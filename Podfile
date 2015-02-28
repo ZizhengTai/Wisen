@@ -4,4 +4,4 @@ pod 'GeoFire'
 pod 'SDWebImage'
 pod 'SinchRTC'
 pod 'coinbase-official'
-
+pod 'ReactiveCocoa'

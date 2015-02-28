@@ -105,7 +105,7 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
             [keyTagsRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
                 if (snapshot.value != [NSNull null] && snapshot.value[tag]) {
                     [query removeObserverWithFirebaseHandle:handle];
-                    self.handleQueryPairs[@(handle)] = nil;
+                    [self.handleQueryPairs removeObjectForKey:@(handle)];
                     
                     Request *request = [[Request alloc] init];
                     request.menteeUID = self.authData.uid;

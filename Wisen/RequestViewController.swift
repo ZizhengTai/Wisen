@@ -13,18 +13,12 @@ class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearch
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleNote:", name: kMentorFoundNotification, object: nil)
-        // Do any additional setup after loading the view.
     }
     
     var searchPlaceholder: String? {
         didSet {
             searchBar?.text = searchPlaceholder
         }
-    }
-    
-    func handleNote(note: NSNotification) {
-        NSLog("Note: %@", note.userInfo!)
     }
     
     @IBOutlet weak var recentSecondButton: UIButton! {
@@ -59,7 +53,10 @@ class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearch
         let dest = AGSGeometryEngine.defaultGeometryEngine().projectGeometry(destinationPoint, toSpatialReference: AGSSpatialReference.wgs84SpatialReference()) as AGSPoint
         NSLog("Cur: \(cur) + Dest: \(dest)")
 
-        UserManager.sharedManager().user.requestWithTag("tak", location: CLLocation(latitude: dest.y, longitude: dest.x), radius: 10)
+        dismissViewControllerAnimated(true, completion: { ()
+            UserManager.sharedManager().user.requestWithTag(self.searchBar.text, location: CLLocation(latitude: dest.y, longitude: dest.x), radius: 10)
+
+        })
     }
     
     @IBOutlet weak var searchBar: UISearchBar! {
@@ -110,7 +107,6 @@ class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearch
     }
     
     // MARK: Map Delegate Method
-    
     func mapViewDidLoad(mapView: AGSMapView!) {
         mapView.locationDisplay.startDataSource()
         let point = mapView.locationDisplay.mapLocation()

@@ -8,6 +8,12 @@
 
 #import "MessageManager.h"
 
+@interface MessageManager()
+
+@property (nonatomic) id<SINMessageClient> messageClient;
+
+@end
+
 NSString * const appKey = @"c01240e3-aa90-482f-b9f7-e1d10e731888";
 NSString * const appSecret = @"eF7ulj87k0yDqGdEzMMgfw==";
 NSString * const hostName = @"sandbox.sinch.com";
@@ -18,13 +24,15 @@ NSString * const hostName = @"sandbox.sinch.com";
 - (instancetype)init
 {
     if (self = [super init]) {
-        _client = [Sinch clientWithApplicationKey:appKey applicationSecret:appSecret environmentHost:hostName userId:[UserManager sharedManager].user.UID];
+        NSString *subString = [[UserManager sharedManager].user.UID substringFromIndex:@"twitter:".length];
+        _client = [Sinch clientWithApplicationKey:appKey applicationSecret:appSecret environmentHost:hostName userId:subString];
         [_client setSupportMessaging:YES];
-        [_client setSupportActiveConnectionInBackground:YES];
         [_client setSupportPushNotifications:YES];
         _client.delegate = self;
         [_client start];
         [_client startListeningOnActiveConnection];
+        _messageClient = [_client messageClient];
+        _messageClient.delegate = self;
     }
     return self;
 }
@@ -82,6 +90,7 @@ NSString * const hostName = @"sandbox.sinch.com";
 #pragma mark - SINMessageClientDelegate
 
 - (void)messageClient:(id<SINMessageClient>)messageClient didReceiveIncomingMessage:(id<SINMessage>)message {
+    NSLog(@"Message Got");
     [self.allMessages[message.senderId] addObject:@[ message, @(Incoming) ]];
 //    [self.messageView reloadData];
 //    [self scrollToBottom];
@@ -89,7 +98,11 @@ NSString * const hostName = @"sandbox.sinch.com";
 }
 
 - (void)messageSent:(id<SINMessage>)message recipientId:(NSString *)recipientId {
+    if (!self.allMessages[recipientId]) {
+        self.allMessages[recipientId] = [NSMutableArray array];
+    }
     [self.allMessages[recipientId] addObject:@[ message, @(Outgoing) ]];
+
 //    [self.messageView reloadData];
 //    [self scrollToBottom];
     self.reloadUI();
@@ -115,7 +128,7 @@ NSString * const hostName = @"sandbox.sinch.com";
 - (void)sendMessage:(NSString *)text to:(NSString *)recipientUID;
 {
     SINOutgoingMessage *message = [SINOutgoingMessage messageWithRecipient:recipientUID text:text];
-    [[self.client messageClient] sendMessage:message];
+    [self.messageClient sendMessage:message];
 }
 
 @end
