@@ -16,6 +16,7 @@ typedef NS_ENUM(NSInteger, RequestStatus) {
 
 @interface Request : NSObject
 
+@property (copy, nonatomic) NSString *requestID;
 @property (copy, nonatomic) NSString *menteeUID;
 @property (copy, nonatomic) NSString *tag;
 @property (strong, nonatomic) CLLocation *location;
@@ -24,5 +25,6 @@ typedef NS_ENUM(NSInteger, RequestStatus) {
 @property (assign, nonatomic) RequestStatus status;
 
 @property (readonly, strong, nonatomic) NSDictionary *dictionaryRepresentation;
+@property (readonly, strong, nonatomic) NSDictionary *dictionaryRepresentationForUpload;
 
 @end
