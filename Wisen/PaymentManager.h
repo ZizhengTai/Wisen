@@ -16,5 +16,6 @@
 + (instancetype)sharedManager;
 
 - (void)finishOAuthAuthenticationForURL:(NSURL *)url withBlock:(void (^)(BOOL succeeded))block;
+- (void)sendMoneyToAddress:(NSString *)toAddress withAmountString:(NSString *)ammountString currency:(NSString *)currency;
 
 @end

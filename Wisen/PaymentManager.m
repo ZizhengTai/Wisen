@@ -50,15 +50,6 @@ static NSString *const kRedirectURI = @"com.example.app.coinbase-oauth://coinbas
             self.expiresIn = result[@"expires_in"];
             
             self.client = [Coinbase coinbaseWithOAuthAccessToken:self.accessToken];
-            
-            // Note that you should also store 'expire_in' and refresh the token using [CoinbaseOAuth getOAuthTokensForRefreshToken] when it expires
-            [self.client doGet:@"users/self" parameters:nil completion:^(id result, NSError *error) {
-                if (error) {
-                    NSLog(@"Could not load user: %@", error);
-                } else {
-                    NSLog(@"Signed in as: %@", result[@"user"][@"email"]);
-                }
-            }];
         }
         if (block) {
             block(error == nil);
@@ -67,7 +58,13 @@ static NSString *const kRedirectURI = @"com.example.app.coinbase-oauth://coinbas
 }
 
 - (void)test {
-    Coinbase
+    [self.client doGet:@"transactions/send_money" parameters:nil completion:^(id result, NSError *error) {
+        if (error) {
+            NSLog(@"Could not load user: %@", error);
+        } else {
+            NSLog(@"Signed in as: %@", result[@"user"][@"email"]);
+        }
+    }];
 }
 
 @end
