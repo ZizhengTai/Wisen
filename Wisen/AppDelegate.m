@@ -20,6 +20,13 @@
     [Fabric with:@[ CrashlyticsKit ]]; // Crashlytics is just one option, you can also pass TwitterKit and MoPubKit
     
     [[UserManager sharedManager] tryLogInWithBlock:^(User *user) {
+        NSLog(@"%@ has logged in", user);
+        CLLocation *p1 = [[CLLocation alloc] initWithLatitude:11 longitude:12];
+        [user updateLocation:p1];
+        [user requestWithTag:@"origami" location:p1 radius:1];
+    }];
+    
+    [[UserManager sharedManager] tryLogInWithBlock:^(User *user) {
         if (user) {
             self.window.rootViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"MainScene"];
         } else {

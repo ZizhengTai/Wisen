@@ -21,6 +21,7 @@ extern NSString *const kMentorFoundNotification;
 
 - (void)addTag:(NSString *)tag withBlock:(void (^)(BOOL succeeded))block;
 - (void)removeTag:(NSString *)tag withBlock:(void (^)(BOOL succeeded))block;
+- (void)setTags:(NSArray *)tags withBlock:(void (^)(BOOL succeeded))block;
 - (void)getAllTagsWithBlock:(void (^)(NSArray *tags))block;
 - (void)requestWithTag:(NSString *)tag location:(CLLocation *)location radius:(double)radius;
 - (void)updateLocation:(CLLocation *)location;
