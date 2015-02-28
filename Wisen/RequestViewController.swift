@@ -18,7 +18,7 @@ class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearch
     }
     
     func handleNote(note: NSNotification) {
-            NSLog("Note: %@", note.userInfo!)
+        NSLog("Note: %@", note.userInfo!)
     }
     
     @IBAction func dismiss(sender: UIButton) {
