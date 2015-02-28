@@ -27,20 +27,20 @@
 }
 
 - (NSDictionary *)dictionaryRepresentation {
-    return @{ @"requestID": self.requestID,
-              @"menteeUID": self.menteeUID,
+    NSMutableDictionary *dictionary = [self.dictionaryRepresentationWithoutRequestID mutableCopy];
+    dictionary[@"requestID"] = self.requestID;
+    return dictionary;
+
+}
+
+- (NSDictionary *)dictionaryRepresentationWithoutRequestID {
+    return @{ @"menteeUID": self.menteeUID,
               @"tag": self.tag,
               @"latitude": @(self.location.coordinate.latitude),
               @"longitude": @(self.location.coordinate.longitude),
               @"radius": @(self.radius),
               @"mentorUID": self.mentorUID,
               @"status": @(self.status) };
-}
-
-- (NSDictionary *)dictionaryRepresentationWithoutRequestID {
-    NSMutableDictionary *dictionary = [self.dictionaryRepresentation mutableCopy];
-    [dictionary removeObjectForKey:@"requestID"];
-    return dictionary;
 }
 
 - (NSString *)description {
