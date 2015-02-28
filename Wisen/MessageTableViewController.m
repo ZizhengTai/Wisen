@@ -44,11 +44,6 @@
     };
     UIBarButtonItem *right = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(confirmTouched)];
     self.navigationItem.rightBarButtonItem = right;
-    [[self.textField.rac_textSignal map:^id(NSString *text) {
-        return [NSNumber numberWithBool: text.length > 0];
-    }] subscribeNext:^(NSNumber *x) {
-        self.sendButton.hidden = ![x boolValue];
-    }];
 }
 
 - (void)registerForKeyboardNotifications {
@@ -121,12 +116,13 @@
 }
 
 - (IBAction)sendTouched:(UIButton *)sender {
-    [[MessageManager sharedManager] sendMessage:self.textField.text to:self.recipientUID];
+    if (self.textField.text.length != 0)
+        [[MessageManager sharedManager] sendMessage:self.textField.text to:self.recipientUID];
     self.textField.text = @"";
 }
 
-- (void)confirmTouched:(UIBarButtonItem *)sender {
-    
+- (void)confirmTouched {
+    [self.navigationController pushViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"ConfirmationScene"] animated:YES];
 }
 
 @end

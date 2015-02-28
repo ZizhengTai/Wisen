@@ -15,6 +15,7 @@ class ConfirmationViewController: UIViewController, UITextFieldDelegate {
             textField.delegate = self
         }
     }
+    var timer: NSTimer?
     var clockFace: ClockFace?
     var minutesLeft: Double?
     override func viewDidLoad() {
@@ -32,13 +33,14 @@ class ConfirmationViewController: UIViewController, UITextFieldDelegate {
     func textFieldDidEndEditing(textField: UITextField) {
         clockFace?.myTime = NSString(string:textField.text).floatValue;
         minutesLeft = floor(Double(clockFace!.myTime * 60))
-        let timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: "updateClockFace", userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: "updateClockFace", userInfo: nil, repeats: true)
     }
     
     func updateClockFace() {
         if var min = minutesLeft {
             min = Double(min - Double(1))
             if min <= Double(0) {
+                min = 0
                 requestFinished()
             }
             clockFace?.myTime = Float(min / Double(60))
@@ -46,7 +48,21 @@ class ConfirmationViewController: UIViewController, UITextFieldDelegate {
     }
     
     func requestFinished() {
-        // TODO
+        let alert = AMSmoothAlertView(dropAlertWithTitle: "Congrads!", andText: "You just finished your learning session", andCancelButton: false, forAlertType: .Success)
+        alert.completionBlock = {(alertObj: AMSmoothAlertView!, button: UIButton!) -> () in
+            if button == alertObj.defaultButton {
+                self.dismissSelf()
+            }
+        }
+        alert.show()
     }
     
+    func dismissSelf() {
+        navigationController?.popToRootViewControllerAnimated(true)
+    }
+    
+    override func dealloc() {
+        timer?.invalidate()
+        timer = nil
+    }
 }
