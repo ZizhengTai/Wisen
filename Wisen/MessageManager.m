@@ -21,11 +21,10 @@ NSString * const hostName = @"sandbox.sinch.com";
 
 @implementation MessageManager
 
-- (instancetype)init
-{
+- (instancetype)init {
     if (self = [super init]) {
-        NSString *subString = [[UserManager sharedManager].user.UID substringFromIndex:@"twitter:".length];
-        _client = [Sinch clientWithApplicationKey:appKey applicationSecret:appSecret environmentHost:hostName userId:subString];
+        NSString *subString = [[UserManager sharedManager].user.uid substringFromIndex:@"twitter:".length];
+        _client = [Sinch clientWithApplicationKey:appKey applicationSecret:appSecret environmentHost:hostName userId:[UserManager sharedManager].user.uid];
         [_client setSupportMessaging:YES];
         [_client setSupportPushNotifications:YES];
         _client.delegate = self;
@@ -37,8 +36,7 @@ NSString * const hostName = @"sandbox.sinch.com";
     return self;
 }
 
-+ (instancetype)sharedManager
-{
++ (instancetype)sharedManager {
     static MessageManager *sharedManager = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -47,15 +45,13 @@ NSString * const hostName = @"sandbox.sinch.com";
     return sharedManager;
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
     [_client stopListeningOnActiveConnection];
     [_client terminate];
     _client = nil;
 }
 
-- (NSMutableDictionary *)allMessages
-{
+- (NSMutableDictionary *)allMessages {
     if (!_allMessages) {
         _allMessages = [NSMutableDictionary dictionary];
     }
@@ -125,8 +121,7 @@ NSString * const hostName = @"sandbox.sinch.com";
 
 #pragma mark - Message Methods
 
-- (void)sendMessage:(NSString *)text to:(NSString *)recipientUID;
-{
+- (void)sendMessage:(NSString *)text to:(NSString *)recipientUID; {
     SINOutgoingMessage *message = [SINOutgoingMessage messageWithRecipient:recipientUID text:text];
     [self.messageClient sendMessage:message];
 }

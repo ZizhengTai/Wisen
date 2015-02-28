@@ -18,4 +18,6 @@
 #import "MessageTableViewController.h"
 #import <Sinch/Sinch.h>
 #import "Request.h"
+#import <ReactiveCocoa/ReactiveCocoa.h>
+
 #endif
