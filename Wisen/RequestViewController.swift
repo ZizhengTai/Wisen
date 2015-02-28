@@ -27,8 +27,27 @@ class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearch
         NSLog("Note: %@", note.userInfo!)
     }
     
+    @IBOutlet weak var recentSecondButton: UIButton! {
+        didSet {
+            recentSecondButton.clipsToBounds = true
+            recentSecondButton.layer.cornerRadius = 6
+            recentSecondButton.addTarget(self, action: "replaceSearchBar:", forControlEvents: .TouchUpInside)
+        }
+    }
+    @IBOutlet weak var recentFirstButton: UIButton! {
+        didSet {
+            recentFirstButton.clipsToBounds = true
+            recentFirstButton.layer.cornerRadius = 6
+            recentFirstButton.addTarget(self, action: "replaceSearchBar:", forControlEvents: .TouchUpInside)
+        }
+    }
     @IBAction func dismiss(sender: UIButton) {
         dismissViewControllerAnimated(true, completion: nil)
+    }
+    @IBOutlet weak var requestButton: UIButton! {
+        didSet {
+            requestButton.layer.cornerRadius = 8
+        }
     }
     
     @IBAction func requestButtonTouched(sender: UIButton) {
@@ -40,12 +59,13 @@ class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearch
         let dest = AGSGeometryEngine.defaultGeometryEngine().projectGeometry(destinationPoint, toSpatialReference: AGSSpatialReference.wgs84SpatialReference()) as AGSPoint
         NSLog("Cur: \(cur) + Dest: \(dest)")
 
-        UserManager.sharedManager().user.requestWithTag("origami", location: CLLocation(latitude: 11, longitude: 12), radius: 10)
+        UserManager.sharedManager().user.requestWithTag("tak", location: CLLocation(latitude: dest.y, longitude: dest.x), radius: 10)
     }
     
     @IBOutlet weak var searchBar: UISearchBar! {
         didSet {
             searchBar.text = searchPlaceholder
+            searchBar.delegate = self
             configureSearchBar()
         }
     }
@@ -85,6 +105,10 @@ class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearch
         return image
     }
     
+    func replaceSearchBar(button: UIButton) {
+        searchBar.text = button.titleLabel?.text
+    }
+    
     // MARK: Map Delegate Method
     
     func mapViewDidLoad(mapView: AGSMapView!) {
@@ -92,5 +116,10 @@ class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearch
         let point = mapView.locationDisplay.mapLocation()
         self.mapView.locationDisplay.autoPanMode = .Default
         self.mapView.locationDisplay.wanderExtentFactor = 0.75
+    }
+    
+    // MARK: Search Bar Method
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
     }
 }

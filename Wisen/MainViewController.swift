@@ -111,7 +111,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         })
         UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
         for g in mainView.gestureRecognizers as [UIGestureRecognizer] {
-            g.enabled = false
+            g.enabled = true
         }
     }
     
@@ -127,7 +127,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
         profileShown = false
         for g in mainView.gestureRecognizers as [UIGestureRecognizer] {
-            g.enabled = true
+            g.enabled = false
         }
     }
 
@@ -208,6 +208,10 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         NSLog("Did select \(indexPath)")
         performSegueWithIdentifier("segueToSearch", sender: indexPath.row)
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 20, left: 20, bottom: 10, right: 20)
     }
     
     // MARK: Segue
