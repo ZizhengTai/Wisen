@@ -35,6 +35,10 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
     return self;
 }
 
+- (NSString *)UID {
+    return self.authData.uid;
+}
+
 - (NSString *)displayName {
     return self.authData.providerData[@"displayName"];
 }
@@ -69,6 +73,11 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
 }
 
 - (void)setTags:(NSArray *)tags withBlock:(void (^)(BOOL))block {
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    for (NSString *tag in tags) {
+        dict[tag] = @YES;
+    }
+    
     Firebase *tagsRef = [self.userRef childByAppendingPath:@"tags"];
     [tagsRef setValue:tags withCompletionBlock:^(NSError *error, Firebase *ref) {
         if (block) {
