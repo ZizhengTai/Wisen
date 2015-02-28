@@ -269,6 +269,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func pushToMessage(req: Request, UID: NSString) {
+        request?.status = .Ongoing
         let vc = storyboard?.instantiateViewControllerWithIdentifier("MessageScene") as MessageTableViewController
         let count = NSString(string: "twitter:").length
         vc.recipientUID = NSString(string: UID).substringFromIndex(count)
