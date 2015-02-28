@@ -8,8 +8,8 @@
 
 import UIKit
 
-private let DefaultDuration = 0.3
-private let SmallAvatarWidth = 30
+private let DefaultDuration: NSTimeInterval = 0.3
+private let SmallAvatarWidth: CGFloat = 30
 class MainViewController: UIViewController {
 
     let user = UserManager.sharedManager().user
