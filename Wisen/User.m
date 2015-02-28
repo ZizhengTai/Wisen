@@ -28,7 +28,7 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
     if (self) {
         _authData = authData;
         _userRef = [[Firebase alloc] initWithUrl:[NSString stringWithFormat:@"https://wisen.firebaseio.com/users/%@", authData.uid]];
-        _geoFire = [[GeoFire alloc] initWithFirebaseRef:_userRef];
+        _geoFire = [[GeoFire alloc] initWithFirebaseRef:[[Firebase alloc] initWithUrl:@"https://wisen.firebaseio.com/userLocations"]];
     }
     return self;
 }
@@ -87,26 +87,29 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
 - (void)requestWithTag:(NSString *)tag location:(CLLocation *)location radius:(double)radius {
     GFCircleQuery *query = [self.geoFire queryAtLocation:location withRadius:radius];
     FirebaseHandle handle = [query observeEventType:GFEventTypeKeyEntered withBlock:^(NSString *key, CLLocation *location) {
-        
-        
-        
-        
-        
-        [query removeObserverWithFirebaseHandle:handle];
-        
-        Request *request = [[Request alloc] init];
-        request.menteeUID = self.displayName;
-        request.tag = tag;
-        request.location = location;
-        request.radius = radius;
-        request.mentorUID = key;
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:kMentorFoundNotification object:self userInfo:@{ @"request": request }];
+        if (![key isEqualToString:self.authData.uid]) {
+            Firebase *keyTagsRef = [[Firebase alloc] initWithUrl:[NSString stringWithFormat:@"https://wisen.firebaseio.com/users/%@/tags", key]];
+            
+            [keyTagsRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+                if ([snapshot.value containsString:tag]) {
+                    [query removeObserverWithFirebaseHandle:handle];
+                    
+                    Request *request = [[Request alloc] init];
+                    request.menteeUID = self.displayName;
+                    request.tag = tag;
+                    request.location = location;
+                    request.radius = radius;
+                    request.mentorUID = key;
+                    
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kMentorFoundNotification object:self userInfo:@{ @"request": request }];
+                }
+            }];
+        }
     }];
 }
 
 - (void)updateLocation:(CLLocation *)location {
-    [self.geoFire setLocation:location forKey:@"location"];
+    [self.geoFire setLocation:location forKey:self.authData.uid];
 }
 
 - (NSString *)description {
