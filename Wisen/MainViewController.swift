@@ -25,7 +25,7 @@ class MainViewController: UIViewController {
         didSet {
             profileAvatar.clipsToBounds = true
             profileAvatar.layer.cornerRadius = CGRectGetWidth(profileAvatar.frame)/2
-        profileAvatar .fetchImage(user.profileImageUrl)
+        profileAvatar .fetchImage(user.profileImageURL)
         }
     }
     @IBOutlet weak var searchLabel: UILabel! {
@@ -43,7 +43,7 @@ class MainViewController: UIViewController {
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: SmallAvatarWidth, height: SmallAvatarWidth))
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = SmallAvatarWidth/2
-        imageView.fetchImage(user.profileImageUrl)
+        imageView.fetchImage(user.profileImageURL)
         imageView.userInteractionEnabled = true
         imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "showProfile"))
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: imageView)

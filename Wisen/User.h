@@ -7,19 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 #import <Firebase/Firebase.h>
+
+extern NSString *const kMentorFoundNotification;
 
 @interface User : NSObject
 
 @property (readonly, strong, nonatomic) NSString *displayName;
-@property (readonly, strong, nonatomic) NSString *profileImageUrl;
+@property (readonly, strong, nonatomic) NSString *profileImageURL;
 
 - (instancetype)initWithAuthData:(FAuthData *)authData;
 
 - (void)addTag:(NSString *)tag withBlock:(void (^)(BOOL succeeded))block;
 - (void)removeTag:(NSString *)tag withBlock:(void (^)(BOOL succeeded))block;
 - (void)getAllTagsWithBlock:(void (^)(NSArray *tags))block;
-- (void)requestWithTag:(NSString *)tag location:(CGPoint)location;
-- (void)updateLocationWithLatitude:(CGFloat)latitude longitude:(CGFloat)longitude;
+- (void)requestWithTag:(NSString *)tag location:(CLLocation *)location radius:(double)radius;
+- (void)updateLocation:(CLLocation *)location;
 
 @end
