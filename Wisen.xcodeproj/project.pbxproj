@@ -9,10 +9,10 @@
 /* Begin PBXBuildFile section */
 		07C1AA5C1AA150500042854E /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07C1AA5A1AA150500042854E /* Crashlytics.framework */; };
 		07C1AA5D1AA150500042854E /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07C1AA5B1AA150500042854E /* Fabric.framework */; };
+		07C1AA5F1AA155400042854E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C1AA5E1AA155400042854E /* MainViewController.swift */; };
 		22D1942B5A9A218BE013B411 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FC19ABE1547EBEB50EAE97E7 /* libPods.a */; };
 		33BC3E431AA1417400B4B620 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BC3E421AA1417400B4B620 /* main.m */; };
 		33BC3E461AA1417400B4B620 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BC3E451AA1417400B4B620 /* AppDelegate.m */; };
-		33BC3E491AA1417400B4B620 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BC3E481AA1417400B4B620 /* ViewController.m */; };
 		33BC3E4C1AA1417400B4B620 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33BC3E4A1AA1417400B4B620 /* Main.storyboard */; };
 		33BC3E4E1AA1417400B4B620 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33BC3E4D1AA1417400B4B620 /* Images.xcassets */; };
 		33BC3E511AA1417400B4B620 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33BC3E4F1AA1417400B4B620 /* LaunchScreen.xib */; };
@@ -34,14 +34,13 @@
 /* Begin PBXFileReference section */
 		07C1AA5A1AA150500042854E /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		07C1AA5B1AA150500042854E /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		07C1AA5E1AA155400042854E /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		182AD98120EF69D918B1C6E1 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		33BC3E3D1AA1417400B4B620 /* Wisen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wisen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33BC3E411AA1417400B4B620 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		33BC3E421AA1417400B4B620 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		33BC3E441AA1417400B4B620 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		33BC3E451AA1417400B4B620 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		33BC3E471AA1417400B4B620 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		33BC3E481AA1417400B4B620 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		33BC3E4B1AA1417400B4B620 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		33BC3E4D1AA1417400B4B620 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		33BC3E501AA1417400B4B620 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -104,9 +103,8 @@
 				33D3E3241AA157A900F98C56 /* TwitterAuthHelper.m */,
 				33BC3E441AA1417400B4B620 /* AppDelegate.h */,
 				33BC3E451AA1417400B4B620 /* AppDelegate.m */,
-				33BC3E471AA1417400B4B620 /* ViewController.h */,
-				33BC3E481AA1417400B4B620 /* ViewController.m */,
 				33BC3E4A1AA1417400B4B620 /* Main.storyboard */,
+				07C1AA5E1AA155400042854E /* MainViewController.swift */,
 				33BC3E4D1AA1417400B4B620 /* Images.xcassets */,
 				33BC3E4F1AA1417400B4B620 /* LaunchScreen.xib */,
 				33BC3E401AA1417400B4B620 /* Supporting Files */,
@@ -310,8 +308,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				33D3E3281AA1584300F98C56 /* User.m in Sources */,
-				33BC3E491AA1417400B4B620 /* ViewController.m in Sources */,
+				07C1AA5F1AA155400042854E /* MainViewController.swift in Sources */,
 				33BC3E461AA1417400B4B620 /* AppDelegate.m in Sources */,
 				33BC3E431AA1417400B4B620 /* main.m in Sources */,
 				33D3E3251AA157A900F98C56 /* TwitterAuthHelper.m in Sources */,
