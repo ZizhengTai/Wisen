@@ -17,6 +17,12 @@ class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearch
         // Do any additional setup after loading the view.
     }
     
+    var searchPlaceholder: String? {
+        didSet {
+            searchBar?.text = searchPlaceholder
+        }
+    }
+    
     func handleNote(note: NSNotification) {
         NSLog("Note: %@", note.userInfo!)
     }
@@ -39,6 +45,7 @@ class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearch
     
     @IBOutlet weak var searchBar: UISearchBar! {
         didSet {
+            searchBar.text = searchPlaceholder
             configureSearchBar()
         }
     }

@@ -68,7 +68,7 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="1ZC-tB-Twr">
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="1ZC-tB-Twr">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="4Ux-wl-SJq">
@@ -112,10 +112,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="3yu-1j-wJB"/>
                     <connections>
-                        <outlet property="MainView" destination="H82-Ki-rPF" id="ICj-uu-ksr"/>
                         <outlet property="backgroundTableView" destination="bxO-JI-wM9" id="Shf-YU-aSh"/>
                         <outlet property="backgroundView" destination="Kar-fe-87D" id="IDU-mw-KFv"/>
                         <outlet property="mainCollectionView" destination="1ZC-tB-Twr" id="YgG-vA-Mng"/>
+                        <outlet property="mainView" destination="H82-Ki-rPF" id="NCb-BA-kto"/>
                         <outlet property="profileAvatar" destination="UOm-Lu-vAq" id="0oL-W0-gP0"/>
                         <outlet property="searchLabel" destination="48K-7q-T9L" id="Qce-cA-dn9"/>
                         <outlet property="topConstraint" destination="Bb2-av-5aq" id="iRH-EC-APq"/>

@@ -12,8 +12,9 @@ private let BackgroundCell = "BackgroundCell"
 private let DefaultDuration: NSTimeInterval = 0.3
 private let SmallAvatarWidth: CGFloat = 30
 private let CellHeight: CGFloat = 60
+private let MainCell = "MainCell"
 
-class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
+class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
     private struct CellText {
         static let FirstCell = "FIND YOUR MENTOR"
@@ -38,14 +39,18 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     @IBOutlet weak var mainCollectionView: UICollectionView! {
         didSet {
+            mainCollectionView.registerNib(UINib(nibName: "MainCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: MainCell)
             mainCollectionView.delegate = self
             mainCollectionView.dataSource = self
         }
     }
     @IBOutlet weak var backgroundView: UIView!
-    @IBOutlet weak var MainView: UIView! {
+    @IBOutlet weak var mainView: UIView! {
         didSet {
-            MainView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "hideProfile"))
+            mainView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "hideProfile"))
+            for g in mainView.gestureRecognizers as [UIGestureRecognizer] {
+                g.enabled = false
+            }
         }
     }
     @IBOutlet weak var profileAvatar: UIImageView! {
@@ -105,6 +110,9 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             self.view.layoutIfNeeded()
         })
         UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
+        for g in mainView.gestureRecognizers as [UIGestureRecognizer] {
+            g.enabled = false
+        }
     }
     
     func hideProfile() {
@@ -118,6 +126,9 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         })
         UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
         profileShown = false
+        for g in mainView.gestureRecognizers as [UIGestureRecognizer] {
+            g.enabled = true
+        }
     }
 
     func segueToSearch() {
@@ -167,10 +178,33 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     // MARK: Collection View Method
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        return UICollectionViewCell()
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(MainCell, forIndexPath: indexPath) as MainCollectionViewCell
+        cell.titleLabel.text = UserManager.sharedManager().popularRequest()[indexPath.row] as? String
+        return cell
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return UserManager.sharedManager().popularRequest().count
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        return CGSize(width: 0.9 * CGRectGetWidth(view.frame), height: 300)
+    }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        NSLog("Did select \(indexPath)")
+        performSegueWithIdentifier("segueToSearch", sender: indexPath.row)
+    }
+    
+    // MARK: Segue
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "segueToSearch" {
+            if let row = sender as? Int {
+                if let des = segue.destinationViewController as? RequestViewController {
+                    let pop = UserManager.sharedManager().popularRequest()
+                    des.searchPlaceholder = row == pop.count - 1 ? "" : pop[row] as String
+                }
+            }
+        }
     }
 }
