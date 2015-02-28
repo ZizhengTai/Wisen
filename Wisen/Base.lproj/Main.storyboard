@@ -310,6 +310,7 @@
                     </view>
                     <connections>
                         <outlet property="bottomConstraint" destination="2oH-yE-8qp" id="3wp-tb-Jdz"/>
+                        <outlet property="sendButton" destination="cSv-vM-auZ" id="ZPT-fY-7mP"/>
                         <outlet property="tableView" destination="gAG-xg-YZw" id="tMH-E2-mfq"/>
                         <outlet property="textField" destination="gDo-Pl-0qq" id="gdZ-xe-dyK"/>
                     </connections>

@@ -101,16 +101,17 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: imageView)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleNote:", name: kMentorFoundNotification, object: nil)
         UserManager.sharedManager().user.observeAllReceivedRequestsWithBlock { (requests: [AnyObject]?) -> Void in
+            NSLog("All : %@", requests!)
             if let req = requests as? [Request] {
                 for r in req {
                     if r.status == .Pending {
                         self.request = r
+                        self.showAlert(r)
                         break
                     }
                 }
             }
         }
-        showAlert(Request())
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -252,7 +253,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let alert = AMSmoothAlertView(dropAlertWithTitle: "Hey!", andText: "You just got a new request on \(request.tag)", andCancelButton: true, forAlertType: .Info)
         alert.completionBlock = {(alertObj: AMSmoothAlertView!, button: UIButton!) -> () in
             if button == alertObj.defaultButton {
-                self.pushToMessage(request)
+                self.pushToMessage(request, UID: request.menteeUID)
             }
         }
         alert.show()
@@ -263,14 +264,14 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         NSLog("Note: %@", note.userInfo!)
         let req: AnyObject? = note.userInfo!["request"]
         if let dic = req as? Request {
-            pushToMessage(dic)
+            pushToMessage(dic, UID: dic.mentorUID)
         }
     }
     
-    func pushToMessage(req: Request) {
+    func pushToMessage(req: Request, UID: NSString) {
         let vc = storyboard?.instantiateViewControllerWithIdentifier("MessageScene") as MessageTableViewController
         let count = NSString(string: "twitter:").length
-        vc.recipientUID = NSString(string: req.mentorUID).substringFromIndex(count)
+        vc.recipientUID = NSString(string: UID).substringFromIndex(count)
         navigationController?.pushViewController(vc, animated: true)
     }
 }
