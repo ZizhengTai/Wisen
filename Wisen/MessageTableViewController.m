@@ -41,6 +41,8 @@
         [innerSelf.tableView reloadData];
         [innerSelf scrollToBottom];
     };
+    UIBarButtonItem *right = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(confirmTouched)];
+    self.navigationItem.rightBarButtonItem = right;
 }
 
 - (void)registerForKeyboardNotifications {
@@ -115,6 +117,10 @@
 - (IBAction)sendTouched:(UIButton *)sender {
     [[MessageManager sharedManager] sendMessage:self.textField.text to:self.recipientUID];
     self.textField.text = @"";
+}
+
+- (void)confirmTouched:(UIBarButtonItem *)sender {
+    
 }
 
 @end

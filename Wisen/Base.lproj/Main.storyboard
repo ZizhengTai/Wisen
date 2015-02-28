@@ -318,6 +318,24 @@
             </objects>
             <point key="canvasLocation" x="2406" y="1145"/>
         </scene>
+        <!--Confirmation View Controller-->
+        <scene sceneID="AAN-7g-v6H">
+            <objects>
+                <viewController storyboardIdentifier="ConfirmationScene" id="bAm-C2-IXZ" customClass="ConfirmationViewController" customModule="Wisen" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bX5-5T-Bcg"/>
+                        <viewControllerLayoutGuide type="bottom" id="HSG-ia-3X0"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="oE9-pf-LlB">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ydP-eN-Zn0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3089" y="1145"/>
+        </scene>
         <!--Payment View Controller-->
         <scene sceneID="ahE-wE-FoG">
             <objects>
@@ -505,6 +523,6 @@
     </scenes>
     <resources>
         <image name="Pin" width="600" height="472"/>
-        <image name="Yosemite" width="2560" height="1600"/>
+        <image name="Yosemite" width="682" height="177"/>
     </resources>
 </document>

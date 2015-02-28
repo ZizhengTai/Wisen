@@ -11,6 +11,7 @@
 		070DCD981AA1FA270043F4C9 /* MainCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 070DCD961AA1FA270043F4C9 /* MainCollectionViewCell.xib */; };
 		074870BC1AA214BF00F5D227 /* PaymentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 074870BB1AA214BF00F5D227 /* PaymentManager.m */; };
 		074870BE1AA2163700F5D227 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074870BD1AA2163700F5D227 /* PaymentViewController.swift */; };
+		074870C01AA2516500F5D227 /* ConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074870BF1AA2516500F5D227 /* ConfirmationViewController.swift */; };
 		07C1AA5C1AA150500042854E /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07C1AA5A1AA150500042854E /* Crashlytics.framework */; };
 		07C1AA5D1AA150500042854E /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07C1AA5B1AA150500042854E /* Fabric.framework */; };
 		07C1AA5F1AA155400042854E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C1AA5E1AA155400042854E /* MainViewController.swift */; };
@@ -55,6 +56,7 @@
 		074870BA1AA214BF00F5D227 /* PaymentManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentManager.h; sourceTree = "<group>"; };
 		074870BB1AA214BF00F5D227 /* PaymentManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentManager.m; sourceTree = "<group>"; };
 		074870BD1AA2163700F5D227 /* PaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
+		074870BF1AA2516500F5D227 /* ConfirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationViewController.swift; sourceTree = "<group>"; };
 		07C1AA5A1AA150500042854E /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		07C1AA5B1AA150500042854E /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		07C1AA5E1AA155400042854E /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 				070DCD961AA1FA270043F4C9 /* MainCollectionViewCell.xib */,
 				07D7EC451AA1EC9B00606D43 /* MessageTableViewController.h */,
 				07D7EC461AA1EC9B00606D43 /* MessageTableViewController.m */,
+				074870BF1AA2516500F5D227 /* ConfirmationViewController.swift */,
 				07D7EC501AA1EFA100606D43 /* MessageTableViewCell.h */,
 				07D7EC511AA1EFA100606D43 /* MessageTableViewCell.m */,
 				07D7EC4C1AA1EE5C00606D43 /* IncomingMessageCell.xib */,
@@ -423,6 +426,7 @@
 				07D7EC521AA1EFA100606D43 /* MessageTableViewCell.m in Sources */,
 				33BC3E461AA1417400B4B620 /* AppDelegate.m in Sources */,
 				07D7EC231AA1790800606D43 /* RequestViewController.swift in Sources */,
+				074870C01AA2516500F5D227 /* ConfirmationViewController.swift in Sources */,
 				07D7EC251AA1797300606D43 /* HistoryViewController.swift in Sources */,
 				33BC3E431AA1417400B4B620 /* main.m in Sources */,
 				3351866B1AA16E7900636D86 /* UserManager.m in Sources */,
