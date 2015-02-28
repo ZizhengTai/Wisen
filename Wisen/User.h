@@ -14,7 +14,7 @@ extern NSString *const kMentorFoundNotification;
 
 @interface User : NSObject
 
-@property (readonly, strong, nonatomic) NSString *UID;
+@property (readonly, strong, nonatomic) NSString *uid;
 @property (readonly, strong, nonatomic) NSString *displayName;
 @property (readonly, strong, nonatomic) NSString *profileImageURL;
 

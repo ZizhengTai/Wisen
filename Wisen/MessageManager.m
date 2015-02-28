@@ -15,10 +15,9 @@ NSString * const hostName = @"sandbox.sinch.com";
 
 @implementation MessageManager
 
-- (instancetype)init
-{
+- (instancetype)init {
     if (self = [super init]) {
-        _client = [Sinch clientWithApplicationKey:appKey applicationSecret:appSecret environmentHost:hostName userId:[UserManager sharedManager].user.UID];
+        _client = [Sinch clientWithApplicationKey:appKey applicationSecret:appSecret environmentHost:hostName userId:[UserManager sharedManager].user.uid];
         [_client setSupportMessaging:YES];
         [_client setSupportActiveConnectionInBackground:YES];
         [_client setSupportPushNotifications:YES];
@@ -29,8 +28,7 @@ NSString * const hostName = @"sandbox.sinch.com";
     return self;
 }
 
-+ (instancetype)sharedManager
-{
++ (instancetype)sharedManager {
     static MessageManager *sharedManager = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -39,15 +37,13 @@ NSString * const hostName = @"sandbox.sinch.com";
     return sharedManager;
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
     [_client stopListeningOnActiveConnection];
     [_client terminate];
     _client = nil;
 }
 
-- (NSMutableDictionary *)allMessages
-{
+- (NSMutableDictionary *)allMessages {
     if (!_allMessages) {
         _allMessages = [NSMutableDictionary dictionary];
     }
@@ -112,8 +108,7 @@ NSString * const hostName = @"sandbox.sinch.com";
 
 #pragma mark - Message Methods
 
-- (void)sendMessage:(NSString *)text to:(NSString *)recipientUID;
-{
+- (void)sendMessage:(NSString *)text to:(NSString *)recipientUID; {
     SINOutgoingMessage *message = [SINOutgoingMessage messageWithRecipient:recipientUID text:text];
     [[self.client messageClient] sendMessage:message];
 }

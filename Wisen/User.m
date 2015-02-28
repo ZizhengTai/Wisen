@@ -35,7 +35,7 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
     return self;
 }
 
-- (NSString *)UID {
+- (NSString *)uid {
     return self.authData.uid;
 }
 
@@ -105,7 +105,7 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
             [keyTagsRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
                 if (snapshot.value != [NSNull null] && snapshot.value[tag]) {
                     [query removeObserverWithFirebaseHandle:handle];
-                    self.handleQueryPairs[@(handle)] = nil;
+                    [self.handleQueryPairs removeObjectForKey:@(handle)];
                     
                     Request *request = [[Request alloc] init];
                     request.menteeUID = self.authData.uid;
@@ -127,7 +127,7 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
 
 - (void)cancelRequest:(FirebaseHandle)handle {
     [self.handleQueryPairs[@(handle)] removeObserverWithFirebaseHandle:handle];
-    self.handleQueryPairs[@(handle)] = nil;
+    [self.handleQueryPairs removeObjectForKey:@(handle)];
 }
 
 - (void)updateLocation:(CLLocation *)location {

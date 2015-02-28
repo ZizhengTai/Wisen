@@ -12,6 +12,9 @@
 @interface PaymentManager : NSObject
 
 @property (nonatomic, strong) Coinbase *client;
+
 + (instancetype)sharedManager;
+
+- (void)finishOAuthAuthenticationForURL:(NSURL *)url withBlock:(void (^)(BOOL succeeded))block;
 
 @end

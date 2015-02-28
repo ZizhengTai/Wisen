@@ -51,13 +51,13 @@ class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearch
     }
     
     @IBAction func requestButtonTouched(sender: UIButton) {
-        let currentPoint = mapView.locationDisplay.mapLocation()
+//        let currentPoint = mapView.locationDisplay.mapLocation()
         let destinationPoint = mapView.toMapPoint(mapView.convertPoint(mapView.center, fromView: mapView.superview))
-        NSLog("Current: \(currentPoint) + Destination: \(destinationPoint)")
+//        NSLog("Current: \(currentPoint) + Destination: \(destinationPoint)")
         
-        let cur = AGSGeometryEngine.defaultGeometryEngine().projectGeometry(currentPoint, toSpatialReference: AGSSpatialReference.wgs84SpatialReference()) as AGSPoint
+//        let cur = AGSGeometryEngine.defaultGeometryEngine().projectGeometry(currentPoint, toSpatialReference: AGSSpatialReference.wgs84SpatialReference()) as AGSPoint
         let dest = AGSGeometryEngine.defaultGeometryEngine().projectGeometry(destinationPoint, toSpatialReference: AGSSpatialReference.wgs84SpatialReference()) as AGSPoint
-        NSLog("Cur: \(cur) + Dest: \(dest)")
+//        NSLog("Cur: \(cur) + Dest: \(dest)")
 
         UserManager.sharedManager().user.requestWithTag("tak", location: CLLocation(latitude: dest.y, longitude: dest.x), radius: 10)
     }
