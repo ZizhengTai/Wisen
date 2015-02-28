@@ -23,7 +23,7 @@
         NSLog(@"%@ has logged in", user);
         CLLocation *p1 = [[CLLocation alloc] initWithLatitude:11 longitude:12];
         [user updateLocation:p1];
-        [user requestWithTag:@"origami" location:p1 radius:1];
+        //[user requestWithTag:@"origami" location:p1 radius:1];
     }];
     
     [[UserManager sharedManager] tryLogInWithBlock:^(User *user) {

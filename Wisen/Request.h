@@ -8,7 +8,7 @@
 
 #import <CoreLocation/CoreLocation.h>
 
-@interface Request : NSDictionary
+@interface Request : NSObject
 
 @property (copy, nonatomic) NSString *menteeUID;
 @property (copy, nonatomic) NSString *tag;

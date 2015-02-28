@@ -95,7 +95,7 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
                     [query removeObserverWithFirebaseHandle:handle];
                     
                     Request *request = [[Request alloc] init];
-                    request.menteeUID = self.displayName;
+                    request.menteeUID = self.authData.uid;
                     request.tag = tag;
                     request.location = location;
                     request.radius = radius;
