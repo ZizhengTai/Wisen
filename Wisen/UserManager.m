@@ -89,4 +89,9 @@
     [self.ref unauth];
 }
 
+- (NSArray *)popularRequest
+{
+    return @[@"Skateboard", @"Piano", @"Soccer", @"Guitar", @"Cooking", @"Wokout", @"LOL"];
+}
+
 @end

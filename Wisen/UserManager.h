@@ -18,5 +18,6 @@
 - (void)tryLogInWithBlock:(void (^)(User *user))block;
 - (void)logInWithTwitterWithBlock:(void (^)(User *user))block;
 - (void)logOut;
+- (NSArray *)popularRequest;
 
 @end

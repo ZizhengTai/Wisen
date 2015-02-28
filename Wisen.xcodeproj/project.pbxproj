@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		070DCD971AA1FA270043F4C9 /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070DCD951AA1FA270043F4C9 /* MainCollectionViewCell.swift */; };
+		070DCD981AA1FA270043F4C9 /* MainCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 070DCD961AA1FA270043F4C9 /* MainCollectionViewCell.xib */; };
 		07C1AA5C1AA150500042854E /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07C1AA5A1AA150500042854E /* Crashlytics.framework */; };
 		07C1AA5D1AA150500042854E /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07C1AA5B1AA150500042854E /* Fabric.framework */; };
 		07C1AA5F1AA155400042854E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C1AA5E1AA155400042854E /* MainViewController.swift */; };
@@ -46,6 +48,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		070DCD951AA1FA270043F4C9 /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
+		070DCD961AA1FA270043F4C9 /* MainCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainCollectionViewCell.xib; sourceTree = "<group>"; };
 		07C1AA5A1AA150500042854E /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		07C1AA5B1AA150500042854E /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		07C1AA5E1AA155400042854E /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -137,6 +141,8 @@
 		07D7EC3A1AA1DBEB00606D43 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				070DCD951AA1FA270043F4C9 /* MainCollectionViewCell.swift */,
+				070DCD961AA1FA270043F4C9 /* MainCollectionViewCell.xib */,
 				07D7EC451AA1EC9B00606D43 /* MessageTableViewController.h */,
 				07D7EC461AA1EC9B00606D43 /* MessageTableViewController.m */,
 				07D7EC501AA1EFA100606D43 /* MessageTableViewCell.h */,
@@ -330,6 +336,7 @@
 				33BC3E511AA1417400B4B620 /* LaunchScreen.xib in Resources */,
 				07D7EC4E1AA1EE5C00606D43 /* IncomingMessageCell.xib in Resources */,
 				33BC3E4E1AA1417400B4B620 /* Images.xcassets in Resources */,
+				070DCD981AA1FA270043F4C9 /* MainCollectionViewCell.xib in Resources */,
 				07D7EC371AA1AC3600606D43 /* BackgroundTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -399,6 +406,7 @@
 				07D7EC271AA1830600606D43 /* LoginViewController.swift in Sources */,
 				07D7EC471AA1EC9B00606D43 /* MessageTableViewController.m in Sources */,
 				07D7EC391AA1B7DF00606D43 /* UserViewController.swift in Sources */,
+				070DCD971AA1FA270043F4C9 /* MainCollectionViewCell.swift in Sources */,
 				335186681AA1668600636D86 /* User.m in Sources */,
 				07D7EC361AA1AC3600606D43 /* BackgroundTableViewCell.swift in Sources */,
 				07C1AA5F1AA155400042854E /* MainViewController.swift in Sources */,

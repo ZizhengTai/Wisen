@@ -171,6 +171,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 0
+        return UserManager.sharedManager().popularRequest().count
     }
 }
