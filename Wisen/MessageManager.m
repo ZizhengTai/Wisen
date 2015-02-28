@@ -24,7 +24,7 @@ NSString * const hostName = @"sandbox.sinch.com";
 - (instancetype)init {
     if (self = [super init]) {
         NSString *subString = [[UserManager sharedManager].user.uid substringFromIndex:@"twitter:".length];
-        _client = [Sinch clientWithApplicationKey:appKey applicationSecret:appSecret environmentHost:hostName userId:[UserManager sharedManager].user.uid];
+        _client = [Sinch clientWithApplicationKey:appKey applicationSecret:appSecret environmentHost:hostName userId:subString];
         [_client setSupportMessaging:YES];
         [_client setSupportPushNotifications:YES];
         _client.delegate = self;

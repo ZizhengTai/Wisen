@@ -123,7 +123,6 @@ class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearch
     
     func updateLocation() {
         if let point = mapView.locationDisplay.mapLocation() {
-            NSLog("Point: \(point)")
             UserManager.sharedManager().user.updateLocation(cllocation(point))
         }
     }
