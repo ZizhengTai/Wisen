@@ -66,6 +66,15 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
     }];
 }
 
+- (void)setTags:(NSArray *)tags withBlock:(void (^)(BOOL))block {
+    Firebase *tagsRef = [self.userRef childByAppendingPath:@"tags"];
+    [tagsRef setValue:tags withCompletionBlock:^(NSError *error, Firebase *ref) {
+        if (block) {
+            block(error == nil);
+        }
+    }];
+}
+
 - (void)getAllTagsWithBlock:(void (^)(NSArray *tags))block {
     Firebase *tagsRef = [self.userRef childByAppendingPath:@"tags"];
     [tagsRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
@@ -78,6 +87,11 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
 - (void)requestWithTag:(NSString *)tag location:(CLLocation *)location radius:(double)radius {
     GFCircleQuery *query = [self.geoFire queryAtLocation:location withRadius:radius];
     FirebaseHandle handle = [query observeEventType:GFEventTypeKeyEntered withBlock:^(NSString *key, CLLocation *location) {
+        
+        
+        
+        
+        
         [query removeObserverWithFirebaseHandle:handle];
         
         Request *request = [[Request alloc] init];
