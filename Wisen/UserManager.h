@@ -15,6 +15,7 @@
 
 + (instancetype)sharedManager;
 
+- (void)tryLogInWithBlock:(void (^)(BOOL succeeded))block;
 - (void)logInWithTwitterWithBlock:(void (^)(BOOL succeeded))block;
 - (void)logOut;
 

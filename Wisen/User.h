@@ -11,7 +11,7 @@
 
 @interface User : NSObject
 
-@property (copy, nonatomic) NSString *displayName;
+@property (readonly, strong, nonatomic) NSString *displayName;
 
 - (instancetype)initWithAuthData:(FAuthData *)authData;
 

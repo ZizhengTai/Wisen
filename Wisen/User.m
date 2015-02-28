@@ -12,6 +12,7 @@
 @interface User ()
 
 @property (strong, nonatomic) FAuthData *authData;
+@property (strong, nonatomic) Firebase *userRef;
 
 @end
 
@@ -21,11 +22,13 @@
     self = [super init];
     if (self) {
         _authData = authData;
+        _userRef = [[Firebase alloc] initWithUrl:[NSString stringWithFormat:@"https://wisen.firebaseio.com/users/%@", authData.uid]];
     }
     return self;
 }
 
-- (void)setDisplayName:(NSString *)displayName {
+- (NSString *)displayName {
+    return self.authData.providerData[@"displayName"];
 }
 
 - (void)addTag:(NSString *)tag {

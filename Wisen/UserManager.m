@@ -36,6 +36,20 @@
     return self;
 }
 
+- (void)tryLogInWithBlock:(void (^)(BOOL succeeded))block {
+    __weak UserManager *weakSelf = self;
+    FirebaseHandle handle = [self.ref observeAuthEventWithBlock:^(FAuthData *authData) {
+        BOOL succeeded = authData.uid != nil;
+        if (succeeded) {
+            weakSelf.user = [[User alloc] initWithAuthData:authData];
+        }
+        if (block) {
+            block(succeeded);
+        }
+        [weakSelf.ref removeAuthEventObserverWithHandle:handle];
+    }];
+}
+
 - (void)logInWithTwitterWithBlock:(void (^)(BOOL succeeded))block {
     TwitterAuthHelper *twitterAuthHelper = [[TwitterAuthHelper alloc] initWithFirebaseRef:self.ref apiKey:@"dkRAHcnzFW43tzJcSa4PZQfyP"];
     [twitterAuthHelper selectTwitterAccountWithCallback:^(NSError *error, NSArray *accounts) {
@@ -60,8 +74,6 @@
                     }
                 } else {
                     // User logged in!
-                    NSLog(@"%@", authData);
-                    Firebase *userRef = [self.ref childByAppendingPath:[NSString stringWithFormat:@"users/%@", authData.uid]];
                     self.user = [[User alloc] initWithAuthData:authData];
                     if (block) {
                         block(YES);

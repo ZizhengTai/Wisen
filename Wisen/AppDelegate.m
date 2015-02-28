@@ -22,7 +22,8 @@
     
     [[UserManager sharedManager] logInWithTwitterWithBlock:^(BOOL succeeded) {
         if (succeeded) {
-            NSLog(@"succeeded");
+            User *user = [[UserManager sharedManager] user];
+            NSLog(@"%@", user.displayName);
         } else {
             NSLog(@"failed");
         }
