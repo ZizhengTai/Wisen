@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		07C1AA5C1AA150500042854E /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07C1AA5A1AA150500042854E /* Crashlytics.framework */; };
+		07C1AA5D1AA150500042854E /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07C1AA5B1AA150500042854E /* Fabric.framework */; };
 		22D1942B5A9A218BE013B411 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FC19ABE1547EBEB50EAE97E7 /* libPods.a */; };
 		33BC3E431AA1417400B4B620 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BC3E421AA1417400B4B620 /* main.m */; };
 		33BC3E461AA1417400B4B620 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BC3E451AA1417400B4B620 /* AppDelegate.m */; };
@@ -28,6 +30,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		07C1AA5A1AA150500042854E /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		07C1AA5B1AA150500042854E /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		182AD98120EF69D918B1C6E1 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		33BC3E3D1AA1417400B4B620 /* Wisen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wisen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33BC3E411AA1417400B4B620 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -51,7 +55,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07C1AA5C1AA150500042854E /* Crashlytics.framework in Frameworks */,
 				22D1942B5A9A218BE013B411 /* libPods.a in Frameworks */,
+				07C1AA5D1AA150500042854E /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +74,8 @@
 		33BC3E341AA1417400B4B620 = {
 			isa = PBXGroup;
 			children = (
+				07C1AA5A1AA150500042854E /* Crashlytics.framework */,
+				07C1AA5B1AA150500042854E /* Fabric.framework */,
 				33BC3E3F1AA1417400B4B620 /* Wisen */,
 				33BC3E591AA1417400B4B620 /* WisenTests */,
 				33BC3E3E1AA1417400B4B620 /* Products */,
@@ -155,6 +163,7 @@
 				33BC3E3A1AA1417400B4B620 /* Frameworks */,
 				33BC3E3B1AA1417400B4B620 /* Resources */,
 				805E5F938B3377E46B597A90 /* Copy Pods Resources */,
+				07C1AA591AA1501D0042854E /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -241,6 +250,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		07C1AA591AA1501D0042854E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run a43e6afcb6f8cc60f2c803e6ea49c040ba79fb7e f72258897c2e09f9afd75b7e71f7f3a506d2ae2a52d8a77a4ce2e1c340cd6391";
+		};
 		61896821732A7897DE6FDDF0 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -403,6 +425,10 @@
 			baseConfigurationReference = 5D76523222769ACF221BA57F /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Wisen/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -414,6 +440,10 @@
 			baseConfigurationReference = 182AD98120EF69D918B1C6E1 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Wisen/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -7,16 +7,16 @@
 //
 
 #import "AppDelegate.h"
-
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    [Fabric with:@[CrashlyticsKit]]; //Crashlytics is just one option, you can also pass TwitterKit and MoPubKit
     return YES;
 }
 
