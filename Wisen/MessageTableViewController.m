@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomConstraint;
 @property (weak, nonatomic) IBOutlet UITextField *textField;
+@property (weak, nonatomic) IBOutlet UIButton *sendButton;
 
 @end
 
@@ -43,6 +44,11 @@
     };
     UIBarButtonItem *right = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(confirmTouched)];
     self.navigationItem.rightBarButtonItem = right;
+    [[self.textField.rac_textSignal map:^id(NSString *text) {
+        return [NSNumber numberWithBool: text.length > 0];
+    }] subscribeNext:^(NSNumber *x) {
+        self.sendButton.hidden = ![x boolValue];
+    }];
 }
 
 - (void)registerForKeyboardNotifications {
