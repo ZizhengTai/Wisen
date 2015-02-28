@@ -79,7 +79,7 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
     }
     
     Firebase *tagsRef = [self.userRef childByAppendingPath:@"tags"];
-    [tagsRef setValue:tags withCompletionBlock:^(NSError *error, Firebase *ref) {
+    [tagsRef setValue:dict withCompletionBlock:^(NSError *error, Firebase *ref) {
         if (block) {
             block(error == nil);
         }
