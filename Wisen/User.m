@@ -18,6 +18,7 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
 @property (strong, nonatomic) FAuthData *authData;
 @property (strong, nonatomic) Firebase *userRef;
 @property (strong, nonatomic) GeoFire *geoFire;
+@property (strong, nonatomic) NSMutableDictionary *handleQueryPairs;
 
 @end
 
@@ -29,6 +30,7 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
         _authData = authData;
         _userRef = [[Firebase alloc] initWithUrl:[NSString stringWithFormat:@"https://wisen.firebaseio.com/users/%@", authData.uid]];
         _geoFire = [[GeoFire alloc] initWithFirebaseRef:[[Firebase alloc] initWithUrl:@"https://wisen.firebaseio.com/userLocations"]];
+        _handleQueryPairs = [NSMutableDictionary dictionary];
     }
     return self;
 }
@@ -84,8 +86,9 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
     }];
 }
 
-- (void)requestWithTag:(NSString *)tag location:(CLLocation *)location radius:(double)radius {
+- (FirebaseHandle)requestWithTag:(NSString *)tag location:(CLLocation *)location radius:(double)radius {
     GFCircleQuery *query = [self.geoFire queryAtLocation:location withRadius:radius];
+    
     FirebaseHandle handle = [query observeEventType:GFEventTypeKeyEntered withBlock:^(NSString *key, CLLocation *location) {
         if (![key isEqualToString:self.authData.uid]) {
             Firebase *keyTagsRef = [[Firebase alloc] initWithUrl:[NSString stringWithFormat:@"https://wisen.firebaseio.com/users/%@/tags", key]];
@@ -93,6 +96,7 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
             [keyTagsRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
                 if (snapshot.value[tag]) {
                     [query removeObserverWithFirebaseHandle:handle];
+                    self.handleQueryPairs[@(handle)] = nil;
                     
                     Request *request = [[Request alloc] init];
                     request.menteeUID = self.authData.uid;
@@ -106,6 +110,15 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
             }];
         }
     }];
+    
+    self.handleQueryPairs[@(handle)] = query;
+    
+    return handle;
+}
+
+- (void)cancelRequest:(FirebaseHandle)handle {
+    [self.handleQueryPairs[@(handle)] removeObserverWithFirebaseHandle:handle];
+    self.handleQueryPairs[@(handle)] = nil;
 }
 
 - (void)updateLocation:(CLLocation *)location {

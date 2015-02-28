@@ -21,9 +21,9 @@
     
     [[UserManager sharedManager] tryLogInWithBlock:^(User *user) {
         NSLog(@"%@ has logged in", user);
-        CLLocation *p1 = [[CLLocation alloc] initWithLatitude:11 longitude:12];
-        [user updateLocation:p1];
-        //[user requestWithTag:@"origami" location:p1 radius:1];
+        [user getAllTagsWithBlock:^(NSArray *tags) {
+            NSLog(@"%@", tags);
+        }];
     }];
     
     [[UserManager sharedManager] tryLogInWithBlock:^(User *user) {
