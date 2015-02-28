@@ -72,4 +72,9 @@
 - (void)requestWithTag:(NSString *)tag location:(CGPoint)location {
 }
 
+- (NSString *)description
+{
+    return [self displayName];
+}
+
 @end
