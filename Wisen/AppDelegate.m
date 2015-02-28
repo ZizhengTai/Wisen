@@ -18,34 +18,7 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [Fabric with:@[ CrashlyticsKit ]]; //Crashlytics is just one option, you can also pass TwitterKit and MoPubKit
-    
-    /*[[UserManager sharedManager] tryLogInWithBlock:^(User *user) {
-        if (user) {
-            [user getAllTagsWithBlock:^(NSArray *tags) {
-                for (NSString *tag in tags) {
-                    NSLog(@"%@!", tag);
-                }
-            }];
-        }
-    }];*/
-        
-    /*[[UserManager sharedManager] logInWithTwitterWithBlock:^(User *user) {
-        if (user) {
-            [user addTag:@"origami" withBlock:^(BOOL succeeded) {
-                NSLog(@"origami added");
-            }];
-            [user addTag:@"programming" withBlock:^(BOOL succeeded) {
-                NSLog(@"programming added");
-            }];
-            
-            [user getAllTagsWithBlock:^(NSArray *tags) {
-                for (NSString *tag in tags) {
-                    NSLog(@"%@!", tag);
-                }
-            }];
-        }
-    }];*/
+    [Fabric with:@[ CrashlyticsKit ]]; // Crashlytics is just one option, you can also pass TwitterKit and MoPubKit
     
     return YES;
 }

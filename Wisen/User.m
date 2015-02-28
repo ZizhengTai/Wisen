@@ -31,9 +31,29 @@
     return self.authData.providerData[@"displayName"];
 }
 
+- (NSString *)profileImageUrl {
+    NSString *normalSizeImageUrl = self.authData.providerData[@"cachedUserProfile"][@"profile_image_url_https"];
+    
+    NSError *error = nil;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"_normal\\." options:NSRegularExpressionCaseInsensitive error:&error];
+    
+    NSString *biggerSizeImageUrl = [regex stringByReplacingMatchesInString:normalSizeImageUrl options:0 range:NSMakeRange(0, normalSizeImageUrl.length) withTemplate:@"_bigger\\."];
+    
+    return biggerSizeImageUrl;
+}
+
 - (void)addTag:(NSString *)tag withBlock:(void (^)(BOOL))block {
     Firebase *tagsRef = [self.userRef childByAppendingPath:@"tags"];
     [tagsRef updateChildValues:@{ tag: @YES } withCompletionBlock:^(NSError *error, Firebase *ref) {
+        if (block) {
+            block(error == nil);
+        }
+    }];
+}
+
+- (void)removeTag:(NSString *)tag withBlock:(void (^)(BOOL succeeded))block {
+    Firebase *tagRef = [self.userRef childByAppendingPath:[NSString stringWithFormat:@"tags/%@", tag]];
+    [tagRef removeValueWithCompletionBlock:^(NSError *error, Firebase *ref) {
         if (block) {
             block(error == nil);
         }
