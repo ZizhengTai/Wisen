@@ -7,21 +7,29 @@
 //
 
 import UIKit
-
 class UserViewController: UIViewController, UITextViewDelegate {
 
+    
     @IBOutlet weak var textView: UITextView! {
         didSet {
             textView.delegate = self
         }
     }
     
-    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+    // MARK: Life Cycle
+    override func viewWillAppear(animated: Bool) {
+        UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
+    func textViewDidChange(textView: UITextView) {
         formatTextinTextView(textView)
-        return true
     }
     
     func formatTextinTextView(textView: UITextView) {
+        if (NSString(string: textView.text).hasSuffix(" ")) {
+        }
+        
         textView.scrollEnabled = false
         let selectedRange = textView.selectedRange
         let text = textView.text

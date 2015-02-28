@@ -82,7 +82,12 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     override func viewWillAppear(animated: Bool) {
-        UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
+        if profileShown {
+            UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
+            navigationController?.setNavigationBarHidden(true, animated: true)
+        } else {
+            UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
+        }
     }
     
     // MARK: Transition
