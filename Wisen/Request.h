@@ -25,6 +25,8 @@ typedef NS_ENUM(NSInteger, RequestStatus) {
 @property (assign, nonatomic) RequestStatus status;
 
 @property (readonly, strong, nonatomic) NSDictionary *dictionaryRepresentation;
-@property (readonly, strong, nonatomic) NSDictionary *dictionaryRepresentationForUpload;
+@property (readonly, strong, nonatomic) NSDictionary *dictionaryRepresentationWithoutRequestID;
+
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
 @end
