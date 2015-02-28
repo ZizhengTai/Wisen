@@ -20,5 +20,6 @@
 - (void)removeTag:(NSString *)tag withBlock:(void (^)(BOOL succeeded))block;
 - (void)getAllTagsWithBlock:(void (^)(NSArray *tags))block;
 - (void)requestWithTag:(NSString *)tag location:(CGPoint)location;
+- (void)updateLocationWithLatitude:(CGFloat)latitude longitude:(CGFloat)longitude;
 
 @end

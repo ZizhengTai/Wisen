@@ -17,7 +17,7 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [Fabric with:@[CrashlyticsKit]]; //Crashlytics is just one option, you can also pass TwitterKit and MoPubKit
+    [Fabric with:@[ CrashlyticsKit ]]; // Crashlytics is just one option, you can also pass TwitterKit and MoPubKit
     
     [[UserManager sharedManager] tryLogInWithBlock:^(User *user) {
         if (user) {
@@ -26,6 +26,7 @@
             self.window.rootViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginScene"];
         }
     }];
+    
     return YES;
 }
 

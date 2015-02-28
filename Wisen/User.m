@@ -7,12 +7,14 @@
 //
 
 #import <Firebase/Firebase.h>
+#import <GeoFire/GeoFire.h>
 #import "User.h"
 
 @interface User ()
 
 @property (strong, nonatomic) FAuthData *authData;
 @property (strong, nonatomic) Firebase *userRef;
+@property (strong, nonatomic) GeoFire *geoFire;
 
 @end
 
@@ -21,8 +23,11 @@
 - (instancetype)initWithAuthData:(FAuthData *)authData {
     self = [super init];
     if (self) {
+        Firebase *ref = [[Firebase alloc] initWithUrl:@"https://wisen.firebaseio.com"];
+        
         _authData = authData;
-        _userRef = [[Firebase alloc] initWithUrl:[NSString stringWithFormat:@"https://wisen.firebaseio.com/users/%@", authData.uid]];
+        _userRef = [ref childByAppendingPath:[NSString stringWithFormat:@"users/%@", authData.uid]];
+        _geoFire = [[GeoFire alloc] initWithFirebaseRef:ref];
     }
     return self;
 }
@@ -37,7 +42,7 @@
     NSError *error = nil;
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"_normal\\." options:NSRegularExpressionCaseInsensitive error:&error];
     
-    NSString *biggerSizeImageUrl = [regex stringByReplacingMatchesInString:normalSizeImageUrl options:0 range:NSMakeRange(0, normalSizeImageUrl.length) withTemplate:@"_bigger\\."];
+    NSString *biggerSizeImageUrl = [regex stringByReplacingMatchesInString:normalSizeImageUrl options:0 range:NSMakeRange(0, normalSizeImageUrl.length) withTemplate:@"\\."];
     
     return biggerSizeImageUrl;
 }
@@ -70,11 +75,15 @@
 }
 
 - (void)requestWithTag:(NSString *)tag location:(CGPoint)location {
+#warning Not implemented
 }
 
-- (NSString *)description
-{
-    return [self displayName];
+- (void)updateLocationWithLatitude:(CGFloat)latitude longitude:(CGFloat)longitude {
+#warning Not implemented
+}
+
+- (NSString *)description {
+    return self.displayName;
 }
 
 @end
