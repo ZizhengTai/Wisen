@@ -79,7 +79,7 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
     Firebase *tagsRef = [self.userRef childByAppendingPath:@"tags"];
     [tagsRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         if (block) {
-            block(snapshot.value);
+            block([snapshot.value allKeys]);
         }
     }];
 }
@@ -91,7 +91,7 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
             Firebase *keyTagsRef = [[Firebase alloc] initWithUrl:[NSString stringWithFormat:@"https://wisen.firebaseio.com/users/%@/tags", key]];
             
             [keyTagsRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-                if ([snapshot.value containsObject:tag]) {
+                if (snapshot.value[tag]) {
                     [query removeObserverWithFirebaseHandle:handle];
                     
                     Request *request = [[Request alloc] init];

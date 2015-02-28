@@ -11,6 +11,13 @@
 @implementation Request
 
 - (NSString *)description {
-    return [NSString stringWithFormat: @"%@",@[self.location, self.menteeUID, self.mentorUID, self.tag]];
+    return [NSString stringWithFormat:@"%@", @{
+                                               @"menteeUID": self.menteeUID,
+                                               @"tag": self.tag,
+                                               @"location": self.location,
+                                               @"radius": @(self.radius),
+                                               @"mentorUID": self.mentorUID
+                                               }];
 }
+
 @end
