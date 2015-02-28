@@ -6,9 +6,10 @@
 //  Copyright (c) 2015 self. All rights reserved.
 //
 
-#import "AppDelegate.h"
-#import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
+#import <Fabric/Fabric.h>
+#import "AppDelegate.h"
+
 @interface AppDelegate ()
 
 @end

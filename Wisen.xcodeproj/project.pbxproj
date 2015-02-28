@@ -17,6 +17,8 @@
 		33BC3E4E1AA1417400B4B620 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33BC3E4D1AA1417400B4B620 /* Images.xcassets */; };
 		33BC3E511AA1417400B4B620 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33BC3E4F1AA1417400B4B620 /* LaunchScreen.xib */; };
 		33BC3E5D1AA1417400B4B620 /* WisenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BC3E5C1AA1417400B4B620 /* WisenTests.m */; };
+		33D3E3251AA157A900F98C56 /* TwitterAuthHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D3E3241AA157A900F98C56 /* TwitterAuthHelper.m */; };
+		33D3E3281AA1584300F98C56 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D3E3271AA1584300F98C56 /* User.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +48,10 @@
 		33BC3E561AA1417400B4B620 /* WisenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WisenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		33BC3E5B1AA1417400B4B620 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		33BC3E5C1AA1417400B4B620 /* WisenTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WisenTests.m; sourceTree = "<group>"; };
+		33D3E3231AA157A900F98C56 /* TwitterAuthHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterAuthHelper.h; sourceTree = "<group>"; };
+		33D3E3241AA157A900F98C56 /* TwitterAuthHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterAuthHelper.m; sourceTree = "<group>"; };
+		33D3E3261AA1584300F98C56 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		33D3E3271AA1584300F98C56 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		5D76523222769ACF221BA57F /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FC19ABE1547EBEB50EAE97E7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -74,8 +80,6 @@
 		33BC3E341AA1417400B4B620 = {
 			isa = PBXGroup;
 			children = (
-				07C1AA5A1AA150500042854E /* Crashlytics.framework */,
-				07C1AA5B1AA150500042854E /* Fabric.framework */,
 				33BC3E3F1AA1417400B4B620 /* Wisen */,
 				33BC3E591AA1417400B4B620 /* WisenTests */,
 				33BC3E3E1AA1417400B4B620 /* Products */,
@@ -96,6 +100,8 @@
 		33BC3E3F1AA1417400B4B620 /* Wisen */ = {
 			isa = PBXGroup;
 			children = (
+				33D3E3231AA157A900F98C56 /* TwitterAuthHelper.h */,
+				33D3E3241AA157A900F98C56 /* TwitterAuthHelper.m */,
 				33BC3E441AA1417400B4B620 /* AppDelegate.h */,
 				33BC3E451AA1417400B4B620 /* AppDelegate.m */,
 				33BC3E471AA1417400B4B620 /* ViewController.h */,
@@ -104,6 +110,8 @@
 				33BC3E4D1AA1417400B4B620 /* Images.xcassets */,
 				33BC3E4F1AA1417400B4B620 /* LaunchScreen.xib */,
 				33BC3E401AA1417400B4B620 /* Supporting Files */,
+				33D3E3261AA1584300F98C56 /* User.h */,
+				33D3E3271AA1584300F98C56 /* User.m */,
 			);
 			path = Wisen;
 			sourceTree = "<group>";
@@ -137,6 +145,8 @@
 		5EAB378D0E903DC3DCBD9D82 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				07C1AA5A1AA150500042854E /* Crashlytics.framework */,
+				07C1AA5B1AA150500042854E /* Fabric.framework */,
 				FC19ABE1547EBEB50EAE97E7 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -300,9 +310,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33D3E3281AA1584300F98C56 /* User.m in Sources */,
 				33BC3E491AA1417400B4B620 /* ViewController.m in Sources */,
 				33BC3E461AA1417400B4B620 /* AppDelegate.m in Sources */,
 				33BC3E431AA1417400B4B620 /* main.m in Sources */,
+				33D3E3251AA157A900F98C56 /* TwitterAuthHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
