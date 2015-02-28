@@ -39,6 +39,7 @@
 		33BC3E511AA1417400B4B620 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33BC3E4F1AA1417400B4B620 /* LaunchScreen.xib */; };
 		33BC3E5D1AA1417400B4B620 /* WisenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BC3E5C1AA1417400B4B620 /* WisenTests.m */; };
 		33D3E3251AA157A900F98C56 /* TwitterAuthHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D3E3241AA157A900F98C56 /* TwitterAuthHelper.m */; };
+		33E0EA421AA27542004EA52F /* Timer.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E0EA411AA27542004EA52F /* Timer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +102,8 @@
 		33BC3E5C1AA1417400B4B620 /* WisenTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WisenTests.m; sourceTree = "<group>"; };
 		33D3E3231AA157A900F98C56 /* TwitterAuthHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterAuthHelper.h; sourceTree = "<group>"; };
 		33D3E3241AA157A900F98C56 /* TwitterAuthHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterAuthHelper.m; sourceTree = "<group>"; };
+		33E0EA401AA27542004EA52F /* Timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Timer.h; sourceTree = "<group>"; };
+		33E0EA411AA27542004EA52F /* Timer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Timer.m; sourceTree = "<group>"; };
 		5D76523222769ACF221BA57F /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FC19ABE1547EBEB50EAE97E7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -206,6 +209,8 @@
 		33BC3E3F1AA1417400B4B620 /* Wisen */ = {
 			isa = PBXGroup;
 			children = (
+				33E0EA401AA27542004EA52F /* Timer.h */,
+				33E0EA411AA27542004EA52F /* Timer.m */,
 				33D3E3231AA157A900F98C56 /* TwitterAuthHelper.h */,
 				33D3E3241AA157A900F98C56 /* TwitterAuthHelper.m */,
 				33BC3E441AA1417400B4B620 /* AppDelegate.h */,
@@ -323,11 +328,11 @@
 				TargetAttributes = {
 					33BC3E3C1AA1417400B4B620 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = HYHN7K59N8;
+						DevelopmentTeam = B9G4H3G577;
 					};
 					33BC3E551AA1417400B4B620 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = HYHN7K59N8;
+						DevelopmentTeam = B9G4H3G577;
 						TestTargetID = 33BC3E3C1AA1417400B4B620;
 					};
 				};
@@ -431,6 +436,7 @@
 				07D7EC3F1AA1E28900606D43 /* MessageManager.m in Sources */,
 				074870BE1AA2163700F5D227 /* PaymentViewController.swift in Sources */,
 				07D7EC271AA1830600606D43 /* LoginViewController.swift in Sources */,
+				33E0EA421AA27542004EA52F /* Timer.m in Sources */,
 				07D7EC471AA1EC9B00606D43 /* MessageTableViewController.m in Sources */,
 				07D7EC391AA1B7DF00606D43 /* UserViewController.swift in Sources */,
 				070DCD971AA1FA270043F4C9 /* MainCollectionViewCell.swift in Sources */,

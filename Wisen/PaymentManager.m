@@ -66,4 +66,8 @@ static NSString *const kRedirectURI = @"com.example.app.coinbase-oauth://coinbas
     }];
 }
 
+- (void)test {
+    Coinbase
+}
+
 @end
