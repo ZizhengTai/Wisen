@@ -13,6 +13,8 @@
 		07D7EC231AA1790800606D43 /* RequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D7EC221AA1790800606D43 /* RequestViewController.swift */; };
 		07D7EC251AA1797300606D43 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D7EC241AA1797300606D43 /* HistoryViewController.swift */; };
 		22D1942B5A9A218BE013B411 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FC19ABE1547EBEB50EAE97E7 /* libPods.a */; };
+		335186681AA1668600636D86 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 335186671AA1668600636D86 /* User.m */; };
+		3351866B1AA16E7900636D86 /* UserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3351866A1AA16E7900636D86 /* UserManager.m */; };
 		33BC3E431AA1417400B4B620 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BC3E421AA1417400B4B620 /* main.m */; };
 		33BC3E461AA1417400B4B620 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BC3E451AA1417400B4B620 /* AppDelegate.m */; };
 		33BC3E4C1AA1417400B4B620 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33BC3E4A1AA1417400B4B620 /* Main.storyboard */; };
@@ -39,6 +41,10 @@
 		07D7EC221AA1790800606D43 /* RequestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestViewController.swift; sourceTree = "<group>"; };
 		07D7EC241AA1797300606D43 /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		182AD98120EF69D918B1C6E1 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		335186661AA1668600636D86 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		335186671AA1668600636D86 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		335186691AA16E7900636D86 /* UserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserManager.h; sourceTree = "<group>"; };
+		3351866A1AA16E7900636D86 /* UserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserManager.m; sourceTree = "<group>"; };
 		33BC3E3D1AA1417400B4B620 /* Wisen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wisen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33BC3E411AA1417400B4B620 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		33BC3E421AA1417400B4B620 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -52,8 +58,6 @@
 		33BC3E5C1AA1417400B4B620 /* WisenTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WisenTests.m; sourceTree = "<group>"; };
 		33D3E3231AA157A900F98C56 /* TwitterAuthHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterAuthHelper.h; sourceTree = "<group>"; };
 		33D3E3241AA157A900F98C56 /* TwitterAuthHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterAuthHelper.m; sourceTree = "<group>"; };
-		33D3E3261AA1584300F98C56 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
-		33D3E3271AA1584300F98C56 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		5D76523222769ACF221BA57F /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FC19ABE1547EBEB50EAE97E7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -112,8 +116,10 @@
 				07D7EC241AA1797300606D43 /* HistoryViewController.swift */,
 				33BC3E4F1AA1417400B4B620 /* LaunchScreen.xib */,
 				33BC3E401AA1417400B4B620 /* Supporting Files */,
-				33D3E3261AA1584300F98C56 /* User.h */,
-				33D3E3271AA1584300F98C56 /* User.m */,
+				335186661AA1668600636D86 /* User.h */,
+				335186671AA1668600636D86 /* User.m */,
+				335186691AA16E7900636D86 /* UserManager.h */,
+				3351866A1AA16E7900636D86 /* UserManager.m */,
 			);
 			path = Wisen;
 			sourceTree = "<group>";
@@ -314,11 +320,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				335186681AA1668600636D86 /* User.m in Sources */,
 				07C1AA5F1AA155400042854E /* MainViewController.swift in Sources */,
 				33BC3E461AA1417400B4B620 /* AppDelegate.m in Sources */,
 				07D7EC231AA1790800606D43 /* RequestViewController.swift in Sources */,
 				07D7EC251AA1797300606D43 /* HistoryViewController.swift in Sources */,
 				33BC3E431AA1417400B4B620 /* main.m in Sources */,
+				3351866B1AA16E7900636D86 /* UserManager.m in Sources */,
 				33D3E3251AA157A900F98C56 /* TwitterAuthHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

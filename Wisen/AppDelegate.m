@@ -9,6 +9,7 @@
 #import <Crashlytics/Crashlytics.h>
 #import <Fabric/Fabric.h>
 #import "AppDelegate.h"
+#import "UserManager.h"
 
 @interface AppDelegate ()
 
@@ -20,6 +21,13 @@
     [Fabric with:@[CrashlyticsKit]]; //Crashlytics is just one option, you can also pass TwitterKit and MoPubKit
     
     
+    [[UserManager sharedManager] logInWithTwitterWithBlock:^(BOOL succeeded) {
+        if (succeeded) {
+            NSLog(@"succeeded");
+        } else {
+            NSLog(@"failed");
+        }
+    }];
     
     return YES;
 }
