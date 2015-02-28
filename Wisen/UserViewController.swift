@@ -7,8 +7,10 @@
 //
 
 import UIKit
-class UserViewController: UIViewController, UITextViewDelegate {
 
+private let ColorSpectrum = [UIColor.redColor(), UIColor.orangeColor(), UIColor.yellowColor(), UIColor.greenColor(), UIColor.blueColor(), UIColor.purpleColor(), UIColor.blackColor()]
+
+class UserViewController: UIViewController, UITextViewDelegate {
     
     @IBOutlet weak var textView: UITextView! {
         didSet {
@@ -16,10 +18,16 @@ class UserViewController: UIViewController, UITextViewDelegate {
         }
     }
     
+    var startIndex = 0
+    
     // MARK: Life Cycle
     override func viewWillAppear(animated: Bool) {
         UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
         navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
+    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+        return true
     }
     
     func textViewDidChange(textView: UITextView) {
@@ -27,24 +35,32 @@ class UserViewController: UIViewController, UITextViewDelegate {
     }
     
     func formatTextinTextView(textView: UITextView) {
-        if (NSString(string: textView.text).hasSuffix(" ")) {
-        }
-        
-        textView.scrollEnabled = false
-        let selectedRange = textView.selectedRange
         let text = textView.text
-        
+        let selectedRange = textView.selectedRange
         let atrString = NSMutableAttributedString(string: text)
-        let regex = NSRegularExpression(pattern: "#(\\w+)", options:.CaseInsensitive , error: nil)
-        let matches = regex?.matchesInString(text, options: NSMatchingOptions.ReportProgress, range: NSMakeRange(0, NSString(string: text).length))
-        if let matches = matches as? [NSTextCheckingResult] {
-            for match in matches {
-                let matchRange = match.rangeAtIndex(0)
-                atrString.addAttribute(NSForegroundColorAttributeName, value: UIColor.blueColor(), range: matchRange)
+        atrString.addAttribute(NSFontAttributeName, value: UIFont(name: "GillSans", size: 23)!, range: NSMakeRange(startIndex, NSString(string: text).length - startIndex))
+        
+        if (NSString(string: textView.text).hasSuffix(" ")) {
+            textView.scrollEnabled = false
+            let regex = NSRegularExpression(pattern: "#(\\w+)", options:.CaseInsensitive , error: nil)
+            let matches = regex?.matchesInString(text, options: NSMatchingOptions.ReportProgress, range: NSMakeRange(startIndex, NSString(string: text).length - startIndex))
+            var matchTags = [String]()
+            if let matches = matches as? [NSTextCheckingResult] {
+                for match in matches {
+                    let matchRange = match.rangeAtIndex(0)
+                    matchTags += [NSString(string: text).substringWithRange(matchRange)]
+                    let randomIndex = arc4random_uniform(UInt32(ColorSpectrum.count))
+                    atrString.addAttribute(NSBackgroundColorAttributeName, value: ColorSpectrum[Int(randomIndex)], range: matchRange)
+                    atrString.addAttribute(NSForegroundColorAttributeName, value: UIColor.whiteColor(), range: NSMakeRange(startIndex, NSString(string: text).length - startIndex))
+                }
             }
+            textView.scrollEnabled = true
+            UserManager.sharedManager().user.setTags(matchTags, withBlock: { (finished: Bool) -> Void in
+                NSLog("Matches: \(matchTags)")
+            })
+            startIndex = NSString(string: text).length
         }
         textView.attributedText = atrString
         textView.selectedRange = selectedRange
-        textView.scrollEnabled = true
     }
 }

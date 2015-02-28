@@ -10,4 +10,7 @@
 
 @implementation Request
 
+- (NSString *)description {
+    return [NSString stringWithFormat: @"%@",@[self.location, self.menteeUID, self.mentorUID, self.tag]];
+}
 @end
