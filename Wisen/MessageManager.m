@@ -86,10 +86,10 @@ NSString * const hostName = @"sandbox.sinch.com";
 #pragma mark - SINMessageClientDelegate
 
 - (void)messageClient:(id<SINMessageClient>)messageClient didReceiveIncomingMessage:(id<SINMessage>)message {
-    NSLog(@"Message Got");
+     if (!self.allMessages[message.senderId]) {
+        self.allMessages[message.senderId] = [NSMutableArray array];
+    }
     [self.allMessages[message.senderId] addObject:@[ message, @(Incoming) ]];
-//    [self.messageView reloadData];
-//    [self scrollToBottom];
     self.reloadUI();
 }
 
@@ -98,9 +98,6 @@ NSString * const hostName = @"sandbox.sinch.com";
         self.allMessages[recipientId] = [NSMutableArray array];
     }
     [self.allMessages[recipientId] addObject:@[ message, @(Outgoing) ]];
-
-//    [self.messageView reloadData];
-//    [self scrollToBottom];
     self.reloadUI();
 }
 
