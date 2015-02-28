@@ -39,6 +39,7 @@
 - (void)tryLogInWithBlock:(void (^)(User *user))block {
     __weak UserManager *weakSelf = self;
     FirebaseHandle handle = [self.ref observeAuthEventWithBlock:^(FAuthData *authData) {
+        [weakSelf.ref removeAuthEventObserverWithHandle:handle];
         if (authData.uid) {
             weakSelf.user = [[User alloc] initWithAuthData:authData];
         } else {
@@ -47,7 +48,6 @@
         if (block) {
             block(weakSelf.user);
         }
-        [weakSelf.ref removeAuthEventObserverWithHandle:handle];
     }];
 }
 
