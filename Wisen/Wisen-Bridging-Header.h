@@ -10,7 +10,10 @@
 #define Wisen_Wisen_Bridging_Header_h
 
 #import "UserManager.h"
+#import "MessageManager.h"
 #import "AppDelegate.h"
 #import "UIImageView+WebCache.h"
 #import "UIImageView+Fetch.h"
+#import <Sinch/Sinch.h>
+
 #endif

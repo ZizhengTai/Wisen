@@ -17,6 +17,11 @@
 		07D7EC361AA1AC3600606D43 /* BackgroundTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D7EC341AA1AC3600606D43 /* BackgroundTableViewCell.swift */; };
 		07D7EC371AA1AC3600606D43 /* BackgroundTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07D7EC351AA1AC3600606D43 /* BackgroundTableViewCell.xib */; };
 		07D7EC391AA1B7DF00606D43 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D7EC381AA1B7DF00606D43 /* UserViewController.swift */; };
+		07D7EC3F1AA1E28900606D43 /* MessageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 07D7EC3E1AA1E28900606D43 /* MessageManager.m */; };
+		07D7EC471AA1EC9B00606D43 /* MessageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07D7EC461AA1EC9B00606D43 /* MessageTableViewController.m */; };
+		07D7EC4E1AA1EE5C00606D43 /* IncomingMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07D7EC4C1AA1EE5C00606D43 /* IncomingMessageCell.xib */; };
+		07D7EC4F1AA1EE5C00606D43 /* OutgoingMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07D7EC4D1AA1EE5C00606D43 /* OutgoingMessageCell.xib */; };
+		07D7EC521AA1EFA100606D43 /* MessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07D7EC511AA1EFA100606D43 /* MessageTableViewCell.m */; };
 		22D1942B5A9A218BE013B411 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FC19ABE1547EBEB50EAE97E7 /* libPods.a */; };
 		335186681AA1668600636D86 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 335186671AA1668600636D86 /* User.m */; };
 		3351866B1AA16E7900636D86 /* UserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3351866A1AA16E7900636D86 /* UserManager.m */; };
@@ -54,6 +59,14 @@
 		07D7EC341AA1AC3600606D43 /* BackgroundTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundTableViewCell.swift; sourceTree = "<group>"; };
 		07D7EC351AA1AC3600606D43 /* BackgroundTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BackgroundTableViewCell.xib; sourceTree = "<group>"; };
 		07D7EC381AA1B7DF00606D43 /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		07D7EC3D1AA1E28900606D43 /* MessageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageManager.h; sourceTree = "<group>"; };
+		07D7EC3E1AA1E28900606D43 /* MessageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageManager.m; sourceTree = "<group>"; };
+		07D7EC451AA1EC9B00606D43 /* MessageTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageTableViewController.h; sourceTree = "<group>"; };
+		07D7EC461AA1EC9B00606D43 /* MessageTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTableViewController.m; sourceTree = "<group>"; };
+		07D7EC4C1AA1EE5C00606D43 /* IncomingMessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IncomingMessageCell.xib; sourceTree = "<group>"; };
+		07D7EC4D1AA1EE5C00606D43 /* OutgoingMessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OutgoingMessageCell.xib; sourceTree = "<group>"; };
+		07D7EC501AA1EFA100606D43 /* MessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageTableViewCell.h; sourceTree = "<group>"; };
+		07D7EC511AA1EFA100606D43 /* MessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTableViewCell.m; sourceTree = "<group>"; };
 		182AD98120EF69D918B1C6E1 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		335186661AA1668600636D86 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		335186671AA1668600636D86 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
@@ -115,6 +128,8 @@
 			children = (
 				335186691AA16E7900636D86 /* UserManager.h */,
 				3351866A1AA16E7900636D86 /* UserManager.m */,
+				07D7EC3D1AA1E28900606D43 /* MessageManager.h */,
+				07D7EC3E1AA1E28900606D43 /* MessageManager.m */,
 			);
 			name = Manager;
 			sourceTree = "<group>";
@@ -122,6 +137,12 @@
 		07D7EC3A1AA1DBEB00606D43 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				07D7EC451AA1EC9B00606D43 /* MessageTableViewController.h */,
+				07D7EC461AA1EC9B00606D43 /* MessageTableViewController.m */,
+				07D7EC501AA1EFA100606D43 /* MessageTableViewCell.h */,
+				07D7EC511AA1EFA100606D43 /* MessageTableViewCell.m */,
+				07D7EC4C1AA1EE5C00606D43 /* IncomingMessageCell.xib */,
+				07D7EC4D1AA1EE5C00606D43 /* OutgoingMessageCell.xib */,
 				07C1AA5E1AA155400042854E /* MainViewController.swift */,
 				07D7EC381AA1B7DF00606D43 /* UserViewController.swift */,
 				07D7EC341AA1AC3600606D43 /* BackgroundTableViewCell.swift */,
@@ -305,7 +326,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				33BC3E4C1AA1417400B4B620 /* Main.storyboard in Resources */,
+				07D7EC4F1AA1EE5C00606D43 /* OutgoingMessageCell.xib in Resources */,
 				33BC3E511AA1417400B4B620 /* LaunchScreen.xib in Resources */,
+				07D7EC4E1AA1EE5C00606D43 /* IncomingMessageCell.xib in Resources */,
 				33BC3E4E1AA1417400B4B620 /* Images.xcassets in Resources */,
 				07D7EC371AA1AC3600606D43 /* BackgroundTableViewCell.xib in Resources */,
 			);
@@ -372,12 +395,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				33720F531AA1B6F40040895D /* Request.m in Sources */,
+				07D7EC3F1AA1E28900606D43 /* MessageManager.m in Sources */,
 				07D7EC271AA1830600606D43 /* LoginViewController.swift in Sources */,
+				07D7EC471AA1EC9B00606D43 /* MessageTableViewController.m in Sources */,
 				07D7EC391AA1B7DF00606D43 /* UserViewController.swift in Sources */,
 				335186681AA1668600636D86 /* User.m in Sources */,
 				07D7EC361AA1AC3600606D43 /* BackgroundTableViewCell.swift in Sources */,
 				07C1AA5F1AA155400042854E /* MainViewController.swift in Sources */,
 				07D7EC311AA1A32800606D43 /* UIImageView+Fetch.m in Sources */,
+				07D7EC521AA1EFA100606D43 /* MessageTableViewCell.m in Sources */,
 				33BC3E461AA1417400B4B620 /* AppDelegate.m in Sources */,
 				07D7EC231AA1790800606D43 /* RequestViewController.swift in Sources */,
 				07D7EC251AA1797300606D43 /* HistoryViewController.swift in Sources */,

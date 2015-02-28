@@ -13,7 +13,7 @@ private let DefaultDuration: NSTimeInterval = 0.3
 private let SmallAvatarWidth: CGFloat = 30
 private let CellHeight: CGFloat = 60
 
-class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
 
     private struct CellText {
         static let FirstCell = "FIND YOUR MENTOR"
@@ -36,6 +36,12 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     let user = UserManager.sharedManager().user
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var mainCollectionView: UICollectionView! {
+        didSet {
+            mainCollectionView.delegate = self
+            mainCollectionView.dataSource = self
+        }
+    }
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var MainView: UIView! {
         didSet {
@@ -157,5 +163,14 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return CellHeight
+    }
+    
+    // MARK: Collection View Method
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        return UICollectionViewCell()
+    }
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 0
     }
 }

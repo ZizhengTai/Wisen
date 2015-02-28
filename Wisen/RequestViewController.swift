@@ -29,6 +29,11 @@ class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearch
         let currentPoint = mapView.locationDisplay.mapLocation()
         let destinationPoint = mapView.toMapPoint(mapView.convertPoint(mapView.center, fromView: mapView.superview))
         NSLog("Current: \(currentPoint) + Destination: \(destinationPoint)")
+        
+        let cur = AGSGeometryEngine.defaultGeometryEngine().projectGeometry(currentPoint, toSpatialReference: AGSSpatialReference.wgs84SpatialReference()) as AGSPoint
+        let dest = AGSGeometryEngine.defaultGeometryEngine().projectGeometry(destinationPoint, toSpatialReference: AGSSpatialReference.wgs84SpatialReference()) as AGSPoint
+        NSLog("Cur: \(cur) + Dest: \(dest)")
+
         UserManager.sharedManager().user.requestWithTag("origami", location: CLLocation(latitude: 11, longitude: 12), radius: 10)
     }
     
