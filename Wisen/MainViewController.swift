@@ -90,7 +90,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "showProfile"))
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: imageView)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleNote:", name: kMentorFoundNotification, object: nil)
-
+        UserManager.sharedManager().user.observ
     }
     
     override func viewWillAppear(animated: Bool) {

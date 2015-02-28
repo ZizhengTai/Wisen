@@ -12,6 +12,7 @@
 		074870BC1AA214BF00F5D227 /* PaymentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 074870BB1AA214BF00F5D227 /* PaymentManager.m */; };
 		074870BE1AA2163700F5D227 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074870BD1AA2163700F5D227 /* PaymentViewController.swift */; };
 		074870C01AA2516500F5D227 /* ConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074870BF1AA2516500F5D227 /* ConfirmationViewController.swift */; };
+		074870C41AA2569400F5D227 /* ClockFace.m in Sources */ = {isa = PBXBuildFile; fileRef = 074870C31AA2569400F5D227 /* ClockFace.m */; };
 		07C1AA5C1AA150500042854E /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07C1AA5A1AA150500042854E /* Crashlytics.framework */; };
 		07C1AA5D1AA150500042854E /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07C1AA5B1AA150500042854E /* Fabric.framework */; };
 		07C1AA5F1AA155400042854E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C1AA5E1AA155400042854E /* MainViewController.swift */; };
@@ -57,6 +58,8 @@
 		074870BB1AA214BF00F5D227 /* PaymentManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentManager.m; sourceTree = "<group>"; };
 		074870BD1AA2163700F5D227 /* PaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		074870BF1AA2516500F5D227 /* ConfirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationViewController.swift; sourceTree = "<group>"; };
+		074870C21AA2569400F5D227 /* ClockFace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClockFace.h; sourceTree = "<group>"; };
+		074870C31AA2569400F5D227 /* ClockFace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClockFace.m; sourceTree = "<group>"; };
 		07C1AA5A1AA150500042854E /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		07C1AA5B1AA150500042854E /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		07C1AA5E1AA155400042854E /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -123,6 +126,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		074870C11AA2567400F5D227 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				074870C21AA2569400F5D227 /* ClockFace.h */,
+				074870C31AA2569400F5D227 /* ClockFace.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		07D7EC2A1AA1A2EF00606D43 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -197,6 +209,7 @@
 				33D3E3231AA157A900F98C56 /* TwitterAuthHelper.h */,
 				33D3E3241AA157A900F98C56 /* TwitterAuthHelper.m */,
 				33BC3E441AA1417400B4B620 /* AppDelegate.h */,
+				074870C11AA2567400F5D227 /* View */,
 				33BC3E451AA1417400B4B620 /* AppDelegate.m */,
 				33BC3E4A1AA1417400B4B620 /* Main.storyboard */,
 				07D7EC3A1AA1DBEB00606D43 /* ViewController */,
@@ -310,7 +323,7 @@
 				TargetAttributes = {
 					33BC3E3C1AA1417400B4B620 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = B9G4H3G577;
+						DevelopmentTeam = HYHN7K59N8;
 					};
 					33BC3E551AA1417400B4B620 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -413,6 +426,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				074870C41AA2569400F5D227 /* ClockFace.m in Sources */,
 				33720F531AA1B6F40040895D /* Request.m in Sources */,
 				07D7EC3F1AA1E28900606D43 /* MessageManager.m in Sources */,
 				074870BE1AA2163700F5D227 /* PaymentViewController.swift in Sources */,

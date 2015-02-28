@@ -20,5 +20,6 @@
 #import "Request.h"
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import "AMSmoothAlertView.h"
+#import "ClockFace.h"
 
 #endif
