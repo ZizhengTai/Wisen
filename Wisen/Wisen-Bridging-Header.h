@@ -15,5 +15,9 @@
 #import "AppDelegate.h"
 #import "UIImageView+WebCache.h"
 #import "UIImageView+Fetch.h"
+#import "MessageTableViewController.h"
 #import <Sinch/Sinch.h>
+#import "Request.h"
+#import <ReactiveCocoa/ReactiveCocoa.h>
+
 #endif

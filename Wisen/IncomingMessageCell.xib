@@ -24,7 +24,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UJZ-6d-xWu" userLabel="BubbleView">
                         <rect key="frame" x="4" y="19" width="301" height="67"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Grey_Bubble.png" translatesAutoresizingMaskIntoConstraints="NO" id="yjV-XY-tFc">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yjV-XY-tFc">
                                 <rect key="frame" x="0.0" y="0.0" width="301" height="67"/>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Hello!" translatesAutoresizingMaskIntoConstraints="NO" id="uIC-Qy-3eD" userLabel="messageText">
@@ -59,9 +59,6 @@
             </connections>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="Grey_Bubble.png" width="682" height="177"/>
-    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

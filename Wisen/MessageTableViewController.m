@@ -60,12 +60,10 @@
     UIViewAnimationCurve curve = [note.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
     CGRect frame = [[note.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
     UIViewAnimationOptions options = curve << 16;
-    CGAffineTransform transform;
     if ([note.name isEqualToString:UIKeyboardWillShowNotification]) {
         self.bottomConstraint.constant  =  CGRectGetHeight(frame);
     } else {
         self.bottomConstraint.constant =  0 ;
-        transform = CGAffineTransformIdentity;
     }
     [UIView animateWithDuration:duration delay:0 options:options animations:^{
         [self.view layoutIfNeeded];
@@ -98,10 +96,11 @@
     NSString *identifier =
     [NSString stringWithFormat:@"%@MessageCell", (Incoming == direction) ? @"Incoming" : @"Outgoing"];
     
+    
     MessageTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:identifier];
     
     if (!cell) {
-        cell = [[NSBundle mainBundle] loadNibNamed:identifier owner:self options:nil][0];
+        cell = [[[NSBundle mainBundle] loadNibNamed:identifier owner:self options:nil] firstObject];
         cell.backgroundColor = [UIColor clearColor];
         cell.contentView.backgroundColor = [UIColor clearColor];
     }
@@ -109,13 +108,13 @@
 }
 
 - (void)scrollToBottom {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(_messages.count - 1)inSection:0];
-    
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(self.messages.count - 1)inSection:0];
     [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
 - (IBAction)sendTouched:(UIButton *)sender {
     [[MessageManager sharedManager] sendMessage:self.textField.text to:self.recipientUID];
+    self.textField.text = @"";
 }
 
 @end

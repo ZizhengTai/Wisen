@@ -89,7 +89,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         imageView.userInteractionEnabled = true
         imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "showProfile"))
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: imageView)
-        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleNote:", name: kMentorFoundNotification, object: nil)
+
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -178,7 +179,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         switch indexPath.row {
-        case 0: break
+        case 0:
+            self.hideProfile()
         case 1:
             self.performSegueWithIdentifier("segueToPayment", sender: nil)
         case 2: break
@@ -188,6 +190,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         case 6: break
         default: break
         }
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     // MARK: Collection View Method
@@ -206,7 +209,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        NSLog("Did select \(indexPath)")
         performSegueWithIdentifier("segueToSearch", sender: indexPath.row)
     }
     
@@ -224,5 +226,17 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 }
             }
         }
+    }
+    
+    // MARK: Note handler
+    func handleNote(note: NSNotification) {
+        NSLog("Note: %@", note.userInfo!)
+        let vc = storyboard?.instantiateViewControllerWithIdentifier("MessageScene") as MessageTableViewController
+        let req: AnyObject? = note.userInfo!["request"]
+        if let dic = req as? Request {
+            let count = NSString(string: "twitter:").length
+            vc.recipientUID = NSString(string: dic.mentorUID).substringFromIndex(count)
+        }
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

@@ -11,20 +11,16 @@ import ArcGIS
 
 class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearchBarDelegate, CLLocationManagerDelegate {
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleNote:", name: kMentorFoundNotification, object: nil)
-        // Do any additional setup after loading the view.
+        let timer = NSTimer.scheduledTimerWithTimeInterval(1, target:self, selector: "updateLocation", userInfo: nil, repeats: true)
     }
     
     var searchPlaceholder: String? {
         didSet {
             searchBar?.text = searchPlaceholder
         }
-    }
-    
-    func handleNote(note: NSNotification) {
-        NSLog("Note: %@", note.userInfo!)
     }
     
     @IBOutlet weak var recentSecondButton: UIButton! {
@@ -56,10 +52,13 @@ class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearch
 //        NSLog("Current: \(currentPoint) + Destination: \(destinationPoint)")
         
 //        let cur = AGSGeometryEngine.defaultGeometryEngine().projectGeometry(currentPoint, toSpatialReference: AGSSpatialReference.wgs84SpatialReference()) as AGSPoint
-        let dest = AGSGeometryEngine.defaultGeometryEngine().projectGeometry(destinationPoint, toSpatialReference: AGSSpatialReference.wgs84SpatialReference()) as AGSPoint
+//        let dest = AGSGeometryEngine.defaultGeometryEngine().projectGeometry(destinationPoint, toSpatialReference: AGSSpatialReference.wgs84SpatialReference()) as AGSPoint
 //        NSLog("Cur: \(cur) + Dest: \(dest)")
 
-        UserManager.sharedManager().user.requestWithTag("tak", location: CLLocation(latitude: dest.y, longitude: dest.x), radius: 10)
+        dismissViewControllerAnimated(true, completion: { ()
+            UserManager.sharedManager().user.requestWithTag(self.searchBar.text, location: self.cllocation(destinationPoint), radius: 10)
+
+        })
     }
     
     @IBOutlet weak var searchBar: UISearchBar! {
@@ -110,12 +109,22 @@ class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearch
     }
     
     // MARK: Map Delegate Method
-    
     func mapViewDidLoad(mapView: AGSMapView!) {
         mapView.locationDisplay.startDataSource()
         let point = mapView.locationDisplay.mapLocation()
         self.mapView.locationDisplay.autoPanMode = .Default
         self.mapView.locationDisplay.wanderExtentFactor = 0.75
+    }
+    
+    func cllocation(from: AGSPoint) -> CLLocation {
+        let loc = AGSGeometryEngine.defaultGeometryEngine().projectGeometry(from, toSpatialReference: AGSSpatialReference.wgs84SpatialReference()) as AGSPoint
+        return CLLocation(latitude: loc.y, longitude: loc.x)
+    }
+    
+    func updateLocation() {
+        if let point = mapView.locationDisplay.mapLocation() {
+            UserManager.sharedManager().user.updateLocation(cllocation(point))
+        }
     }
     
     // MARK: Search Bar Method
