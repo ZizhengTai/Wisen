@@ -100,7 +100,7 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
 - (void)notifyMentorWithRequest:(Request *)request {
     Firebase *receivedRequestsRef = [[Firebase alloc] initWithUrl:[NSString stringWithFormat:@"https://wisen.firebaseio.com/users/%@/receivedRequests", request.mentorUID]];
     Firebase *requestRef = [receivedRequestsRef childByAutoId];
-    [requestRef setValue:request.dictionaryRepresentationForUpload];
+    [requestRef setValue:request.dictionaryRepresentationWithoutRequestID];
 }
 
 - (FirebaseHandle)requestWithTag:(NSString *)tag location:(CLLocation *)location radius:(double)radius {
@@ -146,9 +146,9 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
             NSMutableArray *requests = [NSMutableArray array];
             if (snapshot.value != [NSNull null]) {
                 for (NSString *requestID in snapshot.value) {
-                    Request *request = snapshot.value[requestID];
-                    request.requestID = requestID;
-                    [requests addObject:request];
+                    NSMutableDictionary *dictionary = snapshot.value[requestID];
+                    dictionary[@"requestID"] = requestID;
+                    [requests addObject:[[Request alloc] initWithDictionary:dictionary]];
                 }
             }
             block(requests);
