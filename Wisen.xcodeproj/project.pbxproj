@@ -14,6 +14,8 @@
 		07D7EC251AA1797300606D43 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D7EC241AA1797300606D43 /* HistoryViewController.swift */; };
 		07D7EC271AA1830600606D43 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D7EC261AA1830600606D43 /* LoginViewController.swift */; };
 		07D7EC311AA1A32800606D43 /* UIImageView+Fetch.m in Sources */ = {isa = PBXBuildFile; fileRef = 07D7EC301AA1A32800606D43 /* UIImageView+Fetch.m */; };
+		07D7EC361AA1AC3600606D43 /* BackgroundTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D7EC341AA1AC3600606D43 /* BackgroundTableViewCell.swift */; };
+		07D7EC371AA1AC3600606D43 /* BackgroundTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07D7EC351AA1AC3600606D43 /* BackgroundTableViewCell.xib */; };
 		22D1942B5A9A218BE013B411 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FC19ABE1547EBEB50EAE97E7 /* libPods.a */; };
 		335186681AA1668600636D86 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 335186671AA1668600636D86 /* User.m */; };
 		3351866B1AA16E7900636D86 /* UserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3351866A1AA16E7900636D86 /* UserManager.m */; };
@@ -47,6 +49,8 @@
 		07D7EC291AA1853800606D43 /* Wisen-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Wisen-Bridging-Header.h"; sourceTree = "<group>"; };
 		07D7EC2F1AA1A32800606D43 /* UIImageView+Fetch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Fetch.h"; sourceTree = "<group>"; };
 		07D7EC301AA1A32800606D43 /* UIImageView+Fetch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Fetch.m"; sourceTree = "<group>"; };
+		07D7EC341AA1AC3600606D43 /* BackgroundTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundTableViewCell.swift; sourceTree = "<group>"; };
+		07D7EC351AA1AC3600606D43 /* BackgroundTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BackgroundTableViewCell.xib; sourceTree = "<group>"; };
 		182AD98120EF69D918B1C6E1 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		335186661AA1668600636D86 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		335186671AA1668600636D86 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
@@ -137,6 +141,8 @@
 				33BC3E451AA1417400B4B620 /* AppDelegate.m */,
 				33BC3E4A1AA1417400B4B620 /* Main.storyboard */,
 				07C1AA5E1AA155400042854E /* MainViewController.swift */,
+				07D7EC341AA1AC3600606D43 /* BackgroundTableViewCell.swift */,
+				07D7EC351AA1AC3600606D43 /* BackgroundTableViewCell.xib */,
 				07D7EC221AA1790800606D43 /* RequestViewController.swift */,
 				07D7EC261AA1830600606D43 /* LoginViewController.swift */,
 				07D7EC241AA1797300606D43 /* HistoryViewController.swift */,
@@ -285,6 +291,7 @@
 				33BC3E4C1AA1417400B4B620 /* Main.storyboard in Resources */,
 				33BC3E511AA1417400B4B620 /* LaunchScreen.xib in Resources */,
 				33BC3E4E1AA1417400B4B620 /* Images.xcassets in Resources */,
+				07D7EC371AA1AC3600606D43 /* BackgroundTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -350,6 +357,7 @@
 			files = (
 				07D7EC271AA1830600606D43 /* LoginViewController.swift in Sources */,
 				335186681AA1668600636D86 /* User.m in Sources */,
+				07D7EC361AA1AC3600606D43 /* BackgroundTableViewCell.swift in Sources */,
 				07C1AA5F1AA155400042854E /* MainViewController.swift in Sources */,
 				07D7EC311AA1A32800606D43 /* UIImageView+Fetch.m in Sources */,
 				33BC3E461AA1417400B4B620 /* AppDelegate.m in Sources */,

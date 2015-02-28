@@ -20,6 +20,10 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kar-fe-87D" userLabel="Background View">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="476"/>
                                 <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="bxO-JI-wM9">
+                                        <rect key="frame" x="0.0" y="200" width="600" height="276"/>
+                                        <color key="backgroundColor" red="0.037570968150000002" green="0.041530916969999998" blue="0.049511056880000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </tableView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UOm-Lu-vAq">
                                         <rect key="frame" x="250" y="50" width="100" height="100"/>
                                         <constraints>
@@ -28,11 +32,21 @@
                                         </constraints>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.072064929197737451" green="0.0542857065289983" blue="0.42664359466374258" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.11619339313022679" green="0.12711052222066291" blue="0.15577651515151514" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="bxO-JI-wM9" firstAttribute="top" secondItem="UOm-Lu-vAq" secondAttribute="bottom" constant="50" id="3fu-Wr-6TL"/>
                                     <constraint firstItem="UOm-Lu-vAq" firstAttribute="top" secondItem="Kar-fe-87D" secondAttribute="top" constant="50" id="KMO-qt-fqk"/>
+                                    <constraint firstItem="bxO-JI-wM9" firstAttribute="leading" secondItem="Kar-fe-87D" secondAttribute="leading" id="M9o-Op-I9q"/>
                                     <constraint firstAttribute="centerX" secondItem="UOm-Lu-vAq" secondAttribute="centerX" id="Nn8-EM-Ocv"/>
+                                    <constraint firstAttribute="bottom" secondItem="bxO-JI-wM9" secondAttribute="bottom" id="heA-fZ-zcl"/>
+                                    <constraint firstAttribute="trailing" secondItem="bxO-JI-wM9" secondAttribute="trailing" id="nGy-Xk-rE7"/>
+                                    <constraint firstItem="UOm-Lu-vAq" firstAttribute="top" secondItem="bxO-JI-wM9" secondAttribute="bottom" constant="8" symbolic="YES" id="pj6-YG-u6b"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="pj6-YG-u6b"/>
+                                    </mask>
+                                </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H82-Ki-rPF" userLabel="Main View">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
@@ -76,6 +90,7 @@
                     <navigationItem key="navigationItem" id="3yu-1j-wJB"/>
                     <connections>
                         <outlet property="MainView" destination="H82-Ki-rPF" id="ICj-uu-ksr"/>
+                        <outlet property="backgroundTableView" destination="bxO-JI-wM9" id="Shf-YU-aSh"/>
                         <outlet property="backgroundView" destination="Kar-fe-87D" id="IDU-mw-KFv"/>
                         <outlet property="profileAvatar" destination="UOm-Lu-vAq" id="0oL-W0-gP0"/>
                         <outlet property="searchLabel" destination="48K-7q-T9L" id="Qce-cA-dn9"/>
