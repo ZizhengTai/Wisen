@@ -61,7 +61,7 @@ class ConfirmationViewController: UIViewController, UITextFieldDelegate {
         navigationController?.popToRootViewControllerAnimated(true)
     }
     
-    override func dealloc() {
+    deinit {
         timer?.invalidate()
         timer = nil
     }
