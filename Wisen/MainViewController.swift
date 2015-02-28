@@ -46,7 +46,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         didSet {
             profileAvatar.clipsToBounds = true
             profileAvatar.layer.cornerRadius = CGRectGetWidth(profileAvatar.frame)/2
-            profileAvatar.fetchImage(user.profileImageUrl)
+            profileAvatar.fetchImage(user.profileImageURL)
             profileAvatar.userInteractionEnabled = true
             profileAvatar.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "segueToUser"))
         }
