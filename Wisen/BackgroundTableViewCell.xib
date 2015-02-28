@@ -20,10 +20,10 @@
                             <constraint firstAttribute="height" constant="35" id="t8u-Ul-LhO"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="PLACE HOLDER" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rVy-t7-FWM">
-                        <rect key="frame" x="51" y="13" width="119.5" height="20"/>
-                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="19"/>
-                        <color key="textColor" red="0.97291272095959591" green="0.97291272095959591" blue="0.97291272095959591" alpha="1" colorSpace="calibratedRGB"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PLACE HOLDER" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rVy-t7-FWM">
+                        <rect key="frame" x="51" y="12.5" width="126.5" height="21"/>
+                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="18"/>
+                        <color key="textColor" red="0.97291272095959591" green="0.97291272095959591" blue="0.97291272095959591" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>

@@ -46,7 +46,9 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         didSet {
             profileAvatar.clipsToBounds = true
             profileAvatar.layer.cornerRadius = CGRectGetWidth(profileAvatar.frame)/2
-        profileAvatar .fetchImage(user.profileImageUrl)
+            profileAvatar.fetchImage(user.profileImageUrl)
+            profileAvatar.userInteractionEnabled = true
+            profileAvatar.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "segueToUser"))
         }
     }
     @IBOutlet weak var searchLabel: UILabel! {
@@ -108,7 +110,11 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
 
     func segueToSearch() {
-        self.performSegueWithIdentifier("segueToSearch", sender: nil)
+        performSegueWithIdentifier("segueToSearch", sender: nil)
+    }
+    
+    func segueToUser() {
+        navigationController?.pushViewController(storyboard!.instantiateViewControllerWithIdentifier("UserScene") as UIViewController, animated: true)
     }
     
     // MARK: UITableView Method
