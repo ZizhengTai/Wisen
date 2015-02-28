@@ -6,10 +6,17 @@
 //  Copyright (c) 2015 self. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import <Firebase/Firebase.h>
 
 @interface User : NSObject
 
-- (void)logInWithTwitterWithBlock:(void (^)(BOOL))block;
+@property (copy, nonatomic) NSString *displayName;
+
+- (instancetype)initWithAuthData:(FAuthData *)authData;
+
+- (void)addTag:(NSString *)tag;
+- (void)allTags:(NSArray *)tags;
+- (void)requestWithTag:(NSString *)tag location:(CGPoint)location;
 
 @end
