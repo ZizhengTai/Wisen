@@ -20,13 +20,6 @@
     [Fabric with:@[ CrashlyticsKit ]]; // Crashlytics is just one option, you can also pass TwitterKit and MoPubKit
     
     [[UserManager sharedManager] tryLogInWithBlock:^(User *user) {
-        NSLog(@"%@ has logged in", user);
-        [user getAllTagsWithBlock:^(NSArray *tags) {
-            NSLog(@"%@", tags);
-        }];
-    }];
-    
-    [[UserManager sharedManager] tryLogInWithBlock:^(User *user) {
         if (user) {
             self.window.rootViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"MainScene"];
         } else {

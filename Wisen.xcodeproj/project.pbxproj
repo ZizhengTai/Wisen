@@ -119,6 +119,20 @@
 			name = Manager;
 			sourceTree = "<group>";
 		};
+		07D7EC3A1AA1DBEB00606D43 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				07C1AA5E1AA155400042854E /* MainViewController.swift */,
+				07D7EC381AA1B7DF00606D43 /* UserViewController.swift */,
+				07D7EC341AA1AC3600606D43 /* BackgroundTableViewCell.swift */,
+				07D7EC351AA1AC3600606D43 /* BackgroundTableViewCell.xib */,
+				07D7EC221AA1790800606D43 /* RequestViewController.swift */,
+				07D7EC261AA1830600606D43 /* LoginViewController.swift */,
+				07D7EC241AA1797300606D43 /* HistoryViewController.swift */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
 		33BC3E341AA1417400B4B620 = {
 			isa = PBXGroup;
 			children = (
@@ -147,13 +161,7 @@
 				33BC3E441AA1417400B4B620 /* AppDelegate.h */,
 				33BC3E451AA1417400B4B620 /* AppDelegate.m */,
 				33BC3E4A1AA1417400B4B620 /* Main.storyboard */,
-				07C1AA5E1AA155400042854E /* MainViewController.swift */,
-				07D7EC381AA1B7DF00606D43 /* UserViewController.swift */,
-				07D7EC341AA1AC3600606D43 /* BackgroundTableViewCell.swift */,
-				07D7EC351AA1AC3600606D43 /* BackgroundTableViewCell.xib */,
-				07D7EC221AA1790800606D43 /* RequestViewController.swift */,
-				07D7EC261AA1830600606D43 /* LoginViewController.swift */,
-				07D7EC241AA1797300606D43 /* HistoryViewController.swift */,
+				07D7EC3A1AA1DBEB00606D43 /* ViewController */,
 				33BC3E4F1AA1417400B4B620 /* LaunchScreen.xib */,
 				33BC3E401AA1417400B4B620 /* Supporting Files */,
 				07D7EC2A1AA1A2EF00606D43 /* Model */,
