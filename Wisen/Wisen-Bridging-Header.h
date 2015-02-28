@@ -11,5 +11,6 @@
 
 #import "UserManager.h"
 #import "AppDelegate.h"
-
+#import "UIImageView+WebCache.h"
+#import "UIImageView+Fetch.h"
 #endif

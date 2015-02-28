@@ -8,25 +8,41 @@
 
 import UIKit
 
+private let DefaultDuration = 0.3
+private let SmallAvatarWidth = 30
 class MainViewController: UIViewController {
 
+    let user = UserManager.sharedManager().user
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var searchLabel: UILabel! {
         didSet {
             searchLabel.userInteractionEnabled = true
             searchLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "segueToSearch"))
         }
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Wisen"
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: SmallAvatarWidth, height: SmallAvatarWidth))
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = SmallAvatarWidth/2
+        imageView.fetchImage(user.profileImageUrl)
+        imageView.userInteractionEnabled = true
+        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "showProfile"))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: imageView)
         // Do any additional setup after loading the view.
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
+    func showProfile() {
+        topConstraint.constant = CGRectGetHeight(backgroundView.frame)
+        UIView.animateWithDuration(DefaultDuration, animations: { () -> Void in
+            self.view.layoutIfNeeded()
+        })
+    }
+
     func segueToSearch() {
         self.performSegueWithIdentifier("segueToSearch", sender: nil)
     }
@@ -34,15 +50,4 @@ class MainViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

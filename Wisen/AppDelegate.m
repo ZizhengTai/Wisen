@@ -19,9 +19,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [Fabric with:@[CrashlyticsKit]]; //Crashlytics is just one option, you can also pass TwitterKit and MoPubKit
     
-//    if (![UserManager sharedManager].user) {
-//        self.window.rootViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginScene"];
-//    } 
+    [[UserManager sharedManager] tryLogInWithBlock:^(User *user) {
+        if (user) {
+            self.window.rootViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"MainScene"];
+        } else {
+            self.window.rootViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginScene"];
+        }
+    }];
     return YES;
 }
 

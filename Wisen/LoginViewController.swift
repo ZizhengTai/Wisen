@@ -16,7 +16,7 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginTouched(sender: UIButton) {
-        UserManager.sharedManager().logInWithTwitterWithBlock { (let finished) -> Void in
+        UserManager.sharedManager().logInWithTwitterWithBlock { (user: User?) -> Void in
             let delegate = UIApplication.sharedApplication().delegate as AppDelegate
             delegate.window.rootViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MainScene") as? UIViewController
         }
