@@ -343,11 +343,20 @@
                                             <action selector="requestButtonTouched:" destination="hlv-k8-lPp" eventType="touchUpInside" id="5bt-6t-ijI"/>
                                         </connections>
                                     </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Pin" translatesAutoresizingMaskIntoConstraints="NO" id="PME-jm-knE">
+                                        <rect key="frame" x="285.5" y="184.5" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="Hd2-zj-6SJ"/>
+                                            <constraint firstAttribute="width" constant="30" id="Yko-rQ-Ie2"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="centerX" secondItem="PME-jm-knE" secondAttribute="centerX" id="6eX-bw-riT"/>
                                     <constraint firstAttribute="height" constant="400" id="7KB-k9-bnn"/>
                                     <constraint firstAttribute="bottom" secondItem="j1L-rD-2ri" secondAttribute="bottom" constant="20" symbolic="YES" id="FKf-Dc-aqu"/>
+                                    <constraint firstAttribute="centerY" secondItem="PME-jm-knE" secondAttribute="centerY" id="eec-Yw-Heb"/>
                                     <constraint firstAttribute="centerX" secondItem="j1L-rD-2ri" secondAttribute="centerX" id="kGG-ND-KPE"/>
                                 </constraints>
                             </view>
@@ -434,6 +443,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Pin" width="600" height="472"/>
         <image name="Yosemite" width="2560" height="1600"/>
     </resources>
 </document>
