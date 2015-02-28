@@ -1,0 +1,490 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		22D1942B5A9A218BE013B411 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FC19ABE1547EBEB50EAE97E7 /* libPods.a */; };
+		33BC3E431AA1417400B4B620 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BC3E421AA1417400B4B620 /* main.m */; };
+		33BC3E461AA1417400B4B620 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BC3E451AA1417400B4B620 /* AppDelegate.m */; };
+		33BC3E491AA1417400B4B620 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BC3E481AA1417400B4B620 /* ViewController.m */; };
+		33BC3E4C1AA1417400B4B620 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33BC3E4A1AA1417400B4B620 /* Main.storyboard */; };
+		33BC3E4E1AA1417400B4B620 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33BC3E4D1AA1417400B4B620 /* Images.xcassets */; };
+		33BC3E511AA1417400B4B620 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33BC3E4F1AA1417400B4B620 /* LaunchScreen.xib */; };
+		33BC3E5D1AA1417400B4B620 /* WisenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BC3E5C1AA1417400B4B620 /* WisenTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		33BC3E571AA1417400B4B620 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 33BC3E351AA1417400B4B620 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 33BC3E3C1AA1417400B4B620;
+			remoteInfo = Wisen;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		182AD98120EF69D918B1C6E1 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		33BC3E3D1AA1417400B4B620 /* Wisen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wisen.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		33BC3E411AA1417400B4B620 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		33BC3E421AA1417400B4B620 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		33BC3E441AA1417400B4B620 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		33BC3E451AA1417400B4B620 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		33BC3E471AA1417400B4B620 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		33BC3E481AA1417400B4B620 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		33BC3E4B1AA1417400B4B620 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		33BC3E4D1AA1417400B4B620 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		33BC3E501AA1417400B4B620 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		33BC3E561AA1417400B4B620 /* WisenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WisenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		33BC3E5B1AA1417400B4B620 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		33BC3E5C1AA1417400B4B620 /* WisenTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WisenTests.m; sourceTree = "<group>"; };
+		5D76523222769ACF221BA57F /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		FC19ABE1547EBEB50EAE97E7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		33BC3E3A1AA1417400B4B620 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22D1942B5A9A218BE013B411 /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		33BC3E531AA1417400B4B620 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		33BC3E341AA1417400B4B620 = {
+			isa = PBXGroup;
+			children = (
+				33BC3E3F1AA1417400B4B620 /* Wisen */,
+				33BC3E591AA1417400B4B620 /* WisenTests */,
+				33BC3E3E1AA1417400B4B620 /* Products */,
+				DB12D3D52DA7F3B433D99EA1 /* Pods */,
+				5EAB378D0E903DC3DCBD9D82 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		33BC3E3E1AA1417400B4B620 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				33BC3E3D1AA1417400B4B620 /* Wisen.app */,
+				33BC3E561AA1417400B4B620 /* WisenTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		33BC3E3F1AA1417400B4B620 /* Wisen */ = {
+			isa = PBXGroup;
+			children = (
+				33BC3E441AA1417400B4B620 /* AppDelegate.h */,
+				33BC3E451AA1417400B4B620 /* AppDelegate.m */,
+				33BC3E471AA1417400B4B620 /* ViewController.h */,
+				33BC3E481AA1417400B4B620 /* ViewController.m */,
+				33BC3E4A1AA1417400B4B620 /* Main.storyboard */,
+				33BC3E4D1AA1417400B4B620 /* Images.xcassets */,
+				33BC3E4F1AA1417400B4B620 /* LaunchScreen.xib */,
+				33BC3E401AA1417400B4B620 /* Supporting Files */,
+			);
+			path = Wisen;
+			sourceTree = "<group>";
+		};
+		33BC3E401AA1417400B4B620 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				33BC3E411AA1417400B4B620 /* Info.plist */,
+				33BC3E421AA1417400B4B620 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		33BC3E591AA1417400B4B620 /* WisenTests */ = {
+			isa = PBXGroup;
+			children = (
+				33BC3E5C1AA1417400B4B620 /* WisenTests.m */,
+				33BC3E5A1AA1417400B4B620 /* Supporting Files */,
+			);
+			path = WisenTests;
+			sourceTree = "<group>";
+		};
+		33BC3E5A1AA1417400B4B620 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				33BC3E5B1AA1417400B4B620 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5EAB378D0E903DC3DCBD9D82 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FC19ABE1547EBEB50EAE97E7 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DB12D3D52DA7F3B433D99EA1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5D76523222769ACF221BA57F /* Pods.debug.xcconfig */,
+				182AD98120EF69D918B1C6E1 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		33BC3E3C1AA1417400B4B620 /* Wisen */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 33BC3E601AA1417400B4B620 /* Build configuration list for PBXNativeTarget "Wisen" */;
+			buildPhases = (
+				61896821732A7897DE6FDDF0 /* Check Pods Manifest.lock */,
+				33BC3E391AA1417400B4B620 /* Sources */,
+				33BC3E3A1AA1417400B4B620 /* Frameworks */,
+				33BC3E3B1AA1417400B4B620 /* Resources */,
+				805E5F938B3377E46B597A90 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Wisen;
+			productName = Wisen;
+			productReference = 33BC3E3D1AA1417400B4B620 /* Wisen.app */;
+			productType = "com.apple.product-type.application";
+		};
+		33BC3E551AA1417400B4B620 /* WisenTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 33BC3E631AA1417400B4B620 /* Build configuration list for PBXNativeTarget "WisenTests" */;
+			buildPhases = (
+				33BC3E521AA1417400B4B620 /* Sources */,
+				33BC3E531AA1417400B4B620 /* Frameworks */,
+				33BC3E541AA1417400B4B620 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				33BC3E581AA1417400B4B620 /* PBXTargetDependency */,
+			);
+			name = WisenTests;
+			productName = WisenTests;
+			productReference = 33BC3E561AA1417400B4B620 /* WisenTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		33BC3E351AA1417400B4B620 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = self;
+				TargetAttributes = {
+					33BC3E3C1AA1417400B4B620 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					33BC3E551AA1417400B4B620 = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = 33BC3E3C1AA1417400B4B620;
+					};
+				};
+			};
+			buildConfigurationList = 33BC3E381AA1417400B4B620 /* Build configuration list for PBXProject "Wisen" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 33BC3E341AA1417400B4B620;
+			productRefGroup = 33BC3E3E1AA1417400B4B620 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				33BC3E3C1AA1417400B4B620 /* Wisen */,
+				33BC3E551AA1417400B4B620 /* WisenTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		33BC3E3B1AA1417400B4B620 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				33BC3E4C1AA1417400B4B620 /* Main.storyboard in Resources */,
+				33BC3E511AA1417400B4B620 /* LaunchScreen.xib in Resources */,
+				33BC3E4E1AA1417400B4B620 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		33BC3E541AA1417400B4B620 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		61896821732A7897DE6FDDF0 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		805E5F938B3377E46B597A90 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		33BC3E391AA1417400B4B620 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				33BC3E491AA1417400B4B620 /* ViewController.m in Sources */,
+				33BC3E461AA1417400B4B620 /* AppDelegate.m in Sources */,
+				33BC3E431AA1417400B4B620 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		33BC3E521AA1417400B4B620 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				33BC3E5D1AA1417400B4B620 /* WisenTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		33BC3E581AA1417400B4B620 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 33BC3E3C1AA1417400B4B620 /* Wisen */;
+			targetProxy = 33BC3E571AA1417400B4B620 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		33BC3E4A1AA1417400B4B620 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				33BC3E4B1AA1417400B4B620 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		33BC3E4F1AA1417400B4B620 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				33BC3E501AA1417400B4B620 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		33BC3E5E1AA1417400B4B620 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		33BC3E5F1AA1417400B4B620 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		33BC3E611AA1417400B4B620 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5D76523222769ACF221BA57F /* Pods.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Wisen/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		33BC3E621AA1417400B4B620 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 182AD98120EF69D918B1C6E1 /* Pods.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Wisen/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		33BC3E641AA1417400B4B620 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = WisenTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Wisen.app/Wisen";
+			};
+			name = Debug;
+		};
+		33BC3E651AA1417400B4B620 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = WisenTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Wisen.app/Wisen";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		33BC3E381AA1417400B4B620 /* Build configuration list for PBXProject "Wisen" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				33BC3E5E1AA1417400B4B620 /* Debug */,
+				33BC3E5F1AA1417400B4B620 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		33BC3E601AA1417400B4B620 /* Build configuration list for PBXNativeTarget "Wisen" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				33BC3E611AA1417400B4B620 /* Debug */,
+				33BC3E621AA1417400B4B620 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		33BC3E631AA1417400B4B620 /* Build configuration list for PBXNativeTarget "WisenTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				33BC3E641AA1417400B4B620 /* Debug */,
+				33BC3E651AA1417400B4B620 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 33BC3E351AA1417400B4B620 /* Project object */;
+}
