@@ -1,0 +1,17 @@
+//
+//  PrefixHeader.pch
+//  Wisen
+//
+//  Created by Yihe Li on 2/27/15.
+//  Copyright (c) 2015 self. All rights reserved.
+//
+
+#ifndef Wisen_PrefixHeader_pch
+#define Wisen_PrefixHeader_pch
+
+#import "UserManager.h"
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif

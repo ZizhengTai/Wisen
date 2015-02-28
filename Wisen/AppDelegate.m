@@ -9,7 +9,6 @@
 #import <Crashlytics/Crashlytics.h>
 #import <Fabric/Fabric.h>
 #import "AppDelegate.h"
-#import "UserManager.h"
 
 @interface AppDelegate ()
 
@@ -20,15 +19,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [Fabric with:@[CrashlyticsKit]]; //Crashlytics is just one option, you can also pass TwitterKit and MoPubKit
     
-    
-    [[UserManager sharedManager] logInWithTwitterWithBlock:^(BOOL succeeded) {
-        if (succeeded) {
-            NSLog(@"succeeded");
-        } else {
-            NSLog(@"failed");
-        }
-    }];
-    
+//    if (![UserManager sharedManager].user) {
+//        self.window.rootViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginScene"];
+//    } 
     return YES;
 }
 

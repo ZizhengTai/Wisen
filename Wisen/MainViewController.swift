@@ -18,7 +18,7 @@ class MainViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        title = "Wisen"
         // Do any additional setup after loading the view.
     }
 
@@ -29,6 +29,10 @@ class MainViewController: UIViewController {
     
     func segueToSearch() {
         self.performSegueWithIdentifier("segueToSearch", sender: nil)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
     }
 
     /*

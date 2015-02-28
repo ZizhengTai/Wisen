@@ -9,7 +9,7 @@
 import UIKit
 import ArcGIS
 
-class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearchBarDelegate {
+class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearchBarDelegate, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +19,12 @@ class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearch
     
     @IBAction func dismiss(sender: UIButton) {
         dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    @IBAction func requestButtonTouched(sender: UIButton) {
+        let currentPoint = mapView.locationDisplay.mapLocation()
+        let destinationPoint = mapView.toMapPoint(mapView.convertPoint(mapView.center, fromView: mapView.superview))
+        NSLog("Current: \(currentPoint) + Destination: \(destinationPoint)")
     }
     
     @IBOutlet weak var searchBar: UISearchBar! {
@@ -50,13 +56,7 @@ class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearch
             }
         }
     }
-    
-    func mapViewDidLoad(mapView: AGSMapView!) {
-        //do something now that the map is loaded
-        //for example, show the current location on the map
-        mapView.locationDisplay.startDataSource()
-    }
-    
+  
     func imageWithColor(color :UIColor, height:CGFloat) -> UIImage {
         let rect = CGRect(x: 0, y: 0, width: 1, height: height)
         UIGraphicsBeginImageContext(rect.size)
@@ -68,4 +68,12 @@ class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearch
         return image
     }
     
+    // MARK: Map Delegate Method
+    
+    func mapViewDidLoad(mapView: AGSMapView!) {
+        mapView.locationDisplay.startDataSource()
+        let point = mapView.locationDisplay.mapLocation()
+        self.mapView.locationDisplay.autoPanMode = .Default
+        self.mapView.locationDisplay.wanderExtentFactor = 0.75
+    }
 }

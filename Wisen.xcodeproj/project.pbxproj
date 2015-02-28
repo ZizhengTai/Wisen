@@ -12,6 +12,7 @@
 		07C1AA5F1AA155400042854E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C1AA5E1AA155400042854E /* MainViewController.swift */; };
 		07D7EC231AA1790800606D43 /* RequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D7EC221AA1790800606D43 /* RequestViewController.swift */; };
 		07D7EC251AA1797300606D43 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D7EC241AA1797300606D43 /* HistoryViewController.swift */; };
+		07D7EC271AA1830600606D43 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D7EC261AA1830600606D43 /* LoginViewController.swift */; };
 		22D1942B5A9A218BE013B411 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FC19ABE1547EBEB50EAE97E7 /* libPods.a */; };
 		335186681AA1668600636D86 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 335186671AA1668600636D86 /* User.m */; };
 		3351866B1AA16E7900636D86 /* UserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3351866A1AA16E7900636D86 /* UserManager.m */; };
@@ -40,6 +41,9 @@
 		07C1AA5E1AA155400042854E /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		07D7EC221AA1790800606D43 /* RequestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestViewController.swift; sourceTree = "<group>"; };
 		07D7EC241AA1797300606D43 /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
+		07D7EC261AA1830600606D43 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		07D7EC281AA183D300606D43 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		07D7EC291AA1853800606D43 /* Wisen-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Wisen-Bridging-Header.h"; sourceTree = "<group>"; };
 		182AD98120EF69D918B1C6E1 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		335186661AA1668600636D86 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		335186671AA1668600636D86 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
@@ -113,6 +117,7 @@
 				33BC3E4A1AA1417400B4B620 /* Main.storyboard */,
 				07C1AA5E1AA155400042854E /* MainViewController.swift */,
 				07D7EC221AA1790800606D43 /* RequestViewController.swift */,
+				07D7EC261AA1830600606D43 /* LoginViewController.swift */,
 				07D7EC241AA1797300606D43 /* HistoryViewController.swift */,
 				33BC3E4F1AA1417400B4B620 /* LaunchScreen.xib */,
 				33BC3E401AA1417400B4B620 /* Supporting Files */,
@@ -129,6 +134,8 @@
 			children = (
 				33BC3E4D1AA1417400B4B620 /* Images.xcassets */,
 				33BC3E411AA1417400B4B620 /* Info.plist */,
+				07D7EC281AA183D300606D43 /* PrefixHeader.pch */,
+				07D7EC291AA1853800606D43 /* Wisen-Bridging-Header.h */,
 				33BC3E421AA1417400B4B620 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -320,6 +327,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07D7EC271AA1830600606D43 /* LoginViewController.swift in Sources */,
 				335186681AA1668600636D86 /* User.m in Sources */,
 				07C1AA5F1AA155400042854E /* MainViewController.swift in Sources */,
 				33BC3E461AA1417400B4B620 /* AppDelegate.m in Sources */,
@@ -455,9 +463,11 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GCC_PREFIX_HEADER = Wisen/PrefixHeader.pch;
 				INFOPLIST_FILE = Wisen/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "$(SRCROOT)/$(PROJECT_NAME)/Wisen-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -471,9 +481,11 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GCC_PREFIX_HEADER = Wisen/PrefixHeader.pch;
 				INFOPLIST_FILE = Wisen/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "$(SRCROOT)/$(PROJECT_NAME)/Wisen-Bridging-Header.h";
 			};
 			name = Release;
 		};
