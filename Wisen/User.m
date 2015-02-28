@@ -143,18 +143,22 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
     [self.handleQueryPairs removeObjectForKey:@(handle)];
 }
 
-- (void)getAllReceivedRequestsWithBlock:(void (^)(NSArray *requests))block {
+- (void)observeAllReceivedRequestsWithBlock:(void (^)(NSArray *requests))block {
     Firebase *receivedRequestsRef = [self.userRef childByAppendingPath:@"receivedRequests"];
-    [receivedRequestsRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+    [receivedRequestsRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         if (block) {
             if (snapshot.value != [NSNull null]) {
                 block([snapshot.value allValues]);
             } else {
                 block(@[]);
             }
-            
         }
     }];
+}
+
+- (void)stopObservingAllReceivedRequests {
+    Firebase *receivedRequestsRef = [self.userRef childByAppendingPath:@"receivedRequests"];
+    [receivedRequestsRef removeAllObservers];
 }
 
 - (void)updateLocation:(CLLocation *)location {
@@ -163,6 +167,10 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
 
 - (NSString *)description {
     return self.displayName;
+}
+
+- (void)dealloc {
+    [self stopObservingAllReceivedRequests];
 }
 
 @end
