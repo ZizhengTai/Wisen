@@ -20,6 +20,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [Fabric with:@[CrashlyticsKit]]; //Crashlytics is just one option, you can also pass TwitterKit and MoPubKit
     
+    
     [[UserManager sharedManager] logInWithTwitterWithBlock:^(BOOL succeeded) {
         if (succeeded) {
             User *user = [[UserManager sharedManager] user];
