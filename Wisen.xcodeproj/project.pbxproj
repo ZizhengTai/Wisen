@@ -310,10 +310,11 @@
 				TargetAttributes = {
 					33BC3E3C1AA1417400B4B620 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = HYHN7K59N8;
+						DevelopmentTeam = B9G4H3G577;
 					};
 					33BC3E551AA1417400B4B620 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = B9G4H3G577;
 						TestTargetID = 33BC3E3C1AA1417400B4B620;
 					};
 				};
@@ -555,6 +556,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -563,6 +565,7 @@
 				INFOPLIST_FILE = Wisen/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "$(SRCROOT)/$(PROJECT_NAME)/Wisen-Bridging-Header.h";
 			};
 			name = Debug;
@@ -573,6 +576,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -581,6 +585,7 @@
 				INFOPLIST_FILE = Wisen/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "$(SRCROOT)/$(PROJECT_NAME)/Wisen-Bridging-Header.h";
 			};
 			name = Release;
