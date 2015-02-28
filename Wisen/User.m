@@ -31,10 +31,22 @@
     return self.authData.providerData[@"displayName"];
 }
 
-- (void)addTag:(NSString *)tag {
+- (void)addTag:(NSString *)tag withBlock:(void (^)(BOOL))block {
+    Firebase *tagsRef = [self.userRef childByAppendingPath:@"tags"];
+    [tagsRef updateChildValues:@{ tag: @YES } withCompletionBlock:^(NSError *error, Firebase *ref) {
+        if (block) {
+            block(error == nil);
+        }
+    }];
 }
 
-- (void)allTags:(NSArray *)tags {
+- (void)getAllTagsWithBlock:(void (^)(NSArray *tags))block {
+    Firebase *tagsRef = [self.userRef childByAppendingPath:@"tags"];
+    [tagsRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        if (block) {
+            block(snapshot.value);
+        }
+    }];
 }
 
 - (void)requestWithTag:(NSString *)tag location:(CGPoint)location {
