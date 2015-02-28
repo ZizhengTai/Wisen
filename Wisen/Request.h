@@ -8,6 +8,12 @@
 
 #import <CoreLocation/CoreLocation.h>
 
+typedef NS_ENUM(NSInteger, RequestStatus) {
+    RequestStatusPending = 0,
+    RequestStatusOngoing = 1,
+    RequestStatusComplete = 2
+};
+
 @interface Request : NSObject
 
 @property (copy, nonatomic) NSString *menteeUID;
@@ -15,5 +21,8 @@
 @property (strong, nonatomic) CLLocation *location;
 @property (assign, nonatomic) double radius;
 @property (copy, nonatomic) NSString *mentorUID;
+@property (assign, nonatomic) RequestStatus status;
+
+@property (readonly, strong, nonatomic) NSDictionary *dictionaryRepresentation;
 
 @end

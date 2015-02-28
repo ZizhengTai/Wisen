@@ -10,14 +10,17 @@
 
 @implementation Request
 
+- (NSDictionary *)dictionaryRepresentation {
+    return @{ @"menteeUID": self.menteeUID,
+              @"tag": self.tag,
+              @"location": self.location,
+              @"radius": @(self.radius),
+              @"mentorUID": self.mentorUID,
+              @"status": @(self.status) };
+}
+
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@", @{
-                                               @"menteeUID": self.menteeUID,
-                                               @"tag": self.tag,
-                                               @"location": self.location,
-                                               @"radius": @(self.radius),
-                                               @"mentorUID": self.mentorUID
-                                               }];
+    return [NSString stringWithFormat:@"%@", self.dictionaryRepresentation];
 }
 
 @end
