@@ -13,8 +13,12 @@ class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearch
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleNote:", name: kMentorFoundNotification, object: nil)
         // Do any additional setup after loading the view.
+    }
+    
+    func handleNote(note: NSNotification) {
+            NSLog("Note: %@", note.userInfo!)
     }
     
     @IBAction func dismiss(sender: UIButton) {
@@ -25,6 +29,7 @@ class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearch
         let currentPoint = mapView.locationDisplay.mapLocation()
         let destinationPoint = mapView.toMapPoint(mapView.convertPoint(mapView.center, fromView: mapView.superview))
         NSLog("Current: \(currentPoint) + Destination: \(destinationPoint)")
+        UserManager.sharedManager().user.requestWithTag("origami", location: CLLocation(latitude: 11, longitude: 12), radius: 10)
     }
     
     @IBOutlet weak var searchBar: UISearchBar! {
