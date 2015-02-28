@@ -91,7 +91,7 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
             Firebase *keyTagsRef = [[Firebase alloc] initWithUrl:[NSString stringWithFormat:@"https://wisen.firebaseio.com/users/%@/tags", key]];
             
             [keyTagsRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-                if ([snapshot.value containsString:tag]) {
+                if ([snapshot.value containsObject:tag]) {
                     [query removeObserverWithFirebaseHandle:handle];
                     
                     Request *request = [[Request alloc] init];
