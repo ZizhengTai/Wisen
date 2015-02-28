@@ -14,9 +14,9 @@ static NSString *const kRedirectURI = @"com.example.app.coinbase-oauth://coinbas
 
 @interface PaymentManager ()
 
-@property (copy, nonatomic) NSString *accessToken;// = [response objectForKey:@"access_token"];
-@property (copy, nonatomic) NSString *refreshToken;// = [response objectForKey:@"refresh_token"];
-@property (strong, nonatomic) NSNumber *expiresIn;// = [response objectForKey:@"expires_in"];
+@property (copy, nonatomic) NSString *accessToken;
+@property (copy, nonatomic) NSString *refreshToken;
+@property (strong, nonatomic) NSNumber *expiresIn;
 
 @end
 
