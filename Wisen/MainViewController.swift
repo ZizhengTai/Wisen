@@ -74,7 +74,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: SmallAvatarWidth, height: SmallAvatarWidth))
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = SmallAvatarWidth/2
-        imageView.fetchImage(user.profileImageUrl)
+        imageView.fetchImage(user.profileImageURL)
         imageView.userInteractionEnabled = true
         imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "showProfile"))
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: imageView)

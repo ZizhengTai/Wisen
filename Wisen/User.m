@@ -9,6 +9,9 @@
 #import <Firebase/Firebase.h>
 #import <GeoFire/GeoFire.h>
 #import "User.h"
+#import "Request.h"
+
+NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
 
 @interface User ()
 
@@ -23,11 +26,9 @@
 - (instancetype)initWithAuthData:(FAuthData *)authData {
     self = [super init];
     if (self) {
-        Firebase *ref = [[Firebase alloc] initWithUrl:@"https://wisen.firebaseio.com"];
-        
         _authData = authData;
-        _userRef = [ref childByAppendingPath:[NSString stringWithFormat:@"users/%@", authData.uid]];
-        _geoFire = [[GeoFire alloc] initWithFirebaseRef:ref];
+        _userRef = [[Firebase alloc] initWithUrl:[NSString stringWithFormat:@"https://wisen.firebaseio.com/users/%@", authData.uid]];
+        _geoFire = [[GeoFire alloc] initWithFirebaseRef:_userRef];
     }
     return self;
 }
@@ -36,15 +37,15 @@
     return self.authData.providerData[@"displayName"];
 }
 
-- (NSString *)profileImageUrl {
-    NSString *normalSizeImageUrl = self.authData.providerData[@"cachedUserProfile"][@"profile_image_url_https"];
+- (NSString *)profileImageURL {
+    NSString *normalSizeImageURL = self.authData.providerData[@"cachedUserProfile"][@"profile_image_url_https"];
     
     NSError *error = nil;
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"_normal\\." options:NSRegularExpressionCaseInsensitive error:&error];
     
-    NSString *biggerSizeImageUrl = [regex stringByReplacingMatchesInString:normalSizeImageUrl options:0 range:NSMakeRange(0, normalSizeImageUrl.length) withTemplate:@"\\."];
+    NSString *biggerSizeImageURL = [regex stringByReplacingMatchesInString:normalSizeImageURL options:0 range:NSMakeRange(0, normalSizeImageURL.length) withTemplate:@"\\."];
     
-    return biggerSizeImageUrl;
+    return biggerSizeImageURL;
 }
 
 - (void)addTag:(NSString *)tag withBlock:(void (^)(BOOL))block {
@@ -74,12 +75,24 @@
     }];
 }
 
-- (void)requestWithTag:(NSString *)tag location:(CGPoint)location {
-#warning Not implemented
+- (void)requestWithTag:(NSString *)tag location:(CLLocation *)location radius:(double)radius {
+    GFCircleQuery *query = [self.geoFire queryAtLocation:location withRadius:radius];
+    FirebaseHandle handle = [query observeEventType:GFEventTypeKeyEntered withBlock:^(NSString *key, CLLocation *location) {
+        [query removeObserverWithFirebaseHandle:handle];
+        
+        Request *request = [[Request alloc] init];
+        request.menteeUID = self.displayName;
+        request.tag = tag;
+        request.location = location;
+        request.radius = radius;
+        request.mentorUID = key;
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kMentorFoundNotification object:self userInfo:@{ @"request": request }];
+    }];
 }
 
-- (void)updateLocationWithLatitude:(CGFloat)latitude longitude:(CGFloat)longitude {
-#warning Not implemented
+- (void)updateLocation:(CLLocation *)location {
+    [self.geoFire setLocation:location forKey:@"location"];
 }
 
 - (NSString *)description {
