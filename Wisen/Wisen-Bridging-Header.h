@@ -11,9 +11,9 @@
 
 #import "UserManager.h"
 #import "MessageManager.h"
+#import "PaymentManager.h"
 #import "AppDelegate.h"
 #import "UIImageView+WebCache.h"
 #import "UIImageView+Fetch.h"
 #import <Sinch/Sinch.h>
-
 #endif

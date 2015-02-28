@@ -176,6 +176,20 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return CellHeight
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        switch indexPath.row {
+        case 0: break
+        case 1:
+            self.performSegueWithIdentifier("segueToPayment", sender: nil)
+        case 2: break
+        case 3: break
+        case 4: break
+        case 5: break
+        case 6: break
+        default: break
+        }
+    }
+    
     // MARK: Collection View Method
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(MainCell, forIndexPath: indexPath) as MainCollectionViewCell
