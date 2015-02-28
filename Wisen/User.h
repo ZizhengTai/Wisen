@@ -11,12 +11,14 @@
 
 @interface User : NSObject
 
-@property (copy, nonatomic) NSString *displayName;
+@property (readonly, strong, nonatomic) NSString *displayName;
+@property (readonly, strong, nonatomic) NSString *profileImageUrl;
 
 - (instancetype)initWithAuthData:(FAuthData *)authData;
 
-- (void)addTag:(NSString *)tag;
-- (void)allTags:(NSArray *)tags;
+- (void)addTag:(NSString *)tag withBlock:(void (^)(BOOL succeeded))block;
+- (void)removeTag:(NSString *)tag withBlock:(void (^)(BOOL succeeded))block;
+- (void)getAllTagsWithBlock:(void (^)(NSArray *tags))block;
 - (void)requestWithTag:(NSString *)tag location:(CGPoint)location;
 
 @end

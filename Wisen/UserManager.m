@@ -36,18 +36,33 @@
     return self;
 }
 
-- (void)logInWithTwitterWithBlock:(void (^)(BOOL succeeded))block {
+- (void)tryLogInWithBlock:(void (^)(User *user))block {
+    __weak UserManager *weakSelf = self;
+    FirebaseHandle handle = [self.ref observeAuthEventWithBlock:^(FAuthData *authData) {
+        if (authData.uid) {
+            weakSelf.user = [[User alloc] initWithAuthData:authData];
+        } else {
+            weakSelf.user = nil;
+        }
+        if (block) {
+            block(weakSelf.user);
+        }
+        [weakSelf.ref removeAuthEventObserverWithHandle:handle];
+    }];
+}
+
+- (void)logInWithTwitterWithBlock:(void (^)(User *user))block {
     TwitterAuthHelper *twitterAuthHelper = [[TwitterAuthHelper alloc] initWithFirebaseRef:self.ref apiKey:@"dkRAHcnzFW43tzJcSa4PZQfyP"];
     [twitterAuthHelper selectTwitterAccountWithCallback:^(NSError *error, NSArray *accounts) {
         if (error) {
             // Error retrieving Twitter accounts
             if (block) {
-                block(NO);
+                block(nil);
             }
         } else if (accounts.count == 0) {
             // No Twitter accounts found on device
             if (block) {
-                block(NO);
+                block(nil);
             }
         } else {
             // Select an account. Here we pick the first one for simplicity
@@ -56,15 +71,13 @@
                 if (error) {
                     // Error authenticating account
                     if (block) {
-                        block(NO);
+                        block(nil);
                     }
                 } else {
                     // User logged in!
-                    NSLog(@"%@", authData);
-                    Firebase *userRef = [self.ref childByAppendingPath:[NSString stringWithFormat:@"users/%@", authData.uid]];
                     self.user = [[User alloc] initWithAuthData:authData];
                     if (block) {
-                        block(YES);
+                        block(self.user);
                     }
                 }
             }];
