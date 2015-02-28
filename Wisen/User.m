@@ -97,9 +97,10 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
     }];
 }
 
-- (void)notifyMentorWithRequest:(Request *)request {
+- (void)notifyMentorWithRequestWithAutoID:(Request *)request {
     Firebase *receivedRequestsRef = [[Firebase alloc] initWithUrl:[NSString stringWithFormat:@"https://wisen.firebaseio.com/users/%@/receivedRequests", request.mentorUID]];
     Firebase *requestRef = [receivedRequestsRef childByAutoId];
+    request.requestID = requestRef.key;
     [requestRef setValue:request.dictionaryRepresentationWithoutRequestID];
 }
 
@@ -123,7 +124,9 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
                     request.mentorUID = key;
                     request.status = RequestStatusPending;
                     
-                    [self notifyMentorWithRequest:request];
+                    [self notifyMentorWithRequestWithAutoID:request];
+                    
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kMentorFoundNotification object:self userInfo:@{ @"request": request }];
                 }
             }];
         }
