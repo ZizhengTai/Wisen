@@ -209,8 +209,8 @@
 				33D3E3231AA157A900F98C56 /* TwitterAuthHelper.h */,
 				33D3E3241AA157A900F98C56 /* TwitterAuthHelper.m */,
 				33BC3E441AA1417400B4B620 /* AppDelegate.h */,
-				074870C11AA2567400F5D227 /* View */,
 				33BC3E451AA1417400B4B620 /* AppDelegate.m */,
+				074870C11AA2567400F5D227 /* View */,
 				33BC3E4A1AA1417400B4B620 /* Main.storyboard */,
 				07D7EC3A1AA1DBEB00606D43 /* ViewController */,
 				33BC3E4F1AA1417400B4B620 /* LaunchScreen.xib */,
@@ -327,7 +327,7 @@
 					};
 					33BC3E551AA1417400B4B620 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = B9G4H3G577;
+						DevelopmentTeam = HYHN7K59N8;
 						TestTargetID = 33BC3E3C1AA1417400B4B620;
 					};
 				};

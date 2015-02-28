@@ -31,8 +31,6 @@ class UserViewController: UIViewController, UITextViewDelegate {
     }
     
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
-        NSLog("Text View : %@", textView.text)
-        NSLog("Text: %@", text)
         if (NSString(string: textView.text).hasSuffix(" ") || NSString(string: textView.text).length == 0) && (text != "#" && text != " ") {
             return false
         }

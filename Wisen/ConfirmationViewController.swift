@@ -16,10 +16,11 @@ class ConfirmationViewController: UIViewController, UITextFieldDelegate {
         }
     }
     var clockFace: ClockFace?
+    var minutesLeft: Double?
     override func viewDidLoad() {
         super.viewDidLoad()
         clockFace = ClockFace()
-        clockFace?.position = CGPoint(x:self.view.bounds.size.width , y: 150)
+        clockFace?.position = CGPoint(x:self.view.bounds.size.width/2 , y: 150)
         self.view.layer.addSublayer(self.clockFace);
     }
 
@@ -29,7 +30,23 @@ class ConfirmationViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
-        clockFace?.time = NSString(string:textField.text).floatValue;
+        clockFace?.myTime = NSString(string:textField.text).floatValue;
+        minutesLeft = floor(Double(clockFace!.myTime * 60))
+        let timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: "updateClockFace", userInfo: nil, repeats: true)
+    }
+    
+    func updateClockFace() {
+        if var min = minutesLeft {
+            min = Double(min - Double(1))
+            if min <= Double(0) {
+                requestFinished()
+            }
+            clockFace?.myTime = Float(min / Double(60))
+        }
+    }
+    
+    func requestFinished() {
+        // TODO
     }
     
 }

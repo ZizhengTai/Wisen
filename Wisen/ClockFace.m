@@ -11,7 +11,7 @@
 
 @implementation ClockFace
 
-@dynamic time;
+@dynamic myTime;
 
 - (id)init
 {
@@ -25,7 +25,7 @@
 
 + (BOOL)needsDisplayForKey:(NSString *)key
 {
-    if ([@"time" isEqualToString:key])
+    if ([@"myTime" isEqualToString:key])
     {
         return YES;
     }
@@ -34,11 +34,11 @@
 
 - (id<CAAction>)actionForKey:(NSString *)key
 {
-    if ([key isEqualToString:@"time"])
+    if ([key isEqualToString:@"myTime"])
     {
         CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:key];
         animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
-        animation.fromValue = @([[self presentationLayer] time]);
+        animation.fromValue = @([[self presentationLayer] myTime]);
         return animation;
     }
     return [super actionForKey:key];
@@ -46,10 +46,10 @@
 
 - (void)display
 {
-    NSLog(@"time: %f", [self.presentationLayer time]);
+    NSLog(@"time: %f", [self.presentationLayer myTime]);
     
     //get interpolated time value
-    float time = [self.presentationLayer time];
+    float time = [self.presentationLayer myTime];
     
     //create drawing context
     UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 0);

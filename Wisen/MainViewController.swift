@@ -16,6 +16,12 @@ private let MainCell = "MainCell"
 
 class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
+    var request: Request? {
+        didSet {
+            
+        }
+    }
+    
     private struct CellText {
         static let FirstCell = "FIND YOUR MENTOR"
         static let SecondCell = "PAYMENT"
@@ -81,7 +87,11 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     // MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Wisen"
+//        title = "Wisen"
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 80, height: 40))
+        label.text = "Wisen"
+        label.font = UIFont(name: "GillSans", size: 24)
+        navigationItem.titleView = label
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: SmallAvatarWidth, height: SmallAvatarWidth))
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = SmallAvatarWidth/2
@@ -90,7 +100,17 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "showProfile"))
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: imageView)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleNote:", name: kMentorFoundNotification, object: nil)
-        UserManager.sharedManager().user.observ
+        UserManager.sharedManager().user.observeAllReceivedRequestsWithBlock { (requests: [AnyObject]?) -> Void in
+            if let req = requests as? [Request] {
+                for r in req {
+                    if r.status == .Pending {
+                        self.request = r
+                        break
+                    }
+                }
+            }
+        }
+        showAlert(Request())
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -228,15 +248,29 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
+    func showAlert(request: Request) {
+        let alert = AMSmoothAlertView(dropAlertWithTitle: "Hey!", andText: "You just got a new request on \(request.tag)", andCancelButton: true, forAlertType: .Info)
+        alert.completionBlock = {(alertObj: AMSmoothAlertView!, button: UIButton!) -> () in
+            if button == alertObj.defaultButton {
+                self.pushToMessage(request)
+            }
+        }
+        alert.show()
+    }
+    
     // MARK: Note handler
     func handleNote(note: NSNotification) {
         NSLog("Note: %@", note.userInfo!)
-        let vc = storyboard?.instantiateViewControllerWithIdentifier("MessageScene") as MessageTableViewController
         let req: AnyObject? = note.userInfo!["request"]
         if let dic = req as? Request {
-            let count = NSString(string: "twitter:").length
-            vc.recipientUID = NSString(string: dic.mentorUID).substringFromIndex(count)
+            pushToMessage(dic)
         }
+    }
+    
+    func pushToMessage(req: Request) {
+        let vc = storyboard?.instantiateViewControllerWithIdentifier("MessageScene") as MessageTableViewController
+        let count = NSString(string: "twitter:").length
+        vc.recipientUID = NSString(string: req.mentorUID).substringFromIndex(count)
         navigationController?.pushViewController(vc, animated: true)
     }
 }

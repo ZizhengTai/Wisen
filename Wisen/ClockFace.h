@@ -11,7 +11,7 @@
 
 @interface ClockFace: CALayer
 
-@property (nonatomic, assign) float time;
+@property (nonatomic, assign) float myTime;
 
 @end
 
