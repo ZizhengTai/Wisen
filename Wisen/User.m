@@ -6,10 +6,8 @@
 //  Copyright (c) 2015 self. All rights reserved.
 //
 
-#import <Firebase/Firebase.h>
 #import <GeoFire/GeoFire.h>
 #import "User.h"
-#import "Request.h"
 
 NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
 
@@ -102,7 +100,7 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
 - (void)notifyMentorWithRequest:(Request *)request {
     Firebase *receivedRequestsRef = [[Firebase alloc] initWithUrl:[NSString stringWithFormat:@"https://wisen.firebaseio.com/users/%@/receivedRequests", request.mentorUID]];
     Firebase *requestRef = [receivedRequestsRef childByAutoId];
-    [requestRef setValue:request.dictionaryRepresentation];
+    [requestRef setValue:request.dictionaryRepresentationForUpload];
 }
 
 - (FirebaseHandle)requestWithTag:(NSString *)tag location:(CLLocation *)location radius:(double)radius {
@@ -126,8 +124,6 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
                     request.status = RequestStatusPending;
                     
                     [self notifyMentorWithRequest:request];
-                    
-                    [[NSNotificationCenter defaultCenter] postNotificationName:kMentorFoundNotification object:self userInfo:request.dictionaryRepresentation];
                 }
             }];
         }
@@ -147,11 +143,15 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
     Firebase *receivedRequestsRef = [self.userRef childByAppendingPath:@"receivedRequests"];
     [receivedRequestsRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         if (block) {
+            NSMutableArray *requests = [NSMutableArray array];
             if (snapshot.value != [NSNull null]) {
-                block([snapshot.value allValues]);
-            } else {
-                block(@[]);
+                for (NSString *requestID in snapshot.value) {
+                    Request *request = snapshot.value[requestID];
+                    request.requestID = requestID;
+                    [requests addObject:request];
+                }
             }
+            block(requests);
         }
     }];
 }
@@ -159,6 +159,16 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
 - (void)stopObservingAllReceivedRequests {
     Firebase *receivedRequestsRef = [self.userRef childByAppendingPath:@"receivedRequests"];
     [receivedRequestsRef removeAllObservers];
+}
+
+- (void)updateStatus:(RequestStatus)status forRequestWithID:(NSString *)requestID {
+    Firebase *receivedRequestsRef = [self.userRef childByAppendingPath:@"receivedRequests"];
+    Firebase *requestRef = [receivedRequestsRef childByAppendingPath:requestID];
+    [requestRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        if (snapshot.value != [NSNull null]) {
+            [requestRef updateChildValues:@{ @"status": @(status) }];
+        }
+    }];
 }
 
 - (void)updateLocation:(CLLocation *)location {

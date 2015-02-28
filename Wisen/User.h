@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import <Firebase/Firebase.h>
+#import "Request.h"
 
 extern NSString *const kMentorFoundNotification;
 
@@ -29,6 +30,7 @@ extern NSString *const kMentorFoundNotification;
 - (void)cancelRequest:(FirebaseHandle)handle;
 - (void)observeAllReceivedRequestsWithBlock:(void (^)(NSArray *requests))block;
 - (void)stopObservingAllReceivedRequests;
+- (void)updateStatus:(RequestStatus)status forRequestWithID:(NSString *)requestID;
 
 - (void)updateLocation:(CLLocation *)location;
 

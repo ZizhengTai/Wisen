@@ -11,6 +11,16 @@
 @implementation Request
 
 - (NSDictionary *)dictionaryRepresentation {
+    return @{ @"requestID": self.requestID,
+              @"menteeUID": self.menteeUID,
+              @"tag": self.tag,
+              @"location": self.location,
+              @"radius": @(self.radius),
+              @"mentorUID": self.mentorUID,
+              @"status": @(self.status) };
+}
+
+- (NSDictionary *)dictionaryRepresentationForUpload {
     return @{ @"menteeUID": self.menteeUID,
               @"tag": self.tag,
               @"location": self.location,
