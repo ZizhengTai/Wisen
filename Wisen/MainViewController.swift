@@ -16,13 +16,27 @@ class MainViewController: UIViewController {
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var backgroundView: UIView!
+    @IBOutlet weak var MainView: UIView! {
+        didSet {
+            MainView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "hideProfile"))
+        }
+    }
+    @IBOutlet weak var profileAvatar: UIImageView! {
+        didSet {
+            profileAvatar.clipsToBounds = true
+            profileAvatar.layer.cornerRadius = CGRectGetWidth(profileAvatar.frame)/2
+        profileAvatar .fetchImage(user.profileImageUrl)
+        }
+    }
     @IBOutlet weak var searchLabel: UILabel! {
         didSet {
             searchLabel.userInteractionEnabled = true
             searchLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "segueToSearch"))
         }
     }
+    var profileShown = false
     
+    // MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Wisen"
@@ -36,18 +50,36 @@ class MainViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(animated: Bool) {
+        UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
+    }
+    
+    // MARK: Transition
     func showProfile() {
+        profileShown = true
+        navigationController?.setNavigationBarHidden(true, animated: true)
         topConstraint.constant = CGRectGetHeight(backgroundView.frame)
         UIView.animateWithDuration(DefaultDuration, animations: { () -> Void in
             self.view.layoutIfNeeded()
         })
+        UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
+    }
+    
+    func hideProfile() {
+        if (!profileShown) {
+            return
+        }
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        topConstraint.constant = 0
+        UIView.animateWithDuration(DefaultDuration, animations: { () -> Void in
+            self.view.layoutIfNeeded()
+        })
+        UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
+        profileShown = false
     }
 
     func segueToSearch() {
         self.performSegueWithIdentifier("segueToSearch", sender: nil)
     }
-    
-    override func viewWillAppear(animated: Bool) {
-        UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
-    }
+
 }
