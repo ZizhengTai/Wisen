@@ -132,6 +132,9 @@ NSString const *Cell = @"IncomingMessageCell";
 
 - (void)scrollToBottom {
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(self.messages.count - 1)inSection:0];
+    if (indexPath.row >= [self.tableView numberOfRowsInSection:0]) {
+        return;
+    }
     [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
