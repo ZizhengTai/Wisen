@@ -95,6 +95,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 80, height: 40))
         label.text = "Wisen"
         label.font = UIFont(name: "GillSans", size: 24)
+        label.textColor = UIColor.whiteColor()  
         navigationItem.titleView = label
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: SmallAvatarWidth, height: SmallAvatarWidth))
         imageView.clipsToBounds = true
@@ -120,10 +121,10 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewWillAppear(animated: Bool) {
         if profileShown {
-            UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
+            UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
             navigationController?.setNavigationBarHidden(true, animated: true)
         } else {
-            UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
+            UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
         }
     }
     
@@ -135,7 +136,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         UIView.animateWithDuration(DefaultDuration, animations: { () -> Void in
             self.view.layoutIfNeeded()
         })
-        UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
+        UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
         for g in mainView.gestureRecognizers as [UIGestureRecognizer] {
             g.enabled = true
         }
@@ -150,7 +151,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         UIView.animateWithDuration(DefaultDuration, animations: { () -> Void in
             self.view.layoutIfNeeded()
         })
-        UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
+        UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
         profileShown = false
         for g in mainView.gestureRecognizers as [UIGestureRecognizer] {
             g.enabled = false
@@ -285,7 +286,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func pushToMessage(req: Request, UID: NSString) {
-        request?.status = .Ongoing
+        UserManager.sharedManager().user.updateStatus(.Ongoing, forRequestWithID: req.requestID)
         let vc = storyboard?.instantiateViewControllerWithIdentifier("MessageScene") as MessageTableViewController
         let count = NSString(string: "twitter:").length
         vc.recipientUID = NSString(string: UID).substringFromIndex(count)
