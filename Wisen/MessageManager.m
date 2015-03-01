@@ -127,6 +127,7 @@ NSString * const hostName = @"sandbox.sinch.com";
 
 + (NSString *)getSinchIDFromUID:(NSString *)UID
 {
+    NSLog(@"Sinch :%@", [UID substringFromIndex:(@"twitter:").length]);
     return [UID substringFromIndex:(@"twitter:").length];
 }
 
