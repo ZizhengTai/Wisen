@@ -331,6 +331,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Wallpaper" translatesAutoresizingMaskIntoConstraints="NO" id="I5C-NQ-flK">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </imageView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bty-vN-pGe">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="v1Q-PH-gAn">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AC1-kk-n9j">
                                 <rect key="frame" x="250" y="288" width="100" height="24"/>
                                 <constraints>
@@ -340,9 +351,17 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                         </subviews>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="HSG-ia-3X0" firstAttribute="top" secondItem="bty-vN-pGe" secondAttribute="bottom" id="5zZ-W4-Hn9"/>
+                            <constraint firstItem="bty-vN-pGe" firstAttribute="leading" secondItem="oE9-pf-LlB" secondAttribute="leading" id="BQ0-FH-OAF"/>
+                            <constraint firstItem="I5C-NQ-flK" firstAttribute="leading" secondItem="oE9-pf-LlB" secondAttribute="leading" id="Fx5-Dl-fdR"/>
+                            <constraint firstItem="bty-vN-pGe" firstAttribute="top" secondItem="oE9-pf-LlB" secondAttribute="top" id="Hch-lO-xVf"/>
                             <constraint firstAttribute="centerY" secondItem="AC1-kk-n9j" secondAttribute="centerY" id="MRs-LX-aCO"/>
+                            <constraint firstItem="HSG-ia-3X0" firstAttribute="top" secondItem="I5C-NQ-flK" secondAttribute="bottom" id="QKK-BK-krD"/>
+                            <constraint firstAttribute="trailing" secondItem="I5C-NQ-flK" secondAttribute="trailing" id="lSO-yl-lHB"/>
+                            <constraint firstAttribute="trailing" secondItem="bty-vN-pGe" secondAttribute="trailing" id="lT1-YN-zbg"/>
+                            <constraint firstItem="I5C-NQ-flK" firstAttribute="top" secondItem="oE9-pf-LlB" secondAttribute="top" id="ptB-L9-WDr"/>
                             <constraint firstAttribute="centerX" secondItem="AC1-kk-n9j" secondAttribute="centerX" id="yeJ-QN-rm7"/>
                         </constraints>
                     </view>
@@ -410,25 +429,13 @@
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" alpha="0.89999999999999991" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AQm-uF-3zc">
-                                        <rect key="frame" x="180" y="20" width="241" height="35"/>
+                                        <rect key="frame" x="182" y="20" width="130" height="35"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="241" id="GnH-fT-ICJ"/>
+                                            <constraint firstAttribute="width" constant="130" id="GnH-fT-ICJ"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="20"/>
-                                        <state key="normal" title="#Skateboard #Tricks">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" alpha="0.84999999999999987" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DN9-3M-4fy">
-                                        <rect key="frame" x="180" y="63" width="241" height="35"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="241" id="XhF-D8-BqL"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="20"/>
-                                        <state key="normal" title="#Cooking #Chinese #Italian">
+                                        <state key="normal" title="#Skateboard">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -445,23 +452,82 @@
                                             <action selector="gpsTouched:" destination="hlv-k8-lPp" eventType="touchUpInside" id="gB7-do-gbA"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" alpha="0.89999997615814209" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1TF-H4-0fF">
+                                        <rect key="frame" x="320" y="20" width="130" height="35"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="130" id="LHS-Rs-n29"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="20"/>
+                                        <state key="normal" title="#Workout">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" alpha="0.89999997615814209" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aCO-tI-mra">
+                                        <rect key="frame" x="368" y="63" width="120" height="35"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="120" id="5Q3-VT-4mD"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="20"/>
+                                        <state key="normal" title="#Painting">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" alpha="0.89999997615814209" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cue-Mp-DD1">
+                                        <rect key="frame" x="240" y="63" width="120" height="35"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="120" id="Ebe-gS-UEj"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="20"/>
+                                        <state key="normal" title="#Programming">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" alpha="0.84999999999999987" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DN9-3M-4fy">
+                                        <rect key="frame" x="112" y="63" width="120" height="35"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="120" id="XhF-D8-BqL"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="20"/>
+                                        <state key="normal" title="#Cooking ">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="PcV-dd-RYQ" secondAttribute="bottom" constant="20" id="03i-5h-BjQ"/>
+                                    <constraint firstItem="aCO-tI-mra" firstAttribute="leading" secondItem="Cue-Mp-DD1" secondAttribute="trailing" constant="8" symbolic="YES" id="3lJ-kH-Old"/>
                                     <constraint firstAttribute="centerX" secondItem="PME-jm-knE" secondAttribute="centerX" id="6eX-bw-riT"/>
                                     <constraint firstAttribute="bottom" secondItem="j1L-rD-2ri" secondAttribute="bottom" constant="20" symbolic="YES" id="FKf-Dc-aqu"/>
                                     <constraint firstItem="j1L-rD-2ri" firstAttribute="centerY" secondItem="PcV-dd-RYQ" secondAttribute="centerY" id="Gxx-uM-kWP"/>
                                     <constraint firstAttribute="centerX" secondItem="AQm-uF-3zc" secondAttribute="centerX" id="Mrm-nC-mej"/>
                                     <constraint firstAttribute="trailing" secondItem="PcV-dd-RYQ" secondAttribute="trailing" constant="20" symbolic="YES" id="NzE-Nr-0xu"/>
+                                    <constraint firstItem="1TF-H4-0fF" firstAttribute="leading" secondItem="AQm-uF-3zc" secondAttribute="trailing" constant="8" id="Pfx-Fe-Ov4"/>
+                                    <constraint firstItem="aCO-tI-mra" firstAttribute="centerY" secondItem="Cue-Mp-DD1" secondAttribute="centerY" id="Typ-aT-pt9"/>
+                                    <constraint firstAttribute="centerX" secondItem="AQm-uF-3zc" secondAttribute="centerX" constant="52.5" id="Ual-oj-INu"/>
                                     <constraint firstItem="AQm-uF-3zc" firstAttribute="top" secondItem="rDH-uQ-mrf" secondAttribute="top" constant="20" symbolic="YES" id="Wxs-rA-Aqv"/>
+                                    <constraint firstItem="Cue-Mp-DD1" firstAttribute="top" secondItem="1TF-H4-0fF" secondAttribute="bottom" constant="8" id="am4-iD-CS4"/>
                                     <constraint firstAttribute="centerX" secondItem="DN9-3M-4fy" secondAttribute="centerX" id="ccE-vi-jpN"/>
                                     <constraint firstAttribute="centerY" secondItem="PME-jm-knE" secondAttribute="centerY" id="eec-Yw-Heb"/>
                                     <constraint firstAttribute="centerX" secondItem="j1L-rD-2ri" secondAttribute="centerX" id="kGG-ND-KPE"/>
+                                    <constraint firstAttribute="centerX" secondItem="Cue-Mp-DD1" secondAttribute="centerX" id="mnq-q9-SIt"/>
+                                    <constraint firstItem="AQm-uF-3zc" firstAttribute="centerY" secondItem="1TF-H4-0fF" secondAttribute="centerY" id="q0S-1i-AW8"/>
                                     <constraint firstItem="DN9-3M-4fy" firstAttribute="top" secondItem="AQm-uF-3zc" secondAttribute="bottom" constant="8" symbolic="YES" id="u85-xO-emX"/>
+                                    <constraint firstItem="Cue-Mp-DD1" firstAttribute="leading" secondItem="DN9-3M-4fy" secondAttribute="trailing" constant="8" symbolic="YES" id="uLN-L5-HpN"/>
+                                    <constraint firstItem="DN9-3M-4fy" firstAttribute="centerY" secondItem="Cue-Mp-DD1" secondAttribute="centerY" id="wNQ-Be-Owg"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
+                                        <exclude reference="ccE-vi-jpN"/>
+                                        <exclude reference="Mrm-nC-mej"/>
                                         <exclude reference="03i-5h-BjQ"/>
                                     </mask>
                                 </variation>
@@ -512,10 +578,13 @@
                     </view>
                     <connections>
                         <outlet property="mapView" destination="rDH-uQ-mrf" id="Wzi-pl-9No"/>
-                        <outlet property="recentFirstButton" destination="AQm-uF-3zc" id="OxF-Eu-5Xn"/>
-                        <outlet property="recentSecondButton" destination="DN9-3M-4fy" id="8tt-7Z-lzU"/>
                         <outlet property="requestButton" destination="j1L-rD-2ri" id="CwN-SL-vkR"/>
                         <outlet property="searchBar" destination="MjM-IE-xHh" id="o3J-Yc-lkH"/>
+                        <outletCollection property="recentButtons" destination="Cue-Mp-DD1" collectionClass="NSMutableArray" id="vAg-ow-JtV"/>
+                        <outletCollection property="recentButtons" destination="1TF-H4-0fF" collectionClass="NSMutableArray" id="CTr-2m-3qa"/>
+                        <outletCollection property="recentButtons" destination="AQm-uF-3zc" collectionClass="NSMutableArray" id="x3a-xQ-cio"/>
+                        <outletCollection property="recentButtons" destination="DN9-3M-4fy" collectionClass="NSMutableArray" id="Tjr-Er-2zE"/>
+                        <outletCollection property="recentButtons" destination="aCO-tI-mra" collectionClass="NSMutableArray" id="UdW-P6-KPX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lgG-50-IMm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -563,6 +632,7 @@
     <resources>
         <image name="Gps" width="72" height="72"/>
         <image name="Pin" width="200" height="157"/>
+        <image name="Wallpaper" width="640" height="360"/>
         <image name="Yosemite" width="853" height="533"/>
     </resources>
 </document>

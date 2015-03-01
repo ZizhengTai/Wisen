@@ -99,18 +99,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "showProfile"))
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: imageView)
         
-        UserManager.sharedManager().user.observeAllSentRequestsWithBlock { (request: [AnyObject]?) -> Void in
-            if let request = request as? [Request] {
-                for req in request {
-                    if req.status == .MentorConfirmed {
-                        self.showAlert(req, text: "We just found a match for you on \(req.tag), go ahead an say hight", completion: {
-                            self.pushToMessage(req, UID: req.mentorUID)
-                        })
-                    }
-                }
-            }
-        }
-        
         UserManager.sharedManager().user.observeAllReceivedRequestsWithBlock { (requests: [AnyObject]?) -> Void in
             NSLog("All : %@", requests!)
             if let req = requests as? [Request] {
