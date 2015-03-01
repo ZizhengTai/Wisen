@@ -42,6 +42,7 @@
 		33D3E3251AA157A900F98C56 /* TwitterAuthHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D3E3241AA157A900F98C56 /* TwitterAuthHelper.m */; };
 		33E0EA421AA27542004EA52F /* Timer.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E0EA411AA27542004EA52F /* Timer.m */; };
 		D76ED9841AA2A6F5007F8EED /* TrendsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D76ED9831AA2A6F5007F8EED /* TrendsManager.m */; };
+		D7BB436D1AA3790300010E9A /* MessagePipe.m in Sources */ = {isa = PBXBuildFile; fileRef = D7BB436C1AA3790300010E9A /* MessagePipe.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +112,8 @@
 		5D76523222769ACF221BA57F /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		D76ED9821AA2A6F5007F8EED /* TrendsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrendsManager.h; sourceTree = "<group>"; };
 		D76ED9831AA2A6F5007F8EED /* TrendsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrendsManager.m; sourceTree = "<group>"; };
+		D7BB436B1AA3790300010E9A /* MessagePipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagePipe.h; sourceTree = "<group>"; };
+		D7BB436C1AA3790300010E9A /* MessagePipe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagePipe.m; sourceTree = "<group>"; };
 		FC19ABE1547EBEB50EAE97E7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -166,6 +169,8 @@
 				074870BB1AA214BF00F5D227 /* PaymentManager.m */,
 				D76ED9821AA2A6F5007F8EED /* TrendsManager.h */,
 				D76ED9831AA2A6F5007F8EED /* TrendsManager.m */,
+				D7BB436B1AA3790300010E9A /* MessagePipe.h */,
+				D7BB436C1AA3790300010E9A /* MessagePipe.m */,
 			);
 			name = Manager;
 			sourceTree = "<group>";
@@ -460,6 +465,7 @@
 				07D7EC231AA1790800606D43 /* RequestViewController.swift in Sources */,
 				074870C01AA2516500F5D227 /* ConfirmationViewController.swift in Sources */,
 				07D7EC251AA1797300606D43 /* HistoryViewController.swift in Sources */,
+				D7BB436D1AA3790300010E9A /* MessagePipe.m in Sources */,
 				33BC3E431AA1417400B4B620 /* main.m in Sources */,
 				3351866B1AA16E7900636D86 /* UserManager.m in Sources */,
 				074870BC1AA214BF00F5D227 /* PaymentManager.m in Sources */,

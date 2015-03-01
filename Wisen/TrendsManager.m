@@ -22,16 +22,17 @@
 }
 
 - (NSArray *)popularTags {
-    return @[ @"Gundam",
-              @"RubiksCube",
-              @"Origami",
-              @"Skateboard",
-              @"Piano",
-              @"Soccer",
-              @"Guitar",
-              @"Cooking",
-              @"Workout",
-              @"Explore" ];
+    return @[ @"origami",
+              @"piano",
+              @"rubiksCube",
+              @"skateboard",
+              @"soccer",
+              @"guitar",
+              @"cooking",
+              @"calligraphy",
+              @"model",
+              @"workout",
+              @"explore" ];
 }
 
 - (void)getPopularRequestTagsAtLocation:(CLLocation *)location radius:(double)radius block:(void (^)(NSArray *tags))block {
