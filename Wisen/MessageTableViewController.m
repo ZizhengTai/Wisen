@@ -28,7 +28,7 @@ NSString const *Cell = @"IncomingMessageCell";
 
 - (NSArray *)messages
 {
-    return [MessageManager sharedManager].allMessages[self.recipientUID];
+    return [MessageManager sharedManager].allMessages[[MessageManager getSinchIDFromUID:self.recipientUID]];
 }
 
 - (void)viewDidLoad
