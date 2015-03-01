@@ -16,6 +16,8 @@ private let MainCell = "MainCell"
 private let ImageHeight: CGFloat = 200
 private let ImageOffsetSpeed: CGFloat = 25
 
+let kRequestConfirmedByMentorNotification = "RequestConfirmedByMentorNotification"
+
 class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
     var images = UserManager.sharedManager().popularRequest().map( { UIImage(named: "\($0)")} )
@@ -99,6 +101,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "showProfile"))
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: imageView)
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "segueToConfirmation");
+        
         UserManager.sharedManager().user.observeAllReceivedRequestsWithBlock { (requests: [AnyObject]?) -> Void in
             NSLog("All : %@", requests!)
             if let req = requests as? [Request] {
@@ -111,6 +115,12 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             }
         }
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleRequestCompletionNote:", name: kRequestConfirmedByMentorNotification, object: nil)
+        
+    }
+    
+    func segueToConfirmation() {
+        navigationController?.pushViewController(storyboard!.instantiateViewControllerWithIdentifier("ConfirmationScene") as UIViewController, animated: true)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -260,6 +270,16 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
+    func handleRequestCompletionNote(note: NSNotification) {
+//        NSLog("Note: %@", note.userInfo!)
+        let req: AnyObject?  = note.userInfo!["request"]
+        if let request = req as? Request {
+            showAlert(request, text: "We just found a match for you on \(request.tag), go ahead an say hight", completion: {
+                self.pushToMessage(request, UID: request.mentorUID, status: .Ongoing)
+            })
+        }
+    }
+
     func showAlert(request: Request, text: String, completion: ()->()) {
         let alert = AMSmoothAlertView(dropAlertWithTitle: "Hey!", andText:text, andCancelButton: true, forAlertType: .Info)
         alert.completionBlock = {(alertObj: AMSmoothAlertView!, button: UIButton!) -> () in
