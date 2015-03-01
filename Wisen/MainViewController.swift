@@ -111,7 +111,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 for r in req {
                     if r.status == .Pending {
                         self.request = r
-                        self.showAlert(r)
+                        self.showAlert(r, text: "You just got a new request on \(r.tag)", { self.pushToMessage(r, UID: r.menteeUID)})
                         break
                     }
                 }
@@ -266,11 +266,11 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
-    func showAlert(request: Request) {
-        let alert = AMSmoothAlertView(dropAlertWithTitle: "Hey!", andText: "You just got a new request on \(request.tag)", andCancelButton: true, forAlertType: .Info)
+    func showAlert(request: Request, text: String, completion: ()->()) {
+        let alert = AMSmoothAlertView(dropAlertWithTitle: "Hey!", andText:text, andCancelButton: true, forAlertType: .Info)
         alert.completionBlock = {(alertObj: AMSmoothAlertView!, button: UIButton!) -> () in
             if button == alertObj.defaultButton {
-                self.pushToMessage(request, UID: request.menteeUID)
+                completion()
             }
         }
         alert.show()
@@ -281,15 +281,16 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         NSLog("Note: %@", note.userInfo!)
         let req: AnyObject? = note.userInfo!["request"]
         if let dic = req as? Request {
-            pushToMessage(dic, UID: dic.mentorUID)
+            showAlert(dic, text: "We just found a match for you on \(dic.tag), go ahead an say hight",  {
+                self.pushToMessage(dic, UID: dic.mentorUID)
+            })
         }
     }
     
     func pushToMessage(req: Request, UID: NSString) {
         UserManager.sharedManager().user.updateStatus(.Ongoing, forRequestWithID: req.requestID)
         let vc = storyboard?.instantiateViewControllerWithIdentifier("MessageScene") as MessageTableViewController
-        let count = NSString(string: "twitter:").length
-        vc.recipientUID = NSString(string: UID).substringFromIndex(count)
+        vc.recipientUID = UID
         navigationController?.pushViewController(vc, animated: true)
     }
 }

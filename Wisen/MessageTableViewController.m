@@ -10,6 +10,8 @@
 #import <Sinch/Sinch.h>
 #import "MessageTableViewCell.h"
 
+NSString const *Cell = @"IncomingMessageCell";
+
 @interface MessageTableViewController()
 
 @property (nonatomic, weak) id<SINClient> userClient;
@@ -18,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomConstraint;
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
+@property (nonatomic, strong) NSString *profileImageURL;
 
 @end
 
@@ -44,6 +47,20 @@
     };
     UIBarButtonItem *right = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(confirmTouched)];
     self.navigationItem.rightBarButtonItem = right;
+    
+    [[UserManager sharedManager] getBasicInfoForUserWithUID: self.recipientUID  block:^(NSDictionary *userInfo) {
+        NSLog(@"User info: %@", userInfo);
+        NSString *displayName = userInfo[@"displayName"];
+        self.profileImageURL = userInfo[@"profileImageURL"];
+        self.title = displayName;
+    }];
+    self.tableView.estimatedRowHeight = 90;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 }
 
 - (void)registerForKeyboardNotifications {
@@ -75,10 +92,6 @@
 
 #pragma mark - UITableViewDelegate
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 90;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.messages count];
 }
@@ -106,6 +119,7 @@
         cell = [[[NSBundle mainBundle] loadNibNamed:identifier owner:self options:nil] firstObject];
         cell.backgroundColor = [UIColor clearColor];
         cell.contentView.backgroundColor = [UIColor clearColor];
+        [cell.avatarImageView fetchImage:(Outgoing == direction) ? [UserManager sharedManager].user.profileImageURL : self.profileImageURL];
     }
     return cell;
 }
@@ -123,6 +137,31 @@
 
 - (void)confirmTouched {
     [self.navigationController pushViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"ConfirmationScene"] animated:YES];
+}
+
+#pragma mark - Calculate Height
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return [self heightForBasicCellAtIndexPath:indexPath];
+//    return 90;
+}
+
+- (CGFloat)heightForBasicCellAtIndexPath:(NSIndexPath *)indexPath {
+    static MessageTableViewCell *sizingCell = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sizingCell = [self.tableView dequeueReusableCellWithIdentifier:Cell];
+    });
+    
+    return [self calculateHeightForConfiguredSizingCell:sizingCell];
+}
+
+- (CGFloat)calculateHeightForConfiguredSizingCell:(UITableViewCell *)sizingCell {
+    [sizingCell setNeedsLayout];
+    [sizingCell layoutIfNeeded];
+    
+    CGSize size = [sizingCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+    return size.height + 1.0f; // Add 1.0f for the cell separator height
 }
 
 @end

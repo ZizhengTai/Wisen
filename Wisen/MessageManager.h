@@ -20,5 +20,6 @@ typedef NS_ENUM(NSInteger, MessageDirection) { Incoming, Outgoing, };
 
 + (instancetype)sharedManager;
 - (void)sendMessage:(NSString *)text to:(NSString *)recipientUID;
++ (NSString *)getSinchIDFromUID:(NSString *)UID;
 
 @end
