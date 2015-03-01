@@ -141,6 +141,15 @@
     [self.handleQueryPairs removeObjectForKey:@(handle)];
 }
 
+- (void)observeSingleRequest:(Request *)request withBlock:(void (^)(Request *request))block {
+    Firebase *requestRef = [[Firebase alloc] initWithUrl:[NSString stringWithFormat:@"https://wisen.firebaseio.com/requests/%@", request.requestID]];
+    [requestRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        if (block && snapshot.value != [NSNull null]) {
+            block([[Request alloc] initWithDictionary:snapshot.value]);
+        }
+    }];
+}
+
 - (void)observeAllReceivedRequestsWithBlock:(void (^)(NSArray *requests))block {
     Firebase *requestsRef = [[Firebase alloc] initWithUrl:@"https://wisen.firebaseio.com/requests"];
     FQuery *query = [requestsRef queryOrderedByChild:@"mentorUID"];
