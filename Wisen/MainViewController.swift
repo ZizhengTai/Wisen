@@ -20,7 +20,7 @@ let kRequestConfirmedByMentorNotification = "RequestConfirmedByMentorNotificatio
 
 class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
-    var images = UserManager.sharedManager().popularRequest().map( { UIImage(named: "\($0)")} )
+    var images = TrendsManager.sharedManager().popularTags.map( { UIImage(named: "\($0)")} )
     
     private struct CellText {
         static let FirstCell = "FIND YOUR MENTOR"
@@ -228,14 +228,16 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(MainCell, forIndexPath: indexPath) as MainCollectionViewCell
         
         cell.image = images[indexPath.item]
-        cell.titleLabel.text = UserManager.sharedManager().popularRequest()[indexPath.row] as? String
+        if let array = TrendsManager.sharedManager().popularTags as? [String] {
+            cell.titleLabel.text = array[indexPath.item]
+        }
         let yOffset = ((collectionView.contentOffset.y - cell.frame.origin.y) / ImageHeight) * ImageOffsetSpeed
         cell.imageOffset = CGPointMake(0, yOffset)
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return UserManager.sharedManager().popularRequest().count
+        return TrendsManager.sharedManager().popularTags.count
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
@@ -262,7 +264,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if segue.identifier == "segueToSearch" {
             if let row = sender as? Int {
                 if let des = segue.destinationViewController as? RequestViewController {
-                    let pop = UserManager.sharedManager().popularRequest()
+                    let pop = TrendsManager.sharedManager().popularTags
                     des.searchPlaceholder = row == pop.count - 1 ? "" : pop[row] as String
                 }
             }

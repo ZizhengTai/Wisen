@@ -105,8 +105,4 @@
     }];
 }
 
-- (NSArray *)popularRequest {
-    return @[@"Skateboard", @"Piano", @"Soccer", @"Guitar", @"Cooking", @"Workout", @"Origami", @"Explore"];
-}
-
 @end

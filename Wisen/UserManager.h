@@ -21,6 +21,4 @@
 
 - (void)getBasicInfoForUserWithUID:(NSString *)uid block:(void (^)(NSDictionary *userInfo))block;
 
-- (NSArray *)popularRequest;
-
 @end
