@@ -94,7 +94,8 @@
     [userRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         if (block) {
             if (snapshot.value != [NSNull null]) {
-                NSDictionary *userInfo = @{ @"displayName": snapshot.value[@"displayName"],
+                NSDictionary *userInfo = @{ @"username": snapshot.value[@"username"],
+                                            @"displayName": snapshot.value[@"displayName"],
                                             @"profileImageURL": snapshot.value[@"profileImageURL"] };
                 block(userInfo);
             } else {
@@ -104,8 +105,7 @@
     }];
 }
 
-- (NSArray *)popularRequest
-{
+- (NSArray *)popularRequest {
     return @[@"Skateboard", @"Piano", @"Soccer", @"Guitar", @"Cooking", @"Workout", @"Origami", @"Explore"];
 }
 

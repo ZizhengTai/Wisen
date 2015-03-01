@@ -28,7 +28,8 @@
         _geoFire = [[GeoFire alloc] initWithFirebaseRef:[[Firebase alloc] initWithUrl:@"https://wisen.firebaseio.com/userLocations"]];
         _handleQueryPairs = [NSMutableDictionary dictionary];
         
-        [_userRef updateChildValues:@{ @"displayName": _authData.providerData[@"displayName"],
+        [_userRef updateChildValues:@{ @"username": _authData.providerData[@"username"],
+                                       @"displayName": _authData.providerData[@"displayName"],
                                        @"profileImageURL": _authData.providerData[@"cachedUserProfile"][@"profile_image_url_https"] }];
     }
     return self;
@@ -36,6 +37,10 @@
 
 - (NSString *)uid {
     return self.authData.uid;
+}
+
+- (NSString *)username {
+    return self.authData.providerData[@"username"];
 }
 
 - (NSString *)displayName {

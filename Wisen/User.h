@@ -16,6 +16,7 @@ typedef FirebaseHandle RequestHandle;
 @interface User : NSObject
 
 @property (readonly, strong, nonatomic) NSString *uid;
+@property (readonly, strong, nonatomic) NSString *username;
 @property (readonly, strong, nonatomic) NSString *displayName;
 @property (readonly, strong, nonatomic) NSString *profileImageURL;
 

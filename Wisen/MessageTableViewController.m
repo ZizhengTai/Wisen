@@ -142,9 +142,9 @@ NSString const *Cell = @"IncomingMessageCell";
 }
 
 - (void)confirmTouched {
-    ConfimationViewController *vc = (ConfirmationViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"ConfirmationScene"];
+    /*ConfimationViewController *vc = (ConfirmationViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"ConfirmationScene"];
     vc.request = self.
-    [self.navigationController pushViewController:vc animated:YES];
+    [self.navigationController pushViewController:vc animated:YES];*/
 }
 
 #pragma mark - Calculate Height

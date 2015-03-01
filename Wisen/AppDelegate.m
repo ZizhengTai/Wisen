@@ -22,6 +22,7 @@
     
     [[UserManager sharedManager] tryLogInWithBlock:^(User *user) {
         if (user) {
+            NSLog(@"Twitter ID: %@", user.username);
             self.window.rootViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"MainScene"];
         } else {
             self.window.rootViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginScene"];
