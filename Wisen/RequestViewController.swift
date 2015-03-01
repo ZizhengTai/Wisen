@@ -12,20 +12,33 @@ import ArcGIS
 class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearchBarDelegate, CLLocationManagerDelegate {
     
     
+    @IBOutlet var recentButtons: [UIButton]! {
+        didSet {
+            for button in recentButtons {
+                button.clipsToBounds = true
+                button.layer.cornerRadius = 6
+                button.addTarget(self, action: "replaceSearchBar:", forControlEvents: .TouchUpInside)
+            }
+        }
+    }
     let halo = PulsingHaloLayer()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         let timer = NSTimer.scheduledTimerWithTimeInterval(1, target:self, selector: "updateLocation", userInfo: nil, repeats: true)
-        halo.position = view.convertPoint(self.mapView.center,fromView: self.mapView.superview)
         halo.backgroundColor = UIColor.greenColor().CGColor
-        halo.radius = 240.0
-        self.view.layer.addSublayer(halo)
+//        halo.hidden = true
+        mapView.layer.addSublayer(halo)
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
+    }
+    
+    override func viewWillLayoutSubviews() {
+        halo.position = mapView.convertPoint(mapView.center, fromView: mapView.superview)
+        halo.radius = CGRectGetWidth(view.frame)
     }
     
     var searchPlaceholder: String? {
@@ -37,21 +50,7 @@ class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearch
     @IBAction func gpsTouched(sender: UIButton) {
         mapView.zoomToScale(mapView.mapScale, withCenterPoint: mapView.locationDisplay.mapLocation(), animated: true)
     }
-    
-    @IBOutlet weak var recentSecondButton: UIButton! {
-        didSet {
-            recentSecondButton.clipsToBounds = true
-            recentSecondButton.layer.cornerRadius = 6
-            recentSecondButton.addTarget(self, action: "replaceSearchBar:", forControlEvents: .TouchUpInside)
-        }
-    }
-    @IBOutlet weak var recentFirstButton: UIButton! {
-        didSet {
-            recentFirstButton.clipsToBounds = true
-            recentFirstButton.layer.cornerRadius = 6
-            recentFirstButton.addTarget(self, action: "replaceSearchBar:", forControlEvents: .TouchUpInside)
-        }
-    }
+
     @IBAction func dismiss(sender: UIButton) {
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -62,17 +61,15 @@ class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearch
     }
     
     @IBAction func requestButtonTouched(sender: UIButton) {
-//        let currentPoint = mapView.locationDisplay.mapLocation()
         let destinationPoint = mapView.toMapPoint(mapView.convertPoint(mapView.center, fromView: mapView.superview))
-//        NSLog("Current: \(currentPoint) + Destination: \(destinationPoint)")
-        
-//        let cur = AGSGeometryEngine.defaultGeometryEngine().projectGeometry(currentPoint, toSpatialReference: AGSSpatialReference.wgs84SpatialReference()) as AGSPoint
-//        let dest = AGSGeometryEngine.defaultGeometryEngine().projectGeometry(destinationPoint, toSpatialReference: AGSSpatialReference.wgs84SpatialReference()) as AGSPoint
-//        NSLog("Cur: \(cur) + Dest: \(dest)")
 
         dismissViewControllerAnimated(true, completion: { ()
             UserManager.sharedManager().user.requestWithTag(self.searchBar.text, location: self.cllocation(destinationPoint), radius: 10, block: { (succeeded: Bool) -> Void in
-//                let request = 
+                if succeeded {
+                    println("Succeeded")
+                } else {
+                    println("Failed")
+                }
             })
 
         })
