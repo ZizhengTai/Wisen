@@ -119,7 +119,7 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
                     [self.handleQueryPairs removeObjectForKey:@(handle)];
                     
                     Request *request = [[Request alloc] init];
-                    request.menteeUID = self.authData.uid;
+                    request.menteeUID = self.uid;
                     request.tag = tag;
                     request.location = location;
                     request.radius = radius;
@@ -146,7 +146,7 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
 
 - (void)observeAllReceivedRequestsWithBlock:(void (^)(NSArray *requests))block {
     Firebase *requestsRef = [[Firebase alloc] initWithUrl:@"https://wisen.firebaseio.com/requests"];
-    [[[[requestsRef queryOrderedByChild:@"mentorID"] queryStartingAtValue:self.uid] queryEndingAtValue:self.uid]observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+    [[[[requestsRef queryOrderedByChild:@"mentorUID"] queryStartingAtValue:self.uid] queryEndingAtValue:self.uid]observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         if (block) {
             NSMutableArray *requests = [NSMutableArray array];
             if (snapshot.value != [NSNull null]) {
