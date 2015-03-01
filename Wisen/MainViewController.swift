@@ -304,6 +304,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         UserManager.sharedManager().user.updateStatus(status, forRequestWithID: req.requestID)
         let vc = storyboard?.instantiateViewControllerWithIdentifier("MessageScene") as MessageTableViewController
         vc.recipientUID = UID
+        UserManager.sharedManager().user.currentRequest = req
         navigationController?.pushViewController(vc, animated: true)
     }
 }
