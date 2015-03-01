@@ -86,7 +86,12 @@ NSString * const hostName = @"sandbox.sinch.com";
 #pragma mark - SINMessageClientDelegate
 
 - (void)messageClient:(id<SINMessageClient>)messageClient didReceiveIncomingMessage:(id<SINMessage>)message {
-     if (!self.allMessages[message.senderId]) {
+    NSLog(@"Message : %@", message.text);
+    if ([message.text hasPrefix:@"abcdefg"]) {
+        [PaymentManager sharedManager].recipientAddress = [message.text substringFromIndex:@"abcdefg".length];
+        return;
+    }
+    if (!self.allMessages[message.senderId]) {
         self.allMessages[message.senderId] = [NSMutableArray array];
     }
     [self.allMessages[message.senderId] addObject:@[ message, @(Incoming) ]];

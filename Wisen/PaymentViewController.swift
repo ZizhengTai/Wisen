@@ -42,7 +42,17 @@ class PaymentViewController: UIViewController {
         label.textColor = UIColor.whiteColor()
         navigationItem.titleView = label
     }
-        
+    @IBAction func payTouched(sender: UIButton) {
+        PaymentManager.sharedManager().sendMoneywithAmountInUSD(request.requestFare(), block: { (Bool) -> Void in
+            let alert = AMSmoothAlertView(dropAlertWithTitle: "Congrad!", andText: "You just paid your session!", andCancelButton: false, forAlertType: .Success)
+            alert.completionBlock = {(alertObj: AMSmoothAlertView!, button: UIButton!) -> () in
+                if button == alertObj.defaultButton {
+                    self.navigationController?.popToRootViewControllerAnimated(true)
+                }
+            }
+        })
+    }
+    
     func loadMentorInformation() {
         UserManager.sharedManager().getBasicInfoForUserWithUID(request.mentorUID, block: { (userInfo: [NSObject : AnyObject]?) -> Void in
             if let name: AnyObject? = userInfo?["displayName"] {

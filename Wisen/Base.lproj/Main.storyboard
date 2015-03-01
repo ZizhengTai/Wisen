@@ -646,6 +646,9 @@
                                     <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="payTouched:" destination="NqD-uI-Clh" eventType="touchUpInside" id="UA8-Ic-NSb"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -665,6 +668,7 @@
                     <connections>
                         <outlet property="amountLabel" destination="N45-1n-ZHO" id="ojN-Gm-cmZ"/>
                         <outlet property="avatarImageView" destination="cYF-1X-MID" id="jWI-7q-Ree"/>
+                        <outlet property="payTouched" destination="LTe-WI-1mH" id="owE-w7-epd"/>
                         <outlet property="recipientName" destination="X2m-KA-WKO" id="bgN-SH-3Ep"/>
                     </connections>
                 </viewController>

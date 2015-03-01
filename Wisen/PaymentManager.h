@@ -12,11 +12,12 @@
 @interface PaymentManager : NSObject
 
 @property (nonatomic, strong) Coinbase *client;
+@property (copy, nonatomic) NSString *recipientAddress;
 
 + (instancetype)sharedManager;
 
 - (void)authenticateWithBlock:(void (^)(BOOL))block;
 - (void)finishOAuthAuthenticationForURL:(NSURL *)url;
-- (void)sendMoneyToAddress:(NSString *)toAddress withAmountInUSD:(double)amount block:(void (^)(BOOL succeeded))block;
+- (void)sendMoneywithAmountInUSD:(double)amount block:(void (^)(BOOL succeeded))block;
 
 @end

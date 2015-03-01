@@ -63,6 +63,11 @@ static const double kLowestAmount = 0.1;
     }];
 }
 
+- (void)sendMoneywithAmountInUSD:(double)amount block:(void (^)(BOOL))block
+{
+    [self sendMoneyToAddress:self.recipientAddress withAmountInUSD:amount block:block];
+}
+
 - (void)sendMoneyToAddress:(NSString *)toAddress withAmountInUSD:(double)amount block:(void (^)(BOOL succeeded))block {
     if (amount < kLowestAmount) {
         if (block) {
