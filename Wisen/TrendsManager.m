@@ -21,8 +21,8 @@
 }
 
 - (void)getPopularRequestTagsAtLocation:(CLLocation *)location radius:(double)radius block:(void (^)(NSArray *tags))block {
-    Firebase *requestsRef = [[Firebase alloc] initWithUrl:@"https://wisen.firebaseio.com/requestLocations"];
-    GeoFire *geoFire = [[GeoFire alloc] initWithFirebaseRef:requestsRef];
+    Firebase *requestLocationsRef = [[Firebase alloc] initWithUrl:@"https://wisen.firebaseio.com/requestLocations"];
+    GeoFire *geoFire = [[GeoFire alloc] initWithFirebaseRef:requestLocationsRef];
     GFCircleQuery *query = [geoFire queryAtLocation:location withRadius:radius];
     
     NSMutableSet *tags = [NSMutableSet set];
@@ -46,6 +46,34 @@
 }
 
 - (void)getPopularUserTagsAtLocation:(CLLocation *)location radius:(double)radius block:(void (^)(NSArray *tags))block {
+    Firebase *userLocationsRef = [[Firebase alloc] initWithUrl:@"https://wisen.firebaseio.com/userLocations"];
+    GeoFire *geoFire = [[GeoFire alloc] initWithFirebaseRef:userLocationsRef];
+    GFCircleQuery *query = [geoFire queryAtLocation:location withRadius:radius];
+    
+    NSMutableArray *uids = [NSMutableArray array];
+    
+    FirebaseHandle enteredHandle = [query observeEventType:GFEventTypeKeyEntered withBlock:^(NSString *key, CLLocation *location) {
+        [uids addObject:key];
+    }];
+    
+    FirebaseHandle readyHandle = [query observeReadyWithBlock:^{
+        [query removeObserverWithFirebaseHandle:enteredHandle];
+        [query removeObserverWithFirebaseHandle:readyHandle];
+        
+        NSMutableSet *tags = [NSMutableSet set];
+        
+        for (NSString *uid in uids) {
+            Firebase *tagsRef = [[Firebase alloc] initWithUrl:[NSString stringWithFormat:@"https://wisen.firebaseio.com/users/%@/tags", uid]];
+            [tagsRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+                if (snapshot.value != [NSNull null]) {
+                    [tags addObjectsFromArray:[snapshot.value allKeys]];
+                }
+                if (tags.count == uids.count && block) {
+                    block(tags.allObjects);
+                }
+            }];
+        }
+    }];
 }
 
 @end

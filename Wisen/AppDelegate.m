@@ -9,6 +9,7 @@
 #import <Crashlytics/Crashlytics.h>
 #import <Fabric/Fabric.h>
 #import "AppDelegate.h"
+#import "TrendsManager.h"
 
 @interface AppDelegate ()
 
@@ -18,6 +19,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [Fabric with:@[ CrashlyticsKit ]];
+    
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:37.80871071856264 longitude:-122.4301935733505];
+    [[TrendsManager sharedManager] getPopularUserTagsAtLocation:location radius:20 block:^(NSArray *tags) {
+        NSLog(@"tags: %@", tags);
+    }];
     
     [[UserManager sharedManager] tryLogInWithBlock:^(User *user) {
         if (user) {

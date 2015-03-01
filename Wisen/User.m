@@ -122,8 +122,18 @@
                     request.status = RequestStatusPending;
                     
                     [requestRef setValue:request.dictionaryRepresentationWithoutRequestID withCompletionBlock:^(NSError *error, Firebase *ref) {
-                        if (block) {
-                            block(error == nil ? request : nil);
+                        if (error) {
+                            if (block) {
+                                block(nil);
+                            }
+                        } else {
+                            Firebase *requestLocationsRef = [[Firebase alloc] initWithUrl:@"https://wisen.firebaseio.com/requestLocations"];
+                            GeoFire *geoFire = [[GeoFire alloc] initWithFirebaseRef:requestLocationsRef];
+                            [geoFire setLocation:request.location forKey:request.requestID withCompletionBlock:^(NSError *error) {
+                                if (block) {
+                                    block(error == nil ? request : nil);
+                                }
+                            }];
                         }
                     }];
                 }
