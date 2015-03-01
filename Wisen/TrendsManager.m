@@ -21,11 +21,11 @@
 }
 
 - (void)getPopularRequestTagsAtLocation:(CLLocation *)location radius:(double)radius block:(void (^)(NSArray *))block {
-    Firebase *requestsRef = [[Firebase alloc] initWithUrl:@"https://wisen.firebaseio.com/requests"];
+    Firebase *requestsRef = [[Firebase alloc] initWithUrl:@"https://wisen.firebaseio.com/requestLocations"];
     GeoFire *geoFire = [[GeoFire alloc] initWithFirebaseRef:requestsRef];
     
     GFCircleQuery *query = [geoFire queryAtLocation:location withRadius:radius];
-    FirebaseHandle handle = [query observeEventType:GFEventTypeKeyEntered withBlock:^(NSString *key, CLLocation *location) {
+    [query observeEventType:GFEventTypeKeyEntered withBlock:^(NSString *key, CLLocation *location) {
     }];
 }
 

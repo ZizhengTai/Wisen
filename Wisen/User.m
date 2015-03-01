@@ -143,7 +143,10 @@
 
 - (void)observeAllReceivedRequestsWithBlock:(void (^)(NSArray *requests))block {
     Firebase *requestsRef = [[Firebase alloc] initWithUrl:@"https://wisen.firebaseio.com/requests"];
-    [[[[requestsRef queryOrderedByChild:@"mentorUID"] queryStartingAtValue:self.uid] queryEndingAtValue:self.uid]observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+    FQuery *query = [requestsRef queryOrderedByChild:@"mentorUID"];
+    query = [query queryStartingAtValue:self.uid];
+    query = [query queryEndingAtValue:self.uid];
+    [query observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         if (block) {
             NSMutableArray *requests = [NSMutableArray array];
             if (snapshot.value != [NSNull null]) {
