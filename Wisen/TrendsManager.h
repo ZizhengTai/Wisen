@@ -10,6 +10,8 @@
 
 @interface TrendsManager : NSObject
 
+@property (readonly, strong, nonatomic) NSArray *popularTags;
+
 + (instancetype)sharedManager;
 
 - (void)getPopularRequestTagsAtLocation:(CLLocation *)location radius:(double)radius block:(void (^)(NSArray *tags))block;

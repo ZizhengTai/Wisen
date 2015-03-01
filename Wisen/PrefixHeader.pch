@@ -12,6 +12,7 @@
 #import "UserManager.h"
 #import "MessageManager.h"  
 #import "PaymentManager.h"
+#import "TrendsManager.h"
 #import "UIImageView+WebCache.h"
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import "AMSmoothAlertView.h"

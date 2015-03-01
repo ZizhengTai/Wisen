@@ -21,6 +21,19 @@
     return sharedManager;
 }
 
+- (NSArray *)popularTags {
+    return @[ @"Gundam",
+              @"RubiksCube",
+              @"Origami",
+              @"Skateboard",
+              @"Piano",
+              @"Soccer",
+              @"Guitar",
+              @"Cooking",
+              @"Workout",
+              @"Explore" ];
+}
+
 - (void)getPopularRequestTagsAtLocation:(CLLocation *)location radius:(double)radius block:(void (^)(NSArray *tags))block {
     Firebase *requestLocationsRef = [[Firebase alloc] initWithUrl:@"https://wisen.firebaseio.com/requestLocations"];
     GeoFire *geoFire = [[GeoFire alloc] initWithFirebaseRef:requestLocationsRef];
