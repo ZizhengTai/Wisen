@@ -8,7 +8,7 @@
 
 #import "Request.h"
 
-static const double farePerHour = 10;
+static const double kFarePerHour = 10;
 
 @implementation Request
 
@@ -29,7 +29,7 @@ static const double farePerHour = 10;
 }
 
 - (double)requestFare {
-    return farePerHour * self.durationInHours;
+    return kFarePerHour * self.durationInHours;
 }
 
 - (void)setTag:(NSString *)tag {
