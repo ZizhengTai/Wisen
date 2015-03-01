@@ -27,5 +27,6 @@
 #import "PulsingHaloLayer.h"
 #import "Timer.h"
 #import "MessagePipe.h"
+#import "JGProgressHUD.h"
 
 #endif

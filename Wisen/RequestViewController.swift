@@ -27,7 +27,7 @@ class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearch
         super.viewDidLoad()
         let timer = NSTimer.scheduledTimerWithTimeInterval(1, target:self, selector: "updateLocation", userInfo: nil, repeats: true)
         halo.backgroundColor = UIColor.greenColor().CGColor
-//        halo.hidden = true
+        halo.hidden = true
         mapView.layer.addSublayer(halo)
     }
     
@@ -72,26 +72,37 @@ class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearch
         
         let destinationPoint = mapView.toMapPoint(mapView.convertPoint(mapView.center, fromView: mapView.superview))
 
-        dismissViewControllerAnimated(true, completion: { ()
-            UserManager.sharedManager().user.requestWithTag(self.searchBar.text, location: self.cllocation(destinationPoint), radius: 10, block: { (request: Request?) -> Void in
-                if let request = request {
-                    UserManager.sharedManager().user.currentRequest = request
-                    UserManager.sharedManager().user.observeRequestWithID(request.requestID, block: { (request: Request?) -> Void in
-                        if let request = request {
-                            switch request.status {
-                            case .MentorConfirmed:
-                               NSNotificationCenter.defaultCenter().postNotificationName(kRequestConfirmedByMentorNotification, object: nil, userInfo: ["request": request])
-                            case .Canceled:
+//        JGProgressHUD *HUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+//        HUD.textLabel.text = @"Loading";
+//        [HUD showInView:self.view];
+//        [HUD dismissAfterDelay:3.0];
+        let hud = JGProgressHUD(style: JGProgressHUDStyle.Dark)
+        hud.textLabel.text = "Searching"
+        hud.showInView(self.view)
+        UserManager.sharedManager().user.requestWithTag(self.searchBar.text, location: self.cllocation(destinationPoint), radius: 10, block: { (request: Request?) -> Void in
+            if let request = request {
+                UserManager.sharedManager().user.currentRequest = request
+                UserManager.sharedManager().user.observeRequestWithID(request.requestID, block: { (request: Request?) -> Void in
+                    if let request = request {
+                        switch request.status {
+                        case .MentorConfirmed:
+                            hud.dismiss()
+                            self.dismissViewControllerAnimated(true, completion: {
+                                NSNotificationCenter.defaultCenter().postNotificationName(kRequestConfirmedByMentorNotification, object: nil, userInfo: ["request": request])
+                            })
+                        case .Canceled:
+                            hud.dismiss()
+                            self.dismissViewControllerAnimated(true, completion: { () -> Void in
                                 UserManager.sharedManager().user.removeObserverWithRequestID(request.requestID)
                                 NSNotificationCenter.defaultCenter().postNotificationName(kRequestCanceledNotification, object: self, userInfo: ["request" : request])
-                            default:
-                                break;
-                            }
-                        }}
-                    )
-                }
+                            })
+                        default:
+                            break;
+                        }
+                    }}
+                )
             }
-        )})
+        })
     }
     
     @IBOutlet weak var searchBar: UISearchBar! {

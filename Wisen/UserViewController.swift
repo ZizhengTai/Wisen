@@ -39,6 +39,11 @@ class UserViewController: UIViewController, UITextViewDelegate {
         navigationController?.navigationBar.tintColor = UIColor.whiteColor()
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        textView.becomeFirstResponder()
+    }
+    
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         if range.length == 1 && text == "" {
             return true
@@ -74,7 +79,7 @@ class UserViewController: UIViewController, UITextViewDelegate {
         textView.scrollEnabled = true
         textView.attributedText = atrString
         textView.selectedRange = selectedRange
-        if (NSString(string: textView.text).hasSuffix(" ")) {
+        if (NSString(string: textView.text).hasSuffix(" ")||NSString(string: textView.text).hasSuffix("\n")) {
             UserManager.sharedManager().user.setTags(matchTags, withBlock: { (finished: Bool) -> Void in
                 NSLog("Matches: \(matchTags)")
             })
