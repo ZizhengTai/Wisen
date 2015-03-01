@@ -60,7 +60,7 @@
 
 - (void)addTag:(NSString *)tag withBlock:(void (^)(BOOL))block {
     Firebase *tagsRef = [self.userRef childByAppendingPath:@"tags"];
-    [tagsRef updateChildValues:@{ tag: @YES } withCompletionBlock:^(NSError *error, Firebase *ref) {
+    [tagsRef updateChildValues:@{ tag.lowercaseString: @YES } withCompletionBlock:^(NSError *error, Firebase *ref) {
         if (block) {
             block(error == nil);
         }
@@ -68,7 +68,7 @@
 }
 
 - (void)removeTag:(NSString *)tag withBlock:(void (^)(BOOL succeeded))block {
-    Firebase *tagRef = [self.userRef childByAppendingPath:[NSString stringWithFormat:@"tags/%@", tag]];
+    Firebase *tagRef = [self.userRef childByAppendingPath:[NSString stringWithFormat:@"tags/%@", tag.lowercaseString]];
     [tagRef removeValueWithCompletionBlock:^(NSError *error, Firebase *ref) {
         if (block) {
             block(error == nil);
@@ -79,7 +79,7 @@
 - (void)setTags:(NSArray *)tags withBlock:(void (^)(BOOL))block {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     for (NSString *tag in tags) {
-        dict[tag] = @YES;
+        dict[tag.lowercaseString] = @YES;
     }
     
     Firebase *tagsRef = [self.userRef childByAppendingPath:@"tags"];
