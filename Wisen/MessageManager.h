@@ -14,6 +14,7 @@ typedef NS_ENUM(NSInteger, MessageDirection) { Incoming, Outgoing, };
 @interface MessageManager : NSObject <SINClientDelegate, SINMessageClientDelegate>
 
 @property (nonatomic, strong) id<SINClient> client;
+//@property (nonatomic, weak) TimerViewController *confirmationDelegate;
 @property (nonatomic, copy) void (^reloadUI)();
 //@property (nonatomic, strong) NSMutableArray *messages; // Array of two elements array
 @property (nonatomic, strong) NSMutableDictionary *allMessages; // @RecipientUID -> @[@[message, direction]]
@@ -22,5 +23,6 @@ typedef NS_ENUM(NSInteger, MessageDirection) { Incoming, Outgoing, };
 - (void)sendMessage:(NSString *)text to:(NSString *)recipientUID;
 + (NSString *)getSinchIDFromUID:(NSString *)UID;
 - (void)terminate;
+- (void)reset;
 
 @end

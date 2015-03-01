@@ -26,5 +26,6 @@
 #import "UIImageView+Fetch.h"
 #import "PulsingHaloLayer.h"
 #import "Timer.h"
+#import "MessagePipe.h"
 
 #endif

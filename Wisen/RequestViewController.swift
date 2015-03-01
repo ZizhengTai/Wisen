@@ -36,6 +36,11 @@ class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearch
         UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
     }
     
+//    override func viewDidDisappear(animated: Bool) {
+//        super.viewDidDisappear(animated)
+//        mapView = nil
+//    }
+//    
     override func viewWillLayoutSubviews() {
         halo.position = mapView.convertPoint(mapView.center, fromView: mapView.superview)
         halo.radius = CGRectGetWidth(view.frame)

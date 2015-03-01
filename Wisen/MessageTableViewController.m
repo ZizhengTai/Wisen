@@ -75,7 +75,7 @@ NSString const *Cell = @"IncomingMessageCell";
             User *user = [UserManager sharedManager].user;
             [user removeObserverWithRequestID:user.currentRequest.requestID];
             [user updateStatus:RequestStatusCanceled forRequestWithID:user.currentRequest.requestID];
-            [self.navigationController popViewControllerAnimated:YES];
+            [self.navigationController popToRootViewControllerAnimated:YES];
         }
     }];
     [alert show];
@@ -84,7 +84,7 @@ NSString const *Cell = @"IncomingMessageCell";
 - (void)requestCanceled:(NSNotification *)note {
     NSString *text = [NSString stringWithFormat:@"It seems %@ has quited the conversation...", ((UILabel *)self.navigationItem.titleView).text];
     AMSmoothAlertView *alert = [[AMSmoothAlertView alloc] initDropAlertWithTitle:@"Alas!" andText:text andCancelButton:NO forAlertType:AlertFailure withCompletionHandler:^(AMSmoothAlertView *alertView, UIButton *button) {
-        [self.navigationController popViewControllerAnimated:YES];
+        [self.navigationController popToRootViewControllerAnimated:YES];
     }];
     [alert show];
 }
@@ -96,6 +96,7 @@ NSString const *Cell = @"IncomingMessageCell";
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    [[MessageManager sharedManager] reset];
 }
 
 - (void)registerForKeyboardNotifications {
@@ -173,6 +174,7 @@ NSString const *Cell = @"IncomingMessageCell";
 }
 
 - (void)confirmTouched {
+    
     [self.navigationController pushViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"ConfirmationScene"] animated:YES];
 }
 
@@ -182,24 +184,6 @@ NSString const *Cell = @"IncomingMessageCell";
 //    return [self heightForBasicCellAtIndexPath:indexPath];
     return 90;
 }
-//
-//- (CGFloat)heightForBasicCellAtIndexPath:(NSIndexPath *)indexPath {
-//    static MessageTableViewCell *sizingCell = nil;
-//    static dispatch_once_t onceToken;
-//    dispatch_once(&onceToken, ^{
-//        sizingCell = [self.tableView dequeueReusableCellWithIdentifier:Cell];
-//    });
-//    
-//    return [self calculateHeightForConfiguredSizingCell:sizingCell];
-//}
-//
-//- (CGFloat)calculateHeightForConfiguredSizingCell:(UITableViewCell *)sizingCell {
-//    [sizingCell setNeedsLayout];
-//    [sizingCell layoutIfNeeded];
-//    
-//    CGSize size = [sizingCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-//    return size.height + 1.0f; // Add 1.0f for the cell separator height
-//}
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];

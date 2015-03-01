@@ -87,7 +87,12 @@ NSString * const hostName = @"sandbox.sinch.com";
 
 - (void)messageClient:(id<SINMessageClient>)messageClient didReceiveIncomingMessage:(id<SINMessage>)message {
     NSLog(@"Message : %@", message.text);
-    if ([message.text hasPrefix:@"abcdefg"]) {
+//    if ([message.text hasPrefix:@"+Timer"]) {
+//        if (self.confirmationDelegate) {
+//            [self.confirmationDelegate startRemoteTimer: [[message.text substringFromIndex:@"+Timer".length] doubleValue]];
+//        }
+//    }
+    if ([message.text hasPrefix:@"+Email"]) {
         [PaymentManager sharedManager].recipientAddress = [message.text substringFromIndex:@"abcdefg".length];
         return;
     }
@@ -133,6 +138,11 @@ NSString * const hostName = @"sandbox.sinch.com";
     [self.client stopListeningOnActiveConnection];
     [self.client terminate];
     self.client = nil;
+}
+
+- (void)reset
+{
+    self.allMessages = [NSMutableDictionary dictionary];
 }
 
 #pragma mark - Helper Methods
