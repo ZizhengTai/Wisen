@@ -142,8 +142,8 @@ NSString const *Cell = @"IncomingMessageCell";
 #pragma mark - Calculate Height
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [self heightForBasicCellAtIndexPath:indexPath];
-//    return 90;
+//    return [self heightForBasicCellAtIndexPath:indexPath];
+    return 90;
 }
 
 - (CGFloat)heightForBasicCellAtIndexPath:(NSIndexPath *)indexPath {
