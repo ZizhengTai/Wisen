@@ -104,8 +104,9 @@
 }
 
 - (RequestHandle)requestWithTag:(NSString *)tag location:(CLLocation *)location radius:(double)radius block:(void (^)(Request *request))block {
-    GFCircleQuery *query = [self.geoFire queryAtLocation:location withRadius:radius];
+    tag = tag.lowercaseString;
     
+    GFCircleQuery *query = [self.geoFire queryAtLocation:location withRadius:radius];
     FirebaseHandle handle = [query observeEventType:GFEventTypeKeyEntered withBlock:^(NSString *key, CLLocation *location) {
         if (![key isEqualToString:self.uid]) {
             Firebase *keyTagsRef = [[Firebase alloc] initWithUrl:[NSString stringWithFormat:@"https://wisen.firebaseio.com/users/%@/tags", key]];
