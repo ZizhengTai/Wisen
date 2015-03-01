@@ -19,13 +19,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [Fabric with:@[ CrashlyticsKit ]];
     
-//    [[UserManager sharedManager] tryLogInWithBlock:^(User *user) {
-//        if (user) {
-//            self.window.rootViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"MainScene"];
-//        } else {
-//            self.window.rootViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginScene"];
-//        }
-//    }];
+    [[UserManager sharedManager] tryLogInWithBlock:^(User *user) {
+        if (user) {
+            self.window.rootViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"MainScene"];
+        } else {
+            self.window.rootViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginScene"];
+        }
+    }];
     
     return YES;
 }
