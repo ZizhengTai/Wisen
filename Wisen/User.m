@@ -119,7 +119,7 @@
                     request.location = location;
                     request.radius = radius;
                     request.mentorUID = key;
-                    request.status = RequestStatusPending;
+                    request.status = RequestStatusMentorConfirmed;
                     
                     [requestRef setValue:request.dictionaryRepresentationWithoutRequestID withCompletionBlock:^(NSError *error, Firebase *ref) {
                         if (block) {
