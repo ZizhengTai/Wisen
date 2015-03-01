@@ -51,7 +51,7 @@
     self.MJImageView.clipsToBounds = NO;
     [self insertSubview:self.MJImageView atIndex:0];
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(self.bounds.origin.x, self.bounds.origin.y, self.bounds.size.width, IMAGE_HEIGHT)];
-    view.backgroundColor = [[UIColor alloc] initWithWhite:1 alpha:0.2];
+    view.backgroundColor = [[UIColor alloc] initWithWhite:0 alpha:0.2];
     [self insertSubview:view aboveSubview:self.MJImageView];
 }
 
