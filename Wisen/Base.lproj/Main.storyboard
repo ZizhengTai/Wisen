@@ -344,9 +344,6 @@
                                             <state key="normal" title="Start">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
-                                            <connections>
-                                                <action selector="startTouched:" destination="bAm-C2-IXZ" eventType="touchUpInside" id="pR4-CG-whL"/>
-                                            </connections>
                                         </button>
                                     </subviews>
                                     <constraints>
@@ -369,6 +366,9 @@
                             <constraint firstItem="I5C-NQ-flK" firstAttribute="top" secondItem="oE9-pf-LlB" secondAttribute="top" id="ptB-L9-WDr"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="startButton" destination="nFk-eh-iDQ" id="t2W-2A-Bci"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ydP-eN-Zn0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

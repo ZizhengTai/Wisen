@@ -31,28 +31,40 @@ class ConfirmationViewController: UIViewController, TimerDelegate {
         self.view.addGestureRecognizer(pan!)
         let left = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "cancelTouched:")
         navigationItem.leftBarButtonItem = left;
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "requesCanceled:", name: "kRequestCanceledNotification", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "requestCanceled:", name: "kRequestCanceledNotification", object: nil)
         pipe = MessagePipe(selfUID: UserManager.sharedManager().user.uid , otherUID: recipientUID())
         pipe!.observeWithBlock { (dic: [NSObject : AnyObject]!) -> Void in
             if let rawDate: AnyObject = dic["stopDate"] {
-                if let date = rawDate as? NSDate {
-                    self.startRemoteTimer(date)
+                if let date = rawDate as? NSTimeInterval {
+                    let mydate = NSDate(timeIntervalSince1970: date)
+                    self.startRemoteTimer(mydate)
                 }
             }
         }
+        self.view.clipsToBounds = true
     }
     
     override func viewWillAppear(animated: Bool) {
         UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
     }
+    @IBOutlet weak var startButton: UIButton! {
+        didSet {
+            startButton.addTarget(self, action: "startTouched:", forControlEvents: .TouchUpInside)
+        }
+    }
 
-    @IBAction func startTouched(sender: UIButton) {
-        disabled = true
+    func startTouched(sender: UIButton) {
         request.durationInHours = NSTimeInterval(clockFace!.myTime)
+        disabled = true
         minutesLeft = floor(Double(clockFace!.myTime * 60))
         timer = Timer(duration: NSTimeInterval(clockFace!.myTime * 60.0 * 60.0), timeInterval: 1, completionNotification: nil, delegate: self)
-        pipe!.send(["stopDate": timer!.stopDate])
         timer?.start()
+        if let pipe = pipe {
+            if let stopDate = timer?.stopDate {
+                let dic = NSDictionary(object: stopDate.timeIntervalSince1970, forKey: "stopDate")
+                pipe.send(dic)
+            }
+        }
         
 //         TEST
 //        requestFinished()
