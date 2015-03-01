@@ -41,6 +41,7 @@
 		33BC3E5D1AA1417400B4B620 /* WisenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BC3E5C1AA1417400B4B620 /* WisenTests.m */; };
 		33D3E3251AA157A900F98C56 /* TwitterAuthHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D3E3241AA157A900F98C56 /* TwitterAuthHelper.m */; };
 		33E0EA421AA27542004EA52F /* Timer.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E0EA411AA27542004EA52F /* Timer.m */; };
+		D76ED9841AA2A6F5007F8EED /* TrendsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D76ED9831AA2A6F5007F8EED /* TrendsManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +109,8 @@
 		33E0EA401AA27542004EA52F /* Timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Timer.h; sourceTree = "<group>"; };
 		33E0EA411AA27542004EA52F /* Timer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Timer.m; sourceTree = "<group>"; };
 		5D76523222769ACF221BA57F /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		D76ED9821AA2A6F5007F8EED /* TrendsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrendsManager.h; sourceTree = "<group>"; };
+		D76ED9831AA2A6F5007F8EED /* TrendsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrendsManager.m; sourceTree = "<group>"; };
 		FC19ABE1547EBEB50EAE97E7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -161,6 +164,8 @@
 				07D7EC3E1AA1E28900606D43 /* MessageManager.m */,
 				074870BA1AA214BF00F5D227 /* PaymentManager.h */,
 				074870BB1AA214BF00F5D227 /* PaymentManager.m */,
+				D76ED9821AA2A6F5007F8EED /* TrendsManager.h */,
+				D76ED9831AA2A6F5007F8EED /* TrendsManager.m */,
 			);
 			name = Manager;
 			sourceTree = "<group>";
@@ -449,6 +454,7 @@
 				07D7EC361AA1AC3600606D43 /* BackgroundTableViewCell.swift in Sources */,
 				07C1AA5F1AA155400042854E /* MainViewController.swift in Sources */,
 				07D7EC311AA1A32800606D43 /* UIImageView+Fetch.m in Sources */,
+				D76ED9841AA2A6F5007F8EED /* TrendsManager.m in Sources */,
 				07D7EC521AA1EFA100606D43 /* MessageTableViewCell.m in Sources */,
 				33BC3E461AA1417400B4B620 /* AppDelegate.m in Sources */,
 				07D7EC231AA1790800606D43 /* RequestViewController.swift in Sources */,

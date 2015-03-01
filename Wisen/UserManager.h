@@ -18,6 +18,9 @@
 - (void)tryLogInWithBlock:(void (^)(User *user))block;
 - (void)logInWithTwitterWithBlock:(void (^)(User *user))block;
 - (void)logOut;
+
+- (void)getBasicInfoForUserWithUID:(NSString *)uid block:(void (^)(NSDictionary *userInfo))block;
+
 - (NSArray *)popularRequest;
 
 @end

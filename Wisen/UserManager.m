@@ -89,6 +89,21 @@
     [self.ref unauth];
 }
 
+- (void)getBasicInfoForUserWithUID:(NSString *)uid block:(void (^)(NSDictionary *userInfo))block {
+    Firebase *userRef = [[Firebase alloc] initWithUrl:[NSString stringWithFormat:@"https://wisen.firebaseio.com/users/%@", uid]];
+    [userRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        if (block) {
+            if (snapshot.value != [NSNull null]) {
+                NSDictionary *userInfo = @{ @"displayName": snapshot.value[@"displayName"],
+                                            @"profileImageURL": snapshot.value[@"profileImageURL"] };
+                block(userInfo);
+            } else {
+                block(nil);
+            }
+        }
+    }];
+}
+
 - (NSArray *)popularRequest
 {
     return @[@"Skateboard", @"Piano", @"Soccer", @"Guitar", @"Cooking", @"Workout", @"Origami"];

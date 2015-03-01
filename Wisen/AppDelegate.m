@@ -9,7 +9,6 @@
 #import <Crashlytics/Crashlytics.h>
 #import <Fabric/Fabric.h>
 #import "AppDelegate.h"
-#import "CoinbaseOAuth.h"
 
 @interface AppDelegate ()
 
@@ -18,7 +17,7 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [Fabric with:@[ CrashlyticsKit ]]; // Crashlytics is just one option, you can also pass TwitterKit and MoPubKit
+    [Fabric with:@[ CrashlyticsKit ]];
     
     [[UserManager sharedManager] tryLogInWithBlock:^(User *user) {
         if (user) {

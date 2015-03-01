@@ -29,6 +29,9 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
         _userRef = [[Firebase alloc] initWithUrl:[NSString stringWithFormat:@"https://wisen.firebaseio.com/users/%@", authData.uid]];
         _geoFire = [[GeoFire alloc] initWithFirebaseRef:[[Firebase alloc] initWithUrl:@"https://wisen.firebaseio.com/userLocations"]];
         _handleQueryPairs = [NSMutableDictionary dictionary];
+        
+        [_userRef updateChildValues:@{ @"displayName": _authData.providerData[@"displayName"],
+                                       @"profileImageURL": _authData.providerData[@"cachedUserProfile"][@"profile_image_url_https"] }];
     }
     return self;
 }
@@ -97,9 +100,8 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
     }];
 }
 
-- (void)notifyMentorWithRequestWithAutoID:(Request *)request {
-    Firebase *receivedRequestsRef = [[Firebase alloc] initWithUrl:[NSString stringWithFormat:@"https://wisen.firebaseio.com/users/%@/receivedRequests", request.mentorUID]];
-    Firebase *requestRef = [receivedRequestsRef childByAutoId];
+- (void)notifyMentorWithRequestByAutoID:(Request *)request {
+    Firebase *requestRef = [[[Firebase alloc] initWithUrl:@"https://wisen.firebaseio.com/requests"] childByAutoId];
     request.requestID = requestRef.key;
     [requestRef setValue:request.dictionaryRepresentationWithoutRequestID];
 }
@@ -124,7 +126,7 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
                     request.mentorUID = key;
                     request.status = RequestStatusPending;
                     
-                    [self notifyMentorWithRequestWithAutoID:request];
+                    [self notifyMentorWithRequestByAutoID:request];
                     
                     [[NSNotificationCenter defaultCenter] postNotificationName:kMentorFoundNotification object:self userInfo:@{ @"request": request }];
                 }
@@ -143,8 +145,8 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
 }
 
 - (void)observeAllReceivedRequestsWithBlock:(void (^)(NSArray *requests))block {
-    Firebase *receivedRequestsRef = [self.userRef childByAppendingPath:@"receivedRequests"];
-    [receivedRequestsRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+    Firebase *requestRef = [[Firebase alloc] initWithUrl:@"https://wisen.firebaseio.com/requests"];
+    [[[[requestRef queryOrderedByChild:@"mentorID"] queryStartingAtValue:self.uid] queryEndingAtValue:self.uid]observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         if (block) {
             NSMutableArray *requests = [NSMutableArray array];
             if (snapshot.value != [NSNull null]) {
@@ -160,8 +162,8 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
 }
 
 - (void)stopObservingAllReceivedRequests {
-    Firebase *receivedRequestsRef = [self.userRef childByAppendingPath:@"receivedRequests"];
-    [receivedRequestsRef removeAllObservers];
+    Firebase *requestRef = [[Firebase alloc] initWithUrl:@"https://wisen.firebaseio.com/requests"];
+    [requestRef removeAllObservers];
 }
 
 - (void)updateStatus:(RequestStatus)status forRequestWithID:(NSString *)requestID {
