@@ -66,18 +66,24 @@ class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearch
         dismissViewControllerAnimated(true, completion: { ()
             UserManager.sharedManager().user.requestWithTag(self.searchBar.text, location: self.cllocation(destinationPoint), radius: 10, block: { (request: Request?) -> Void in
                 if let request = request {
-                        if request.status == .MentorConfirmed {
-                            if let mainVC = self.presentingViewController as? MainViewController {
-                                mainVC.showAlert(request, text: "We just found a match for you on \(request.tag), go ahead an say hight", completion: {
-                                    mainVC.pushToMessage(request, UID: request.mentorUID, status: .Ongoing)
-                                })
-                            }
-                    }
-                }
 
-            })
-        })
+                    UserManager.sharedManager().user.observeSingleRequest(request, withBlock: { (request: Request?) -> Void in
+                        if let request = request {
+                            if request.status == .MentorConfirmed {
+                                if let mainVC = self.presentingViewController as? MainViewController {
+                                    mainVC.showAlert(request, text: "We just found a match for you on \(request.tag), go ahead an say hight", completion: {
+                                        mainVC.pushToMessage(request, UID: request.mentorUID, status: .Ongoing)
+                                    })
+                                }
+                            }
+                        }}
+                )
+                }
+            }
+            )})
     }
+    
+        
     
     @IBOutlet weak var searchBar: UISearchBar! {
         didSet {

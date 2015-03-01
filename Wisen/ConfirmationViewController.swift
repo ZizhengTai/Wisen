@@ -24,6 +24,10 @@ class ConfirmationViewController: UIViewController, UITextFieldDelegate {
         clockFace?.position = CGPoint(x:self.view.bounds.size.width/2 , y: 150)
         self.view.layer.addSublayer(self.clockFace);
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
+    }
 
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()

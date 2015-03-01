@@ -53,8 +53,9 @@
     
     //create drawing context
     UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 0);
-    CGContextRef ctx = UIGraphicsGetCurrentContext();
-    
+    CGContextRef ctx = UIGraphicsGetCurrentContext();   
+    CGContextSetStrokeColorWithColor(ctx, [UIColor whiteColor].CGColor);
+
     //draw clock face
     CGContextSetLineWidth(ctx, 4);
     CGContextStrokeEllipseInRect(ctx, CGRectInset(self.bounds, 2, 2));

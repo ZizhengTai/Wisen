@@ -342,14 +342,6 @@
                                 </view>
                                 <blurEffect style="light"/>
                             </visualEffectView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AC1-kk-n9j">
-                                <rect key="frame" x="250" y="288" width="100" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="X4V-Jc-LDW"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -357,17 +349,12 @@
                             <constraint firstItem="bty-vN-pGe" firstAttribute="leading" secondItem="oE9-pf-LlB" secondAttribute="leading" id="BQ0-FH-OAF"/>
                             <constraint firstItem="I5C-NQ-flK" firstAttribute="leading" secondItem="oE9-pf-LlB" secondAttribute="leading" id="Fx5-Dl-fdR"/>
                             <constraint firstItem="bty-vN-pGe" firstAttribute="top" secondItem="oE9-pf-LlB" secondAttribute="top" id="Hch-lO-xVf"/>
-                            <constraint firstAttribute="centerY" secondItem="AC1-kk-n9j" secondAttribute="centerY" id="MRs-LX-aCO"/>
                             <constraint firstItem="HSG-ia-3X0" firstAttribute="top" secondItem="I5C-NQ-flK" secondAttribute="bottom" id="QKK-BK-krD"/>
                             <constraint firstAttribute="trailing" secondItem="I5C-NQ-flK" secondAttribute="trailing" id="lSO-yl-lHB"/>
                             <constraint firstAttribute="trailing" secondItem="bty-vN-pGe" secondAttribute="trailing" id="lT1-YN-zbg"/>
                             <constraint firstItem="I5C-NQ-flK" firstAttribute="top" secondItem="oE9-pf-LlB" secondAttribute="top" id="ptB-L9-WDr"/>
-                            <constraint firstAttribute="centerX" secondItem="AC1-kk-n9j" secondAttribute="centerX" id="yeJ-QN-rm7"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="textField" destination="AC1-kk-n9j" id="Ulp-jO-sk9"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ydP-eN-Zn0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
