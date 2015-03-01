@@ -72,7 +72,7 @@ class UserViewController: UIViewController, UITextViewDelegate {
             for match in matches {
                 let matchRange = match.rangeAtIndex(0)
                 matchTags += [NSString(string: text).substringWithRange(NSMakeRange(matchRange.location + 1, matchRange.length - 1) )]
-                atrString.addAttribute(NSBackgroundColorAttributeName, value: UIColor.blueColor(), range: matchRange)
+                atrString.addAttribute(NSBackgroundColorAttributeName, value: UIColor(red: 54/255.0, green: 187/255.0, blue: 250/255.0, alpha: 1), range: matchRange)
                 atrString.addAttribute(NSForegroundColorAttributeName, value: UIColor.whiteColor(), range: matchRange)
             }
         }

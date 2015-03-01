@@ -21,6 +21,7 @@ class PaymentViewController: UIViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.clipsToBounds = true
         if !isRecipient {
             self.payButton.hidden = true
             pipe.observeWithBlock({ (dic: [NSObject : AnyObject]!) -> Void in

@@ -22,12 +22,12 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Hello!" translatesAutoresizingMaskIntoConstraints="NO" id="uIC-Qy-3eD" userLabel="messageText">
                                 <rect key="frame" x="0.0" y="0.0" width="226" height="81.5"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
-                        <color key="backgroundColor" red="0.97648055069930073" green="0.94823535839160844" blue="0.98033570287062921" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.0" green="0.95309768356643354" blue="0.12256883741258741" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="yjV-XY-tFc" firstAttribute="leading" secondItem="UJZ-6d-xWu" secondAttribute="leading" id="AYG-nh-WHm"/>
                             <constraint firstAttribute="bottom" secondItem="uIC-Qy-3eD" secondAttribute="bottom" id="LFF-4O-hmh"/>
