@@ -45,9 +45,7 @@
 }
 
 - (void)display
-{
-    NSLog(@"time: %f", [self.presentationLayer myTime]);
-    
+{    
     //get interpolated time value
     float time = [self.presentationLayer myTime];
     

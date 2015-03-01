@@ -65,20 +65,17 @@ class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearch
 
         dismissViewControllerAnimated(true, completion: { ()
             UserManager.sharedManager().user.requestWithTag(self.searchBar.text, location: self.cllocation(destinationPoint), radius: 10, block: { (request: Request?) -> Void in
-                
                 if let request = request {
-
-
                     UserManager.sharedManager().user.observeRequest(request, withBlock: { (request: Request?) -> Void in
                         if let request = request {
                             if request.status == .MentorConfirmed {
                                NSNotificationCenter.defaultCenter().postNotificationName(kRequestConfirmedByMentorNotification, object: nil, userInfo: ["request": request])
                             }
                         }}
-                )
+                    )
                 }
             }
-            )})
+        )})
     }
     
         

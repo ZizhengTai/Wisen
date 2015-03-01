@@ -18,15 +18,12 @@ class PaymentViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        PaymentManager.sharedManager().authenticateWithBlock { (Bool) -> Void in
-            self.loadMentorInformation()
-        }
-    }
+           }
 
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var amountLabel: UILabel! {
         didSet {
-            amountLabel?.text = "Amount:$\(request.requestFare())"
+            amountLabel.text = "Amount:$\(request.requestFare())"
         }
     }
     @IBOutlet weak var recipientName: UILabel!
@@ -41,6 +38,12 @@ class PaymentViewController: UIViewController {
         label.font = UIFont(name: "GillSans", size: 24)
         label.textColor = UIColor.whiteColor()
         navigationItem.titleView = label
+    }
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        PaymentManager.sharedManager().authenticateWithBlock { (Bool) -> Void in
+            self.loadMentorInformation()
+        }
     }
     @IBAction func payTouched(sender: UIButton) {
         PaymentManager.sharedManager().sendMoneywithAmountInUSD(request.requestFare(), block: { (Bool) -> Void in

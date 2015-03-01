@@ -101,13 +101,13 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "showProfile"))
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: imageView)
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "segueToConfirmation");
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "segueToConfirmation");
         
         UserManager.sharedManager().user.observeAllReceivedRequestsWithBlock { (requests: [AnyObject]?) -> Void in
             NSLog("All : %@", requests!)
             if let req = requests as? [Request] {
                 for r in req {
-                    if r.status == .Pending {
+                    if r.status == .Pending {Double(3600)
                         self.showAlert(r, text: "You just got a new request on \(r.tag)", { self.pushToMessage(r, UID: r.menteeUID, status: .MentorConfirmed)})
                         break
                     }
