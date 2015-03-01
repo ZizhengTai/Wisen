@@ -79,7 +79,7 @@ class PaymentViewController: UIViewController {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 80, height: 40))
         label.text = "Check Out!"
         label.textAlignment = NSTextAlignment.Center
-        label.font = UIFont(name: "GillSans", size: 24)
+        label.font = UIFont(name: "Futura-Medium", size: 24)
         label.textColor = UIColor.whiteColor()
         navigationItem.titleView = label
     }

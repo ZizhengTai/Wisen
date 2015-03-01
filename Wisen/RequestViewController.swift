@@ -119,7 +119,7 @@ class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearch
         for view in searchBar.subviews[0].subviews {
             if let textField = view as? UITextField {
                 textField.textColor = UIColor.blackColor()
-                textField.font = UIFont(name: "GillSans", size: 17)
+                textField.font = UIFont(name: "Futura-Medium", size: 17)
                 textField.layer.borderColor = UIColor.whiteColor().CGColor
                 textField.layer.borderWidth = 1
             }

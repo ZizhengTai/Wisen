@@ -28,7 +28,7 @@ class UserViewController: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 80, height: 40))
         label.text = "Tags"
-        label.font = UIFont(name: "GillSans", size: 24)
+        label.font = UIFont(name: "Futura-Medium", size: 24)
         label.textAlignment = .Center
         label.textColor = UIColor.whiteColor()
         navigationItem.titleView = label
@@ -57,7 +57,7 @@ class UserViewController: UIViewController, UITextViewDelegate {
         let text = textView.text
         let selectedRange = textView.selectedRange
         let atrString = NSMutableAttributedString(string: text)
-        atrString.addAttribute(NSFontAttributeName, value: UIFont(name: "GillSans", size: 23)!, range: NSMakeRange(0, NSString(string: text).length ))
+        atrString.addAttribute(NSFontAttributeName, value: UIFont(name: "Futura-Medium", size: 23)!, range: NSMakeRange(0, NSString(string: text).length ))
 
         textView.scrollEnabled = false
         let regex = NSRegularExpression(pattern: "#(\\w+)", options:.CaseInsensitive , error: nil)
