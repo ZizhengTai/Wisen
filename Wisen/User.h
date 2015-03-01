@@ -26,12 +26,11 @@ typedef FirebaseHandle RequestHandle;
 - (void)setTags:(NSArray *)tags withBlock:(void (^)(BOOL succeeded))block;
 - (void)getAllTagsWithBlock:(void (^)(NSArray *tags))block;
 
-- (RequestHandle)requestWithTag:(NSString *)tag location:(CLLocation *)location radius:(double)radius block:(void (^)(BOOL succeeded))block;
+- (RequestHandle)requestWithTag:(NSString *)tag location:(CLLocation *)location radius:(double)radius block:(void (^)(Request *request))block;
 - (void)cancelRequest:(RequestHandle)handle;
 
-- (void)observeAllSentRequestsWithBlock:(void (^)(NSArray *requests))block;
 - (void)observeAllReceivedRequestsWithBlock:(void (^)(NSArray *requests))block;
-- (void)removeAllObserverForAllRequests;
+- (void)removeAllObserversForAllRequests;
 
 - (void)updateStatus:(RequestStatus)status forRequestWithID:(NSString *)requestID;
 
