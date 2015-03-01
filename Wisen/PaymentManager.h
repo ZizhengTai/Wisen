@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CoinbaseOAuth.h"
+#import <coinbase-official/Coinbase.h>
 
 @interface PaymentManager : NSObject
 
@@ -15,7 +15,8 @@
 
 + (instancetype)sharedManager;
 
+- (void)authenticate;
 - (void)finishOAuthAuthenticationForURL:(NSURL *)url withBlock:(void (^)(BOOL succeeded))block;
-- (void)sendMoneyToAddress:(NSString *)toAddress withAmountString:(NSString *)ammountString currency:(NSString *)currency;
+- (void)sendMoneyToAddress:(NSString *)toAddress withAmountInUSD:(double)amount block:(void (^)(BOOL succeeded))block;
 
 @end

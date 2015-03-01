@@ -6,11 +6,16 @@
 //  Copyright (c) 2015 self. All rights reserved.
 //
 
+#import <coinbase-official/CoinbaseOAuth.h>
 #import "PaymentManager.h"
 
 static NSString *const kClientID = @"047a37b1ea82ea1741a385c57973df40bf1044dd7fcb4b3ac213dd2661a99c0b";
 static NSString *const kClientSecret = @"c5bb0d2f5fe8013ff4cf0e81ec7ffda33914752084a13bde557bb13be990144b";
 static NSString *const kRedirectURI = @"com.example.app.coinbase-oauth://coinbase-oauth";
+
+static NSString *const kCommissionToAddress = @"zizheng.tai@gmail.com";
+static const double kCommissionRate = 0.1;
+static const double kLowestAmount = 0.1;
 
 @interface PaymentManager ()
 
@@ -31,20 +36,19 @@ static NSString *const kRedirectURI = @"com.example.app.coinbase-oauth://coinbas
     return sharedManager;
 }
 
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        [CoinbaseOAuth startOAuthAuthenticationWithClientId:kClientID scope:@"user balance" redirectUri:kRedirectURI meta:nil];
-    }
-    return self;
+- (void)authenticate {
+    [CoinbaseOAuth startOAuthAuthenticationWithClientId:kClientID
+                                                  scope:@"user send"
+                                            redirectUri:kRedirectURI
+                                                   meta:@{ @"send_limit_amount": @"100",
+                                                           @"send_limit_currency": @"USD",
+                                                           @"send_limit_period": @"day" }];
 }
 
 - (void)finishOAuthAuthenticationForURL:(NSURL *)url withBlock:(void (^)(BOOL succeeded))block {
     // This is a redirect from the Coinbase OAuth web page or app.
     [CoinbaseOAuth finishOAuthAuthenticationForUrl:url clientId:kClientID clientSecret:kClientSecret completion:^(id result, NSError *error) {
-        if (error) {
-            // Could not authenticate.
-        } else {
+        if (!error) {
             self.accessToken = result[@"access_token"];
             self.refreshToken = result[@"refresh_token"];
             self.expiresIn = result[@"expires_in"];
@@ -57,12 +61,35 @@ static NSString *const kRedirectURI = @"com.example.app.coinbase-oauth://coinbas
     }];
 }
 
-- (void)test {
-    [self.client doGet:@"transactions/send_money" parameters:nil completion:^(id result, NSError *error) {
+- (void)sendMoneyToAddress:(NSString *)toAddress withAmountInUSD:(double)amount block:(void (^)(BOOL succeeded))block {
+    if (amount < kLowestAmount) {
+        if (block) {
+            block(NO);
+        }
+        return;
+    }
+    
+    // Send commission
+    NSString *amountString = [NSString stringWithFormat:@"%f", kCommissionRate * amount];
+    NSDictionary *params = @{ @"transaction": @{ @"to": kCommissionToAddress,
+                                                 @"amount_string": amountString,
+                                                 @"amount_currency_iso": @"USD" } };
+    [self.client doPost:@"transactions/send_money" parameters:params completion:^(id response, NSError *error) {
         if (error) {
-            NSLog(@"Could not load user: %@", error);
+            if (block) {
+                block(NO);
+            }
         } else {
-            NSLog(@"Signed in as: %@", result[@"user"][@"email"]);
+            // Send to mentor
+            NSString *amountString = [NSString stringWithFormat:@"%f", (1 - kCommissionRate) * amount];
+            NSDictionary *params = @{ @"transaction": @{ @"to": toAddress,
+                                                         @"amount_string": amountString,
+                                                         @"amount_currency_iso": @"USD" } };
+            [self.client doPost:@"transactions/send_money" parameters:params completion:^(id response, NSError *error) {
+                if (block) {
+                    block(error == nil);
+                }
+            }];
         }
     }];
 }

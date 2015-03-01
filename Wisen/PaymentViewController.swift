@@ -12,8 +12,9 @@ class PaymentViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        NSLog("%@",PaymentManager.sharedManager())
+        
         // Do any additional setup after loading the view.
+        PaymentManager.sharedManager().authenticate()
     }
 
     override func viewWillAppear(animated: Bool) {
