@@ -23,7 +23,7 @@ NSString * const hostName = @"sandbox.sinch.com";
 
 - (instancetype)init {
     if (self = [super init]) {
-        NSString *subString = [[UserManager sharedManager].user.uid substringFromIndex:@"twitter:".length];
+        NSString *subString = [MessageManager getSinchIDFromUID:[UserManager sharedManager].user.uid];
         _client = [Sinch clientWithApplicationKey:appKey applicationSecret:appSecret environmentHost:hostName userId:subString];
         [_client setSupportMessaging:YES];
         [_client setSupportPushNotifications:YES];
@@ -119,8 +119,15 @@ NSString * const hostName = @"sandbox.sinch.com";
 #pragma mark - Message Methods
 
 - (void)sendMessage:(NSString *)text to:(NSString *)recipientUID; {
-    SINOutgoingMessage *message = [SINOutgoingMessage messageWithRecipient:recipientUID text:text];
+    SINOutgoingMessage *message = [SINOutgoingMessage messageWithRecipient: [MessageManager getSinchIDFromUID:recipientUID] text:text];
     [self.messageClient sendMessage:message];
+}
+
+#pragma mark - Helper Methods
+
++ (NSString *)getSinchIDFromUID:(NSString *)UID
+{
+    return [UID substringFromIndex:(@"twitter:").length];
 }
 
 @end

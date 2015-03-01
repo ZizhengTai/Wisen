@@ -22,5 +22,6 @@
 #import "AMSmoothAlertView.h"
 #import "ClockFace.h"
 #import "MJCollectionViewCell.h"
+#import "UIImageView+Fetch.h"
 
 #endif

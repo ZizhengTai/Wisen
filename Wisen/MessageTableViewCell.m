@@ -10,4 +10,15 @@
 
 @implementation MessageTableViewCell
 
+- (void)awakeFromNib
+{
+    self.bubbleView.layer.cornerRadius = 10;
+}
+
+- (void)layoutSubviews
+{
+    self.avatarImageView.clipsToBounds = YES;
+    self.avatarImageView.layer.cornerRadius = CGRectGetHeight(self.avatarImageView.frame) / 2;
+}
+
 @end

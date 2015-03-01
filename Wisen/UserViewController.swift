@@ -26,8 +26,9 @@ class UserViewController: UIViewController, UITextViewDelegate {
     
     // MARK: Life Cycle
     override func viewWillAppear(animated: Bool) {
-        UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
+        UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
         navigationController?.setNavigationBarHidden(false, animated: true)
+        navigationController?.navigationBar.tintColor = UIColor.whiteColor()
     }
     
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
