@@ -8,6 +8,8 @@
 
 #import "Request.h"
 
+static double const farePerHour = 10;
+
 @implementation Request
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {
@@ -24,6 +26,11 @@
         _status = [dictionary[@"status"] integerValue];
     }
     return self;
+}
+
+- (double)requestFare
+{
+    return farePerHour * self.durationInHour;
 }
 
 - (void)setTag:(NSString *)tag {

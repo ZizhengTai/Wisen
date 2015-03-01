@@ -28,7 +28,9 @@ typedef NS_ENUM(NSInteger, RequestStatus) {
 
 @property (readonly, strong, nonatomic) NSDictionary *dictionaryRepresentation;
 @property (readonly, strong, nonatomic) NSDictionary *dictionaryRepresentationWithoutRequestID;
+@property (nonatomic) NSTimeInterval durationInHour;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
+- (double)requestFare;
 
 @end

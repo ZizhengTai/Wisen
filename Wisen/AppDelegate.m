@@ -32,7 +32,7 @@
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
     if ([[url scheme] isEqualToString:@"com.example.app.coinbase-oauth"]) {
-        [[PaymentManager sharedManager] finishOAuthAuthenticationForURL:url withBlock:nil];
+        [[PaymentManager sharedManager] finishOAuthAuthenticationForURL:url];
         return YES;
     }
     return NO;

@@ -22,6 +22,7 @@ static const double kLowestAmount = 0.1;
 @property (copy, nonatomic) NSString *accessToken;
 @property (copy, nonatomic) NSString *refreshToken;
 @property (strong, nonatomic) NSNumber *expiresIn;
+@property (nonatomic, copy) void (^authenticationCompletionHandler)(BOOL);
 
 @end
 
@@ -36,16 +37,17 @@ static const double kLowestAmount = 0.1;
     return sharedManager;
 }
 
-- (void)authenticate {
+- (void)authenticateWithBlock:(void (^)(BOOL))block {
     [CoinbaseOAuth startOAuthAuthenticationWithClientId:kClientID
                                                   scope:@"user send"
                                             redirectUri:kRedirectURI
                                                    meta:@{ @"send_limit_amount": @"100",
                                                            @"send_limit_currency": @"USD",
                                                            @"send_limit_period": @"day" }];
+    self.authenticationCompletionHandler = block;
 }
 
-- (void)finishOAuthAuthenticationForURL:(NSURL *)url withBlock:(void (^)(BOOL succeeded))block {
+- (void)finishOAuthAuthenticationForURL:(NSURL *)url {
     // This is a redirect from the Coinbase OAuth web page or app.
     [CoinbaseOAuth finishOAuthAuthenticationForUrl:url clientId:kClientID clientSecret:kClientSecret completion:^(id result, NSError *error) {
         if (!error) {
@@ -55,8 +57,8 @@ static const double kLowestAmount = 0.1;
             
             self.client = [Coinbase coinbaseWithOAuthAccessToken:self.accessToken];
         }
-        if (block) {
-            block(error == nil);
+        if (self.authenticationCompletionHandler) {
+            self.authenticationCompletionHandler(error == nil);
         }
     }];
 }

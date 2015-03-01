@@ -56,7 +56,9 @@ NSString const *Cell = @"IncomingMessageCell";
         label.text = displayName;
         label.font = [UIFont fontWithName:@"GillSans" size:24];
         label.textAlignment = NSTextAlignmentCenter;
+        label.textColor = [UIColor whiteColor];
         self.navigationItem.titleView = label;
+        [self.view setNeedsDisplay];
     }];
     self.tableView.estimatedRowHeight = 90;
 }
@@ -140,7 +142,9 @@ NSString const *Cell = @"IncomingMessageCell";
 }
 
 - (void)confirmTouched {
-    [self.navigationController pushViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"ConfirmationScene"] animated:YES];
+    ConfimationViewController *vc = (ConfirmationViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"ConfirmationScene"];
+    vc.request = self.
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - Calculate Height
@@ -149,23 +153,23 @@ NSString const *Cell = @"IncomingMessageCell";
 //    return [self heightForBasicCellAtIndexPath:indexPath];
     return 90;
 }
-
-- (CGFloat)heightForBasicCellAtIndexPath:(NSIndexPath *)indexPath {
-    static MessageTableViewCell *sizingCell = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        sizingCell = [self.tableView dequeueReusableCellWithIdentifier:Cell];
-    });
-    
-    return [self calculateHeightForConfiguredSizingCell:sizingCell];
-}
-
-- (CGFloat)calculateHeightForConfiguredSizingCell:(UITableViewCell *)sizingCell {
-    [sizingCell setNeedsLayout];
-    [sizingCell layoutIfNeeded];
-    
-    CGSize size = [sizingCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-    return size.height + 1.0f; // Add 1.0f for the cell separator height
-}
+//
+//- (CGFloat)heightForBasicCellAtIndexPath:(NSIndexPath *)indexPath {
+//    static MessageTableViewCell *sizingCell = nil;
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
+//        sizingCell = [self.tableView dequeueReusableCellWithIdentifier:Cell];
+//    });
+//    
+//    return [self calculateHeightForConfiguredSizingCell:sizingCell];
+//}
+//
+//- (CGFloat)calculateHeightForConfiguredSizingCell:(UITableViewCell *)sizingCell {
+//    [sizingCell setNeedsLayout];
+//    [sizingCell layoutIfNeeded];
+//    
+//    CGSize size = [sizingCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+//    return size.height + 1.0f; // Add 1.0f for the cell separator height
+//}
 
 @end

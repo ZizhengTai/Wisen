@@ -123,6 +123,13 @@ NSString * const hostName = @"sandbox.sinch.com";
     [self.messageClient sendMessage:message];
 }
 
+- (void)terminate
+{
+    [self.client stopListeningOnActiveConnection];
+    [self.client terminate];
+    self.client = nil;
+}
+
 #pragma mark - Helper Methods
 
 + (NSString *)getSinchIDFromUID:(NSString *)UID

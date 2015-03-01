@@ -24,5 +24,6 @@
 #import "MJCollectionViewCell.h"
 #import "UIImageView+Fetch.h"
 #import "PulsingHaloLayer.h"
+#import "Timer.h"
 
 #endif

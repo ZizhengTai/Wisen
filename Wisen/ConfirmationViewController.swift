@@ -8,14 +8,16 @@
 
 import UIKit
 
-class ConfirmationViewController: UIViewController, UITextFieldDelegate {
+class ConfirmationViewController: UIViewController, UITextFieldDelegate, TimerDelegate {
 
+    var request: Request?
+    
     @IBOutlet weak var textField: UITextField! {
         didSet {
             textField.delegate = self
         }
     }
-    var timer: NSTimer?
+    var timer:Timer?
     var clockFace: ClockFace?
     var minutesLeft: Double?
     override func viewDidLoad() {
@@ -35,30 +37,38 @@ class ConfirmationViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
-        clockFace?.myTime = NSString(string:textField.text).floatValue;
+        let duration = NSString(string:textField.text).floatValue;
+        clockFace?.myTime = duration;
+        request?.durationInHour = NSTimeInterval(duration)
         minutesLeft = floor(Double(clockFace!.myTime * 60))
-        timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: "updateClockFace", userInfo: nil, repeats: true)
-        timer?.fire()
+        timer = Timer(duration: NSTimeInterval(duration * 60.0), timeInterval: 1, completionNotification: nil, delegate: self)
+        
+        timer?.start()
+        
+        // TEST
+        requestFinished()
     }
     
-    func updateClockFace() {
-        if var min = minutesLeft {
-            min = Double(min - Double(1))
-            if min <= Double(0) {
-                min = 0
-                requestFinished()
-            }
-            clockFace?.myTime = Float(min / Double(60))
+    func timer(timer: Timer!, didFireWithRemainingTime remainingTime: NSTimeInterval) {
+        updateClockFace(remainingTime)
+    }
+    
+    func updateClockFace(remaining: NSTimeInterval) {
+        var remaining = remaining
+        if remaining <= 0 {
+            remaining = 0
+            requestFinished()
         }
+        clockFace?.myTime = Float(remaining / Double(60))
     }
     
     func requestFinished() {
-        timer?.invalidate()
-        timer = nil
+        timer?.abort()
         let alert = AMSmoothAlertView(dropAlertWithTitle: "Congrads!", andText: "You just finished your learning session", andCancelButton: false, forAlertType: .Success)
         alert.completionBlock = {(alertObj: AMSmoothAlertView!, button: UIButton!) -> () in
             if button == alertObj.defaultButton {
-                self.dismissSelf()
+//                self.dismissSelf()
+                self.segueToPayment()
             }
         }
         alert.show()
@@ -68,8 +78,11 @@ class ConfirmationViewController: UIViewController, UITextFieldDelegate {
         navigationController?.popToRootViewControllerAnimated(true)
     }
     
+    func segueToPayment() {
+        navigationController?.pushViewController(storyboard?.instantiateViewControllerWithIdentifier("PaymentScene") as UIViewController, animated: true)
+    }
+    
     deinit {
-        timer?.invalidate()
-        timer = nil
+        timer?.abort()
     }
 }

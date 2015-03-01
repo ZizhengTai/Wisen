@@ -212,8 +212,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         switch indexPath.row {
         case 0:
             self.hideProfile()
-        case 1:
-            self.performSegueWithIdentifier("segueToPayment", sender: nil)
+        case 1: break
         case 2: break
         case 3: break
         case 4: break
