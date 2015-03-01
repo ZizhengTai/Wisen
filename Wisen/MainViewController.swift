@@ -94,6 +94,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
 //        title = "Wisen"
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 80, height: 40))
         label.text = "Wisen"
+        label.textAlignment = NSTextAlignment.Center
         label.font = UIFont(name: "GillSans", size: 24)
         label.textColor = UIColor.whiteColor()  
         navigationItem.titleView = label

@@ -52,7 +52,11 @@ NSString const *Cell = @"IncomingMessageCell";
         NSLog(@"User info: %@", userInfo);
         NSString *displayName = userInfo[@"displayName"];
         self.profileImageURL = userInfo[@"profileImageURL"];
-        self.title = displayName;
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 80, 40)];
+        label.text = displayName;
+        label.font = [UIFont fontWithName:@"GillSans" size:24];
+        label.textAlignment = NSTextAlignmentCenter;
+        self.navigationItem.titleView = label;
     }];
     self.tableView.estimatedRowHeight = 90;
 }

@@ -25,6 +25,14 @@ class UserViewController: UIViewController, UITextViewDelegate {
     }
     
     // MARK: Life Cycle
+    override func viewDidLoad() {
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 80, height: 40))
+        label.text = "Tags"
+        label.font = UIFont(name: "GillSans", size: 24)
+        label.textAlignment = .Center
+        label.textColor = UIColor.whiteColor()
+        navigationItem.titleView = label
+    }
     override func viewWillAppear(animated: Bool) {
         UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
         navigationController?.setNavigationBarHidden(false, animated: true)
@@ -32,6 +40,9 @@ class UserViewController: UIViewController, UITextViewDelegate {
     }
     
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+        if range.length == 1 && text == "" {
+            return true
+        }
         if (NSString(string: textView.text).hasSuffix(" ") || NSString(string: textView.text).length == 0) && (text != "#" && text != " ") {
             return false
         }
