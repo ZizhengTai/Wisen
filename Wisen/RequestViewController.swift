@@ -17,7 +17,9 @@ class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearch
     override func viewDidLoad() {
         super.viewDidLoad()
         let timer = NSTimer.scheduledTimerWithTimeInterval(1, target:self, selector: "updateLocation", userInfo: nil, repeats: true)
-        halo.position = self.view.center
+        halo.position = view.convertPoint(self.mapView.center,fromView: self.mapView.superview)
+        halo.backgroundColor = UIColor.greenColor().CGColor
+        halo.radius = 240.0
         self.view.layer.addSublayer(halo)
     }
     

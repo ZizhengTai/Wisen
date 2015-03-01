@@ -18,13 +18,6 @@ private let ImageOffsetSpeed: CGFloat = 25
 
 class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
-//    var request: Request? {
-//        didSet {
-//            
-//        }
-//    }
-    
-    
     var images = UserManager.sharedManager().popularRequest().map( { UIImage(named: "\($0)")} )
     
     private struct CellText {
@@ -110,7 +103,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             if let request = request as? [Request] {
                 for req in request {
                     if req.status == .MentorConfirmed {
-//                        self.request = r
                         self.showAlert(req, text: "We just found a match for you on \(req.tag), go ahead an say hight", completion: {
                             self.pushToMessage(req, UID: req.mentorUID)
                         })
@@ -124,7 +116,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             if let req = requests as? [Request] {
                 for r in req {
                     if r.status == .Pending {
-//                        self.request = r
                         self.showAlert(r, text: "You just got a new request on \(r.tag)", { self.pushToMessage(r, UID: r.menteeUID)})
                         break
                     }
