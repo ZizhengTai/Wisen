@@ -98,22 +98,7 @@
     }];
 }
 
-- (void)addRequest:(Request *)request withBlock:(void (^)(BOOL succeeded))block {
-    Firebase *requestRef = [[[Firebase alloc] initWithUrl:@"https://wisen.firebaseio.com/requests"] childByAutoId];
-    request.requestID = requestRef.key;
-    [requestRef setValue:request.dictionaryRepresentationWithoutRequestID withCompletionBlock:^(NSError *error, Firebase *ref) {
-        if (!error) {
-            Firebase *requestLocationsRef = [[Firebase alloc] initWithUrl:@"https://wisen.firebaseio.com/requestLocations"];
-            GeoFire *geoFire = [[GeoFire alloc] initWithFirebaseRef:requestLocationsRef];
-            [geoFire setLocation:request.location forKey:request.requestID];
-        }
-        if (block) {
-            block(error == nil);
-        }
-    }];
-}
-
-- (RequestHandle)requestWithTag:(NSString *)tag location:(CLLocation *)location radius:(double)radius block:(void (^)(BOOL succeeded))block {
+- (RequestHandle)requestWithTag:(NSString *)tag location:(CLLocation *)location radius:(double)radius block:(void (^)(Request *request))block {
     GFCircleQuery *query = [self.geoFire queryAtLocation:location withRadius:radius];
     
     FirebaseHandle handle = [query observeEventType:GFEventTypeKeyEntered withBlock:^(NSString *key, CLLocation *location) {
@@ -125,7 +110,10 @@
                     [query removeObserverWithFirebaseHandle:handle];
                     [self.handleQueryPairs removeObjectForKey:@(handle)];
                     
+                    Firebase *requestRef = [[[Firebase alloc] initWithUrl:@"https://wisen.firebaseio.com/requests"] childByAutoId];
+                    
                     Request *request = [[Request alloc] init];
+                    request.requestID = requestRef.key;
                     request.menteeUID = self.uid;
                     request.tag = tag;
                     request.location = location;
@@ -133,9 +121,9 @@
                     request.mentorUID = key;
                     request.status = RequestStatusPending;
                     
-                    [self addRequest:request withBlock:^(BOOL succeeded) {
+                    [requestRef setValue:request.dictionaryRepresentationWithoutRequestID withCompletionBlock:^(NSError *error, Firebase *ref) {
                         if (block) {
-                            block(succeeded);
+                            block(error == nil ? request : nil);
                         }
                     }];
                 }
@@ -170,24 +158,7 @@
     }];
 }
 
-- (void)observeAllSentRequestsWithBlock:(void (^)(NSArray *))block {
-    Firebase *requestsRef = [[Firebase alloc] initWithUrl:@"https://wisen.firebaseio.com/requests"];
-    [[[[requestsRef queryOrderedByChild:@"menteeUID"] queryStartingAtValue:self.uid] queryEndingAtValue:self.uid]observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-        if (block) {
-            NSMutableArray *requests = [NSMutableArray array];
-            if (snapshot.value != [NSNull null]) {
-                for (NSString *requestID in snapshot.value) {
-                    NSMutableDictionary *dictionary = snapshot.value[requestID];
-                    dictionary[@"requestID"] = requestID;
-                    [requests addObject:[[Request alloc] initWithDictionary:dictionary]];
-                }
-            }
-            block(requests);
-        }
-    }];
-}
-
-- (void)removeAllObserverForAllRequests {
+- (void)removeAllObserversForAllRequests {
     Firebase *requestsRef = [[Firebase alloc] initWithUrl:@"https://wisen.firebaseio.com/requests"];
     [requestsRef removeAllObservers];
 }
@@ -206,7 +177,7 @@
 }
 
 - (void)dealloc {
-    [self removeAllObserverForAllRequests];
+    [self removeAllObserversForAllRequests];
 }
 
 @end
