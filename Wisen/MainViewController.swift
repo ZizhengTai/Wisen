@@ -18,11 +18,12 @@ private let ImageOffsetSpeed: CGFloat = 25
 
 class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
-    var request: Request? {
-        didSet {
-            
-        }
-    }
+//    var request: Request? {
+//        didSet {
+//            
+//        }
+//    }
+    
     
     var images = UserManager.sharedManager().popularRequest().map( { UIImage(named: "\($0)")} )
     
@@ -91,7 +92,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     // MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-//        title = "Wisen"
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 80, height: 40))
         label.text = "Wisen"
         label.textAlignment = NSTextAlignment.Center
@@ -105,19 +105,33 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         imageView.userInteractionEnabled = true
         imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "showProfile"))
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: imageView)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleNote:", name: kMentorFoundNotification, object: nil)
+        
+        UserManager.sharedManager().user.observeAllSentRequestsWithBlock { (request: [AnyObject]?) -> Void in
+            if let request = request as? [Request] {
+                for req in request {
+                    if req.status == .MentorConfirmed {
+//                        self.request = r
+                        self.showAlert(req, text: "We just found a match for you on \(req.tag), go ahead an say hight", completion: {
+                            self.pushToMessage(req, UID: req.mentorUID)
+                        })
+                    }
+                }
+            }
+        }
+        
         UserManager.sharedManager().user.observeAllReceivedRequestsWithBlock { (requests: [AnyObject]?) -> Void in
             NSLog("All : %@", requests!)
             if let req = requests as? [Request] {
                 for r in req {
                     if r.status == .Pending {
-                        self.request = r
+//                        self.request = r
                         self.showAlert(r, text: "You just got a new request on \(r.tag)", { self.pushToMessage(r, UID: r.menteeUID)})
                         break
                     }
                 }
             }
         }
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -278,15 +292,15 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     // MARK: Note handler
-    func handleNote(note: NSNotification) {
-        NSLog("Note: %@", note.userInfo!)
-        let req: AnyObject? = note.userInfo!["request"]
-        if let dic = req as? Request {
-            showAlert(dic, text: "We just found a match for you on \(dic.tag), go ahead an say hight",  {
-                self.pushToMessage(dic, UID: dic.mentorUID)
-            })
-        }
-    }
+//    func handleNote(note: NSNotification) {
+//        NSLog("Note: %@", note.userInfo!)
+//        let req: AnyObject? = note.userInfo!["request"]
+//        if let dic = req as? Request {
+//            showAlert(dic, text: "We just found a match for you on \(dic.tag), go ahead an say hight",  {
+//                self.pushToMessage(dic, UID: dic.mentorUID)
+//            })
+//        }
+//    }
     
     func pushToMessage(req: Request, UID: NSString) {
         UserManager.sharedManager().user.updateStatus(.Ongoing, forRequestWithID: req.requestID)
