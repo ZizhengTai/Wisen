@@ -640,16 +640,60 @@
                                     <action selector="payTouched:" destination="NqD-uI-Clh" eventType="touchUpInside" id="UA8-Ic-NSb"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ivA-iw-ScF">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Uny-Kv-tS2">
+                                        <rect key="frame" x="195" y="285" width="210" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="210" id="DT8-Oa-dGm"/>
+                                            <constraint firstAttribute="height" constant="30" id="Otq-R8-be8"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your email here" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nFZ-nC-2fx">
+                                        <rect key="frame" x="246" y="250" width="109.5" height="20"/>
+                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="71Z-3q-pK0">
+                                        <rect key="frame" x="413" y="283" width="62" height="33"/>
+                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="18"/>
+                                        <state key="normal" title="Confirm">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="emailConfirmed:" destination="NqD-uI-Clh" eventType="touchUpInside" id="ttV-5X-D9q"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="Uny-Kv-tS2" firstAttribute="top" secondItem="nFZ-nC-2fx" secondAttribute="bottom" constant="15" id="6cn-oC-KZ5"/>
+                                    <constraint firstAttribute="centerY" secondItem="Uny-Kv-tS2" secondAttribute="centerY" id="Fqc-U8-A4m"/>
+                                    <constraint firstItem="71Z-3q-pK0" firstAttribute="centerY" secondItem="Uny-Kv-tS2" secondAttribute="centerY" id="IB4-P0-DCH"/>
+                                    <constraint firstItem="71Z-3q-pK0" firstAttribute="leading" secondItem="Uny-Kv-tS2" secondAttribute="trailing" constant="8" id="JxF-sr-Oat"/>
+                                    <constraint firstAttribute="centerX" secondItem="Uny-Kv-tS2" secondAttribute="centerX" id="Ofi-dY-R5L"/>
+                                    <constraint firstAttribute="centerX" secondItem="nFZ-nC-2fx" secondAttribute="centerX" id="xA5-1t-UIe"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="X2m-KA-WKO" firstAttribute="top" secondItem="cYF-1X-MID" secondAttribute="bottom" constant="20" id="2EB-EB-SyM"/>
                             <constraint firstItem="Zwz-zS-3MD" firstAttribute="top" secondItem="LTe-WI-1mH" secondAttribute="bottom" constant="87" id="7ku-nJ-9Jx"/>
+                            <constraint firstAttribute="trailing" secondItem="ivA-iw-ScF" secondAttribute="trailing" id="9r6-nJ-2Tg"/>
                             <constraint firstItem="cYF-1X-MID" firstAttribute="top" secondItem="dkO-ey-gWX" secondAttribute="bottom" constant="10" id="CE6-fM-J03"/>
                             <constraint firstAttribute="centerX" secondItem="X2m-KA-WKO" secondAttribute="centerX" id="Mly-QI-U3q"/>
                             <constraint firstAttribute="centerX" secondItem="cYF-1X-MID" secondAttribute="centerX" id="NOg-Yy-o9q"/>
+                            <constraint firstItem="ivA-iw-ScF" firstAttribute="leading" secondItem="bdt-Gy-0Ar" secondAttribute="leading" id="PBz-pG-PLq"/>
                             <constraint firstAttribute="centerX" secondItem="LTe-WI-1mH" secondAttribute="centerX" id="PzI-yz-1iy"/>
+                            <constraint firstItem="ivA-iw-ScF" firstAttribute="top" secondItem="bdt-Gy-0Ar" secondAttribute="top" id="QdV-hW-VuL"/>
                             <constraint firstItem="86a-Oy-tdS" firstAttribute="top" secondItem="X2m-KA-WKO" secondAttribute="bottom" constant="28.5" id="Yw0-kJ-GxP"/>
+                            <constraint firstItem="Zwz-zS-3MD" firstAttribute="top" secondItem="ivA-iw-ScF" secondAttribute="bottom" id="f5h-Gy-Q8o"/>
                             <constraint firstAttribute="centerX" secondItem="86a-Oy-tdS" secondAttribute="centerX" id="fgb-yN-BDi"/>
                             <constraint firstItem="N45-1n-ZHO" firstAttribute="top" secondItem="86a-Oy-tdS" secondAttribute="bottom" constant="15" id="lhx-qH-CRR"/>
                             <constraint firstAttribute="centerX" secondItem="N45-1n-ZHO" secondAttribute="centerX" id="sMT-I9-xyC"/>
@@ -658,30 +702,15 @@
                     <connections>
                         <outlet property="amountLabel" destination="N45-1n-ZHO" id="ojN-Gm-cmZ"/>
                         <outlet property="avatarImageView" destination="cYF-1X-MID" id="jWI-7q-Ree"/>
+                        <outlet property="emailTextField" destination="Uny-Kv-tS2" id="MDo-Aa-nQs"/>
+                        <outlet property="payButton" destination="LTe-WI-1mH" id="kH5-mp-bzJ"/>
                         <outlet property="recipientName" destination="X2m-KA-WKO" id="bgN-SH-3Ep"/>
+                        <outlet property="recipientView" destination="ivA-iw-ScF" id="DP5-UB-a9y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EBr-fb-hJf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3119" y="344"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="i4R-DT-Kvz">
-            <objects>
-                <viewController id="M7N-0I-ltr" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="hZ0-6N-nQG"/>
-                        <viewControllerLayoutGuide type="bottom" id="oud-WB-QYN"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Mv2-Cc-9ng">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tGb-Ot-OvB" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3821" y="344"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="dFD-7V-pic">

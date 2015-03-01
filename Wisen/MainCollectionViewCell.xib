@@ -12,29 +12,22 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="414" height="300"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Skateboard" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UsH-sA-vT6">
-                        <rect key="frame" x="110.5" y="130.5" width="194" height="38.5"/>
-                        <fontDescription key="fontDescription" name="GillSans-Bold" family="Gill Sans" pointSize="33"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="skateboard" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UsH-sA-vT6">
+                        <rect key="frame" x="238" y="248.5" width="168" height="43"/>
+                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="33"/>
+                        <color key="textColor" white="1" alpha="0.80000000000000004" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NdU-pn-nDW">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="300"/>
-                    </imageView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
+            <color key="backgroundColor" red="0.16862745100000001" green="0.73333333329999995" blue="0.98033570290000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="NdU-pn-nDW" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="F8y-jT-qnD"/>
-                <constraint firstAttribute="trailing" secondItem="NdU-pn-nDW" secondAttribute="trailing" id="FK5-ZR-ZFk"/>
-                <constraint firstItem="NdU-pn-nDW" firstAttribute="centerY" secondItem="UsH-sA-vT6" secondAttribute="centerY" id="Tcd-gy-QeJ"/>
-                <constraint firstAttribute="bottom" secondItem="NdU-pn-nDW" secondAttribute="bottom" id="g1o-IC-GG8"/>
-                <constraint firstItem="NdU-pn-nDW" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="lQB-5x-owz"/>
-                <constraint firstItem="NdU-pn-nDW" firstAttribute="centerX" secondItem="UsH-sA-vT6" secondAttribute="centerX" id="zF8-be-UwQ"/>
+                <constraint firstAttribute="bottom" secondItem="UsH-sA-vT6" secondAttribute="bottom" constant="8" id="1Y7-oY-Jyh"/>
+                <constraint firstAttribute="trailing" secondItem="UsH-sA-vT6" secondAttribute="trailing" constant="8" id="hyx-0h-MJI"/>
             </constraints>
             <size key="customSize" width="414" height="300"/>
             <connections>
-                <outlet property="backgroundImageView" destination="NdU-pn-nDW" id="ubd-83-VKG"/>
                 <outlet property="titleLabel" destination="UsH-sA-vT6" id="MkN-ft-Ueo"/>
             </connections>
             <point key="canvasLocation" x="507" y="509"/>

@@ -13,9 +13,9 @@ static NSString *const kClientID = @"047a37b1ea82ea1741a385c57973df40bf1044dd7fc
 static NSString *const kClientSecret = @"c5bb0d2f5fe8013ff4cf0e81ec7ffda33914752084a13bde557bb13be990144b";
 static NSString *const kRedirectURI = @"com.example.app.coinbase-oauth://coinbase-oauth";
 
-static NSString *const kCommissionToAddress = @"zizheng.tai@gmail.com";
-static const double kCommissionRate = 0.1;
-static const double kLowestAmount = 0.1;
+static NSString *const kCommissionToAddress = @"liyihe96@gmail.com";
+const double kCommissionRate = 0.1;
+const double kLowestAmount = 0.1;
 
 @interface PaymentManager ()
 
@@ -68,13 +68,17 @@ static const double kLowestAmount = 0.1;
     [self sendMoneyToAddress:self.recipientAddress withAmountInUSD:amount block:block];
 }
 
+
 - (void)sendMoneyToAddress:(NSString *)toAddress withAmountInUSD:(double)amount block:(void (^)(BOOL succeeded))block {
+    
+    NSLog(@"TO address: %@; Amout: %f", toAddress, amount);
     if (amount < kLowestAmount) {
         if (block) {
             block(NO);
         }
         return;
     }
+    
     
     // Send commission
     NSString *amountString = [NSString stringWithFormat:@"%f", kCommissionRate * amount];
@@ -83,6 +87,7 @@ static const double kLowestAmount = 0.1;
                                                  @"amount_currency_iso": @"USD" } };
     [self.client doPost:@"transactions/send_money" parameters:params completion:^(id response, NSError *error) {
         if (error) {
+            NSLog(@"Error To Us message: %@", error.localizedDescription);
             if (block) {
                 block(NO);
             }
@@ -93,6 +98,9 @@ static const double kLowestAmount = 0.1;
                                                          @"amount_string": amountString,
                                                          @"amount_currency_iso": @"USD" } };
             [self.client doPost:@"transactions/send_money" parameters:params completion:^(id response, NSError *error) {
+                if (error) {
+                    NSLog(@"Error To Mentor message: %@", error.localizedDescription);
+                }
                 if (block) {
                     block(error == nil);
                 }

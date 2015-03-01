@@ -9,6 +9,8 @@
 #import "Request.h"
 
 static const double kFarePerHour = 10;
+extern double kCommissionRate;
+extern double kLowestAmount;
 
 @implementation Request
 
@@ -29,7 +31,7 @@ static const double kFarePerHour = 10;
 }
 
 - (double)requestFare {
-    return kFarePerHour * self.durationInHours;
+    return kFarePerHour * self.durationInHours >= kLowestAmount ? kFarePerHour * self.durationInHours :  kLowestAmount;
 }
 
 - (void)setTag:(NSString *)tag {

@@ -240,7 +240,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         cell.image = images[indexPath.item]
         if let array = TrendsManager.sharedManager().popularTags as? [String] {
-            cell.titleLabel.text = array[indexPath.item]
+            cell.titleLabel.text = "#\(array[indexPath.item])"
         }
         let yOffset = ((collectionView.contentOffset.y - cell.frame.origin.y) / ImageHeight) * ImageOffsetSpeed
         cell.imageOffset = CGPointMake(0, yOffset)

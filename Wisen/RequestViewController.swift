@@ -66,6 +66,10 @@ class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearch
     }
     
     @IBAction func requestButtonTouched(sender: UIButton) {
+        if NSString(string: searchBar.text).length == 0 {
+            return
+        }
+        
         let destinationPoint = mapView.toMapPoint(mapView.convertPoint(mapView.center, fromView: mapView.superview))
 
         dismissViewControllerAnimated(true, completion: { ()
