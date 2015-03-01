@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface MessageTableViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
-
+ 
 @property (nonatomic, strong) NSString *recipientUID;
 
 @end

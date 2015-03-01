@@ -25,6 +25,9 @@
         
         _sendRef = [[Firebase alloc] initWithUrl:[NSString stringWithFormat:@"https://wisen.firebaseio.com/messages/%@/%@", _selfUID, _otherUID]];
         _receiveRef = [[Firebase alloc] initWithUrl:[NSString stringWithFormat:@"https://wisen.firebaseio.com/messages/%@/%@", _otherUID, _selfUID]];
+        
+        [_sendRef removeValue];
+        [_receiveRef removeValue];
     }
     return self;
 }

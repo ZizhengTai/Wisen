@@ -21,6 +21,7 @@ NSString const *Cell = @"IncomingMessageCell";
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
 @property (nonatomic, strong) NSString *profileImageURL;
+@property (nonatomic, strong) MessagePipe *pipe;
 
 @end
 
@@ -30,6 +31,15 @@ NSString const *Cell = @"IncomingMessageCell";
 {
     return [MessageManager sharedManager].allMessages[[MessageManager getSinchIDFromUID:self.recipientUID]];
 }
+
+- (MessagePipe *)pipe
+{
+    if (!_pipe) {
+        _pipe = [[MessagePipe alloc] initWithSelfUID:[UserManager sharedManager].user.uid otherUID:self.recipientUID];
+    }
+    return _pipe;
+}
+
 
 - (void)viewDidLoad
 {
@@ -46,7 +56,7 @@ NSString const *Cell = @"IncomingMessageCell";
         [innerSelf scrollToBottom];
     };
     
-    UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(confirmTouched)];
+    UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(confirmTouchedByHand)];
     self.navigationItem.rightBarButtonItem = right;
     
     UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelTouched)];
@@ -66,6 +76,12 @@ NSString const *Cell = @"IncomingMessageCell";
     self.tableView.estimatedRowHeight = 90;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestCanceled:) name:@"kRequestCanceledNotification" object:nil];
+    
+    [self.pipe observeWithBlock:^(NSDictionary *msg) {
+        if ([msg[@"done"] boolValue]) {
+            [self confirmTouched];
+        }
+    }];
 }
 
 - (void)cancelTouched {
@@ -173,8 +189,12 @@ NSString const *Cell = @"IncomingMessageCell";
     self.textField.text = @"";
 }
 
+- (void)confirmTouchedByHand {
+    [self.pipe send:@{@"done": @1}];
+    [self confirmTouched];
+}
+
 - (void)confirmTouched {
-    
     [self.navigationController pushViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"ConfirmationScene"] animated:YES];
 }
 
