@@ -22,12 +22,12 @@
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="bxO-JI-wM9">
                                         <rect key="frame" x="0.0" y="220" width="600" height="256"/>
-                                        <color key="backgroundColor" red="0.037570968150000002" green="0.041530916969999998" blue="0.049511056880000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </tableView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="View Tags" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3DA-IN-Vhi">
                                         <rect key="frame" x="275" y="164" width="49" height="15"/>
                                         <fontDescription key="fontDescription" name="GillSans-Light" family="Gill Sans" pointSize="13"/>
-                                        <color key="textColor" red="0.031372549020000001" green="0.72941176470000002" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UOm-Lu-vAq">
@@ -38,7 +38,7 @@
                                         </constraints>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.11619339313022679" green="0.12711052222066291" blue="0.15577651515151514" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.21350835134965035" green="0.73333333329999995" blue="0.98033570287062921" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="bxO-JI-wM9" firstAttribute="top" secondItem="UOm-Lu-vAq" secondAttribute="bottom" constant="70" id="3fu-Wr-6TL"/>
                                     <constraint firstAttribute="centerX" secondItem="3DA-IN-Vhi" secondAttribute="centerX" id="IJh-GM-Wq9"/>
@@ -80,7 +80,7 @@
                                         <cells/>
                                     </collectionView>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.1161933931" green="0.12711052219999999" blue="0.15577651519999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="1ZC-tB-Twr" firstAttribute="leading" secondItem="H82-Ki-rPF" secondAttribute="leading" id="Cr3-OH-Z0B"/>
                                     <constraint firstAttribute="trailing" secondItem="48K-7q-T9L" secondAttribute="trailing" constant="16" id="GfL-nX-Qwg"/>
@@ -548,6 +548,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="6Z4-WT-CFk">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.037570968150000002" green="0.041530916969999998" blue="0.049511056880000001" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

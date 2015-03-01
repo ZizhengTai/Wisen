@@ -17,6 +17,11 @@ class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearch
         let timer = NSTimer.scheduledTimerWithTimeInterval(1, target:self, selector: "updateLocation", userInfo: nil, repeats: true)
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
+    }
+    
     var searchPlaceholder: String? {
         didSet {
             searchBar?.text = searchPlaceholder
@@ -24,7 +29,7 @@ class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearch
     }
     
     @IBAction func gpsTouched(sender: UIButton) {
-        mapView.zoomToScale(5000, withCenterPoint: mapView.locationDisplay.mapLocation(), animated: true)
+        mapView.zoomToScale(mapView.mapScale, withCenterPoint: mapView.locationDisplay.mapLocation(), animated: true)
     }
     
     @IBOutlet weak var recentSecondButton: UIButton! {
