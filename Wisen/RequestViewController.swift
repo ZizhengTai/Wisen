@@ -69,7 +69,7 @@ class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearch
 //        NSLog("Cur: \(cur) + Dest: \(dest)")
 
         dismissViewControllerAnimated(true, completion: { ()
-            UserManager.sharedManager().user.requestWithTag(self.searchBar.text, location: self.cllocation(destinationPoint), radius: 10, block: { (request: Request?) -> Void in
+            UserManager.sharedManager().user.requestWithTag(self.searchBar.text, location: self.cllocation(destinationPoint), radius: 10, block: { (succeeded: Bool) -> Void in
 //                let request = 
             })
 
