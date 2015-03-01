@@ -15,7 +15,7 @@
     if (self) {
         _requestID = dictionary[@"requestID"];
         _menteeUID = dictionary[@"menteeUID"];
-        _tag = dictionary[@"tag"];
+        _tag = [dictionary[@"tag"] lowercaseString];
         double latitude = [dictionary[@"latitude"] doubleValue];
         double longitude = [dictionary[@"longitude"] doubleValue];
         _location = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
@@ -24,6 +24,10 @@
         _status = [dictionary[@"status"] integerValue];
     }
     return self;
+}
+
+- (void)setTag:(NSString *)tag {
+    _tag = tag.lowercaseString;
 }
 
 - (NSDictionary *)dictionaryRepresentation {
