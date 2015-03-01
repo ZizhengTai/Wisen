@@ -148,7 +148,7 @@
         if (firstEvent) {
             firstEvent = NO;
         } else if (block && snapshot.value != [NSNull null]) {
-            [requestRef removeAuthEventObserverWithHandle:handle];
+            [requestRef removeObserverWithHandle:handle];
             block([[Request alloc] initWithDictionary:snapshot.value]);
         }
     }];
