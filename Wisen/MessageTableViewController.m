@@ -98,6 +98,7 @@ NSString const *Cell = @"IncomingMessageCell";
 }
 
 - (void)requestCanceled:(NSNotification *)note {
+    NSLog(@"Canceled");
     NSString *text = [NSString stringWithFormat:@"It seems %@ has quited the conversation...", ((UILabel *)self.navigationItem.titleView).text];
     AMSmoothAlertView *alert = [[AMSmoothAlertView alloc] initDropAlertWithTitle:@"Alas!" andText:text andCancelButton:NO forAlertType:AlertFailure withCompletionHandler:^(AMSmoothAlertView *alertView, UIButton *button) {
         [self.navigationController popToRootViewControllerAnimated:YES];
@@ -112,6 +113,7 @@ NSString const *Cell = @"IncomingMessageCell";
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [[MessageManager sharedManager] reset];
 }
 
@@ -206,7 +208,16 @@ NSString const *Cell = @"IncomingMessageCell";
 }
 
 - (void)dealloc {
+    NSLog(@"Dealloc called");
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+
+#pragma mark - Scroll View Delegate
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    [self.textField resignFirstResponder];
 }
 
 @end

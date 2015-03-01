@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PaymentViewController: UIViewController {
+class PaymentViewController: UIViewController, UITextFieldDelegate {
     
     lazy var pipe: MessagePipe = {
         var p = MessagePipe(selfUID: UserManager.sharedManager().user.uid, otherUID: self.recipientUID)
@@ -54,7 +54,14 @@ class PaymentViewController: UIViewController {
     }
     @IBOutlet weak var payButton: UIButton!
 
-    @IBOutlet weak var avatarImageView: UIImageView!
+    @IBOutlet weak var avatarImageView: UIImageView! {
+        didSet {
+            avatarImageView.clipsToBounds = true
+            avatarImageView.layer.cornerRadius = CGRectGetWidth(avatarImageView.frame) / 2
+            avatarImageView.layer.borderWidth = 4
+            avatarImageView.layer.borderColor = UIColor.whiteColor().CGColor
+        }
+    }
     @IBOutlet weak var amountLabel: UILabel! {
         didSet {
             amountLabel.text = "Amount:$\(request.requestFare())"
@@ -65,7 +72,11 @@ class PaymentViewController: UIViewController {
             recipientView.hidden = !isRecipient
         }
     }
-    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField! {
+        didSet {
+            emailTextField.delegate = self
+        }
+    }
     @IBAction func emailConfirmed(sender: UIButton) {
         NSLog("Email confirmed")
         pipe.send(["recipientEmail": emailTextField.text])
@@ -128,6 +139,11 @@ class PaymentViewController: UIViewController {
     }
     var recipientUID: String {
         return isRecipient ? request.menteeUID :request.mentorUID
+    }
+    
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        textField.resignFirstResponder()
     }
 }
 

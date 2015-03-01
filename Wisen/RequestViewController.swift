@@ -14,7 +14,7 @@ class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearch
     
     @IBOutlet var recentButtons: [UIButton]! {
         didSet {
-            for button in recentButtons {
+            for button in self.recentButtons {
                 button.clipsToBounds = true
                 button.layer.cornerRadius = 6
                 button.addTarget(self, action: "replaceSearchBar:", forControlEvents: .TouchUpInside)
@@ -79,6 +79,7 @@ class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearch
         let hud = JGProgressHUD(style: JGProgressHUDStyle.Dark)
         hud.textLabel.text = "Searching"
         hud.showInView(self.view)
+        hud.dismissAfterDelay(7)
         UserManager.sharedManager().user.requestWithTag(self.searchBar.text, location: self.cllocation(destinationPoint), radius: 10, block: { (request: Request?) -> Void in
             if let request = request {
                 UserManager.sharedManager().user.currentRequest = request
@@ -91,9 +92,9 @@ class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearch
                                 NSNotificationCenter.defaultCenter().postNotificationName(kRequestConfirmedByMentorNotification, object: nil, userInfo: ["request": request])
                             })
                         case .Canceled:
+                            UserManager.sharedManager().user.removeObserverWithRequestID(request.requestID)
                             hud.dismiss()
                             self.dismissViewControllerAnimated(true, completion: { () -> Void in
-                                UserManager.sharedManager().user.removeObserverWithRequestID(request.requestID)
                                 NSNotificationCenter.defaultCenter().postNotificationName(kRequestCanceledNotification, object: self, userInfo: ["request" : request])
                             })
                         default:
@@ -170,6 +171,19 @@ class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearch
     func updateLocation() {
         if let point = mapView.locationDisplay.mapLocation() {
             UserManager.sharedManager().user.updateLocation(cllocation(point))
+            TrendsManager.sharedManager().getPopularUserTagsAtLocation(cllocation(mapView.locationDisplay.mapLocation()), radius: 200, block: { (raw: [AnyObject]?) -> Void in
+                if let popularTags = raw as? [String] {
+                    var i = 0
+                    for button in self.recentButtons {
+                        if i < popularTags.count {
+                            button.setTitle("#\(popularTags[i])", forState: .Normal)
+                        }
+                        i += 1
+                    }
+                    
+                }
+            })
+
         }
     }
     

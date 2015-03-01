@@ -65,9 +65,6 @@ class ConfirmationViewController: UIViewController, TimerDelegate {
                 pipe.send(dic)
             }
         }
-        
-//         TEST
-//        requestFinished()
     }
     
     func startRemoteTimer(stopTime: NSDate) {
@@ -93,7 +90,6 @@ class ConfirmationViewController: UIViewController, TimerDelegate {
         var remaining = remaining
         if remaining <= 0 {
             remaining = 0
-            requestFinished()
         }
         clockFace?.myTime = Float(remaining / Double(3600))
     }
@@ -142,7 +138,7 @@ class ConfirmationViewController: UIViewController, TimerDelegate {
     }
     
     func requestCanceled(note: NSNotification) {
-        let text = "It seems he has quited the conversation..."
+        let text = "It seems he has quited the session..."
         let alert = AMSmoothAlertView(dropAlertWithTitle: "Alas!", andText: text, andCancelButton: false, forAlertType: AlertType.Failure)
         alert.completionBlock = { (alertObj: AMSmoothAlertView!, button: UIButton!) -> () in
             if button == alert.defaultButton {
@@ -153,6 +149,7 @@ class ConfirmationViewController: UIViewController, TimerDelegate {
     }
     
     deinit {
+        NSLog("Deiniti called")
         timer?.abort()
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
