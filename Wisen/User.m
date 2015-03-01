@@ -171,7 +171,7 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
 }
 
 - (void)updateStatus:(RequestStatus)status forRequestWithID:(NSString *)requestID {
-    Firebase *requestRef = [[Firebase alloc] initWithUrl:[NSString stringWithFormat:@"https://wisen.firebaseio.com/tags/%@/tags", requestID]];
+    Firebase *requestRef = [[Firebase alloc] initWithUrl:[NSString stringWithFormat:@"https://wisen.firebaseio.com/requests/%@", requestID]];
     [requestRef updateChildValues:@{ @"status": @(status) }];
 }
 
