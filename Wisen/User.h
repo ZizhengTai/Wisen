@@ -28,8 +28,11 @@ extern NSString *const kMentorFoundNotification;
 
 - (FirebaseHandle)requestWithTag:(NSString *)tag location:(CLLocation *)location radius:(double)radius;
 - (void)cancelRequest:(FirebaseHandle)handle;
+
+- (void)observeAllSentRequestsWithBlock:(void (^)(NSArray *requests))block;
 - (void)observeAllReceivedRequestsWithBlock:(void (^)(NSArray *requests))block;
-- (void)stopObservingAllReceivedRequests;
+- (void)removeAllObserverForAllRequests;
+
 - (void)updateStatus:(RequestStatus)status forRequestWithID:(NSString *)requestID;
 
 - (void)updateLocation:(CLLocation *)location;

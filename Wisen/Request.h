@@ -10,8 +10,10 @@
 
 typedef NS_ENUM(NSInteger, RequestStatus) {
     RequestStatusPending = 0,
-    RequestStatusOngoing = 1,
-    RequestStatusComplete = 2
+    RequestStatusMentorConfirmed = 1,
+    RequestStatusOngoing = 2,
+    RequestStatusCanceled = 3,
+    RequestStatusComplete = 4
 };
 
 @interface Request : NSObject

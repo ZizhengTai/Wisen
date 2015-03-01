@@ -165,7 +165,24 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
     }];
 }
 
-- (void)stopObservingAllReceivedRequests {
+- (void)observeAllSentRequestsWithBlock:(void (^)(NSArray *))block {
+    Firebase *requestsRef = [[Firebase alloc] initWithUrl:@"https://wisen.firebaseio.com/requests"];
+    [[[[requestsRef queryOrderedByChild:@"menteeUID"] queryStartingAtValue:self.uid] queryEndingAtValue:self.uid]observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        if (block) {
+            NSMutableArray *requests = [NSMutableArray array];
+            if (snapshot.value != [NSNull null]) {
+                for (NSString *requestID in snapshot.value) {
+                    NSMutableDictionary *dictionary = snapshot.value[requestID];
+                    dictionary[@"requestID"] = requestID;
+                    [requests addObject:[[Request alloc] initWithDictionary:dictionary]];
+                }
+            }
+            block(requests);
+        }
+    }];
+}
+
+- (void)removeAllObserverForAllRequests {
     Firebase *requestsRef = [[Firebase alloc] initWithUrl:@"https://wisen.firebaseio.com/requests"];
     [requestsRef removeAllObservers];
 }
@@ -184,7 +201,7 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
 }
 
 - (void)dealloc {
-    [self stopObservingAllReceivedRequests];
+    [self removeAllObserverForAllRequests];
 }
 
 @end
