@@ -66,10 +66,17 @@ class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearch
         dismissViewControllerAnimated(true, completion: { ()
             UserManager.sharedManager().user.requestWithTag(self.searchBar.text, location: self.cllocation(destinationPoint), radius: 10, block: { (request: Request?) -> Void in
                 if let request = request {
-                    UserManager.sharedManager().user.observeRequest(request, withBlock: { (request: Request?) -> Void in
+                    UserManager.sharedManager().user.currentRequest = request
+                    UserManager.sharedManager().user.observeRequestWithID(request.requestID, block: { (request: Request?) -> Void in
                         if let request = request {
-                            if request.status == .MentorConfirmed {
+                            switch request.status {
+                            case .MentorConfirmed:
                                NSNotificationCenter.defaultCenter().postNotificationName(kRequestConfirmedByMentorNotification, object: nil, userInfo: ["request": request])
+                            case .Canceled:
+                                UserManager.sharedManager().user.removeObserverWithRequestID(request.requestID)
+                                NSNotificationCenter.defaultCenter().postNotificationName(kRequestCanceledNotification, object: self, userInfo: ["request" : request])
+                            default:
+                                break;
                             }
                         }}
                     )
@@ -77,8 +84,6 @@ class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearch
             }
         )})
     }
-    
-        
     
     @IBOutlet weak var searchBar: UISearchBar! {
         didSet {

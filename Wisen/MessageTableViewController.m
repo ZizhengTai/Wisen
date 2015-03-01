@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 self. All rights reserved.
 //
 
-#import "MessageTableViewController.h"
 #import <Sinch/Sinch.h>
+#import "MessageTableViewController.h"
 #import "MessageTableViewCell.h"
 
 NSString const *Cell = @"IncomingMessageCell";
@@ -45,11 +45,14 @@ NSString const *Cell = @"IncomingMessageCell";
         [innerSelf.tableView reloadData];
         [innerSelf scrollToBottom];
     };
-    UIBarButtonItem *right = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(confirmTouched)];
+    
+    UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(confirmTouched)];
     self.navigationItem.rightBarButtonItem = right;
     
+    UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelTouched)];
+    self.navigationItem.leftBarButtonItem = left;
+    
     [[UserManager sharedManager] getBasicInfoForUserWithUID: self.recipientUID  block:^(NSDictionary *userInfo) {
-        NSLog(@"User info: %@", userInfo);
         NSString *displayName = userInfo[@"displayName"];
         self.profileImageURL = userInfo[@"profileImageURL"];
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 80, 40)];
@@ -61,12 +64,38 @@ NSString const *Cell = @"IncomingMessageCell";
         [self.view setNeedsDisplay];
     }];
     self.tableView.estimatedRowHeight = 90;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestCanceled:) name:@"kRequestCanceledNotification" object:nil];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)cancelTouched {
+    NSString *text = [NSString stringWithFormat:@"You will probably never meet %@ again...", ((UILabel *)self.navigationItem.titleView).text];
+    AMSmoothAlertView *alert = [[AMSmoothAlertView alloc] initDropAlertWithTitle:@"Alas!" andText:text andCancelButton:YES forAlertType:AlertInfo withCompletionHandler:^(AMSmoothAlertView *alertView, UIButton *button) {
+        if (button == alertView.defaultButton) {
+            User *user = [UserManager sharedManager].user;
+            [user removeObserverWithRequestID:user.currentRequest.requestID];
+            [user updateStatus:RequestStatusCanceled forRequestWithID:user.currentRequest.requestID];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }];
+    [alert show];
+}
+
+- (void)requestCanceled:(NSNotification *)note {
+    NSString *text = [NSString stringWithFormat:@"It seems %@ has quited the conversation...", ((UILabel *)self.navigationItem.titleView).text];
+    AMSmoothAlertView *alert = [[AMSmoothAlertView alloc] initDropAlertWithTitle:@"Alas!" andText:text andCancelButton:NO forAlertType:AlertFailure withCompletionHandler:^(AMSmoothAlertView *alertView, UIButton *button) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }];
+    [alert show];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
 }
 
 - (void)registerForKeyboardNotifications {
@@ -87,9 +116,9 @@ NSString const *Cell = @"IncomingMessageCell";
     CGRect frame = [[note.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
     UIViewAnimationOptions options = curve << 16;
     if ([note.name isEqualToString:UIKeyboardWillShowNotification]) {
-        self.bottomConstraint.constant  =  CGRectGetHeight(frame);
+        self.bottomConstraint.constant = CGRectGetHeight(frame);
     } else {
-        self.bottomConstraint.constant =  0 ;
+        self.bottomConstraint.constant = 0 ;
     }
     [UIView animateWithDuration:duration delay:0 options:options animations:^{
         [self.view layoutIfNeeded];
@@ -115,8 +144,7 @@ NSString const *Cell = @"IncomingMessageCell";
 
 - (MessageTableViewCell *)dequeOrLoadMessageTableViewCell:(MessageDirection)direction {
     
-    NSString *identifier =
-    [NSString stringWithFormat:@"%@MessageCell", (Incoming == direction) ? @"Incoming" : @"Outgoing"];
+    NSString *identifier = [NSString stringWithFormat:@"%@MessageCell", Incoming == direction ? @"Incoming" : @"Outgoing"];
     
     
     MessageTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:identifier];
@@ -125,7 +153,7 @@ NSString const *Cell = @"IncomingMessageCell";
         cell = [[[NSBundle mainBundle] loadNibNamed:identifier owner:self options:nil] firstObject];
         cell.backgroundColor = [UIColor clearColor];
         cell.contentView.backgroundColor = [UIColor clearColor];
-        [cell.avatarImageView fetchImage:(Outgoing == direction) ? [UserManager sharedManager].user.profileImageURL : self.profileImageURL];
+        [cell.avatarImageView fetchImage:Outgoing == direction ? [UserManager sharedManager].user.profileImageURL : self.profileImageURL];
     }
     return cell;
 }
@@ -172,5 +200,9 @@ NSString const *Cell = @"IncomingMessageCell";
 //    CGSize size = [sizingCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
 //    return size.height + 1.0f; // Add 1.0f for the cell separator height
 //}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 @end

@@ -157,14 +157,16 @@
     [self.handleQueryPairs removeObjectForKey:@(handle)];
 }
 
-- (void)observeRequest:(Request *)request withBlock:(void (^)(Request *request))block {
-    Firebase *requestRef = [[Firebase alloc] initWithUrl:[NSString stringWithFormat:@"https://wisen.firebaseio.com/requests/%@", request.requestID]];
+- (void)observeRequestWithID:(NSString *)requestID block:(void (^)(Request *request))block {
+    Firebase *requestRef = [[Firebase alloc] initWithUrl:[NSString stringWithFormat:@"https://wisen.firebaseio.com/requests/%@", requestID]];
     __block BOOL firstEvent = YES;
     [requestRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         if (firstEvent) {
             firstEvent = NO;
         } else if (block && snapshot.value != [NSNull null]) {
-            block([[Request alloc] initWithDictionary:snapshot.value]);
+            NSMutableDictionary *dict = [snapshot.value mutableCopy];
+            dict[@"requestID"] = requestID;
+            block([[Request alloc] initWithDictionary:dict]);
         }
     }];
 }

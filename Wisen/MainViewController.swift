@@ -16,7 +16,8 @@ private let MainCell = "MainCell"
 private let ImageHeight: CGFloat = 200
 private let ImageOffsetSpeed: CGFloat = 25
 
-let kRequestConfirmedByMentorNotification = "RequestConfirmedByMentorNotification"
+let kRequestConfirmedByMentorNotification = "kRequestConfirmedByMentorNotification"
+let kRequestCanceledNotification = "kRequestCanceledNotification"
 
 class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
@@ -104,11 +105,22 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
 //        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "segueToConfirmation");
         
         UserManager.sharedManager().user.observeAllReceivedRequestsWithBlock { (requests: [AnyObject]?) -> Void in
-            NSLog("All : %@", requests!)
             if let req = requests as? [Request] {
                 for r in req {
-                    if r.status == .Pending {Double(3600)
-                        self.showAlert(r, text: "You just got a new request on \(r.tag)", { self.pushToMessage(r, UID: r.menteeUID, status: .MentorConfirmed)})
+                    if r.status == .Pending {
+                        self.showAlert(r, text: "You just got a new request on \(r.tag)", { accepted in
+                            if accepted {
+                                self.pushToMessage(r, UID: r.menteeUID, status: .MentorConfirmed)
+                                UserManager.sharedManager().user.observeRequestWithID(r.requestID, block: { (request: Request!) -> Void in
+                                    if request.status == .Canceled {
+                                        UserManager.sharedManager().user.removeObserverWithRequestID(request.requestID)
+                                        NSNotificationCenter.defaultCenter().postNotificationName(kRequestCanceledNotification, object: self, userInfo: ["request" : request])
+                                    }
+                                })
+                            } else {
+                                UserManager.sharedManager().user.updateStatus(.Canceled, forRequestWithID: r.requestID)
+                            }
+                        })
                         break
                     }
                 }
@@ -116,7 +128,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleRequestCompletionNote:", name: kRequestConfirmedByMentorNotification, object: nil)
-        
     }
     
     func segueToConfirmation() {
@@ -272,35 +283,25 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func handleRequestCompletionNote(note: NSNotification) {
-//        NSLog("Note: %@", note.userInfo!)
         let req: AnyObject?  = note.userInfo!["request"]
         if let request = req as? Request {
-            showAlert(request, text: "We just found a match for you on \(request.tag), go ahead an say hight", completion: {
-                self.pushToMessage(request, UID: request.mentorUID, status: .Ongoing)
+            showAlert(request, text: "We just found a match for you on \(request.tag), go ahead an say hi", completion: { accepted in
+                if accepted {
+                    self.pushToMessage(request, UID: request.mentorUID, status: .Ongoing)
+                } else {
+                    UserManager.sharedManager().user.updateStatus(.Canceled, forRequestWithID: request.requestID)
+                }
             })
         }
     }
 
-    func showAlert(request: Request, text: String, completion: ()->()) {
+    func showAlert(request: Request, text: String, completion: (accepted: Bool)->()) {
         let alert = AMSmoothAlertView(dropAlertWithTitle: "Hey!", andText:text, andCancelButton: true, forAlertType: .Info)
         alert.completionBlock = {(alertObj: AMSmoothAlertView!, button: UIButton!) -> () in
-            if button == alertObj.defaultButton {
-                completion()
-            }
+            completion(accepted: button == alertObj.defaultButton)
         }
         alert.show()
     }
-    
-    // MARK: Note handler
-//    func handleNote(note: NSNotification) {
-//        NSLog("Note: %@", note.userInfo!)
-//        let req: AnyObject? = note.userInfo!["request"]
-//        if let dic = req as? Request {
-//            showAlert(dic, text: "We just found a match for you on \(dic.tag), go ahead an say hight",  {
-//                self.pushToMessage(dic, UID: dic.mentorUID)
-//            })
-//        }
-//    }
     
     func pushToMessage(req: Request, UID: NSString, status: RequestStatus) {
         UserManager.sharedManager().user.updateStatus(status, forRequestWithID: req.requestID)
