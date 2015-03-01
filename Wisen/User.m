@@ -100,10 +100,14 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
     }];
 }
 
-- (void)notifyMentorWithRequestByAutoID:(Request *)request {
+- (void)addRequest:(Request *)request {
     Firebase *requestRef = [[[Firebase alloc] initWithUrl:@"https://wisen.firebaseio.com/requests"] childByAutoId];
     request.requestID = requestRef.key;
     [requestRef setValue:request.dictionaryRepresentationWithoutRequestID];
+    
+    Firebase *requestLocationsRef = [[Firebase alloc] initWithUrl:@"https://wisen.firebaseio.com/requestLocations"];
+    GeoFire *geoFire = [[GeoFire alloc] initWithFirebaseRef:requestLocationsRef];
+    [geoFire setLocation:request.location forKey:request.requestID];
 }
 
 - (FirebaseHandle)requestWithTag:(NSString *)tag location:(CLLocation *)location radius:(double)radius {
@@ -126,7 +130,7 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
                     request.mentorUID = key;
                     request.status = RequestStatusPending;
                     
-                    [self notifyMentorWithRequestByAutoID:request];
+                    [self addRequest:request];
                     
                     [[NSNotificationCenter defaultCenter] postNotificationName:kMentorFoundNotification object:self userInfo:@{ @"request": request }];
                 }
@@ -172,7 +176,7 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
 }
 
 - (void)updateLocation:(CLLocation *)location {
-    [self.geoFire setLocation:location forKey:self.authData.uid];
+    [self.geoFire setLocation:location forKey:self.uid];
 }
 
 - (NSString *)description {

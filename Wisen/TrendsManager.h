@@ -10,4 +10,9 @@
 
 @interface TrendsManager : NSObject
 
++ (instancetype)sharedManager;
+
+- (void)getPopularRequestTagsAtLocation:(CLLocation *)location radius:(double)radius block:(void (^)(NSArray *tags))block;
+- (void)getPopularUserTagsAtLocation:(CLLocation *)location radius:(double)radius block:(void (^)(NSArray *tags))block;
+
 @end
