@@ -10,10 +10,8 @@ import UIKit
 
 class PaymentViewController: UIViewController {
     
-    var request: Request? {
-        didSet {
-            amountLabel?.text = "Amount:$\(request?.requestFare)"
-        }
+    var request: Request {
+        return UserManager.sharedManager().user.currentRequest
     }
 
     override func viewDidLoad() {
@@ -28,7 +26,7 @@ class PaymentViewController: UIViewController {
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var amountLabel: UILabel! {
         didSet {
-            amountLabel?.text = "Amount:$\(request?.requestFare)"
+            amountLabel?.text = "Amount:$\(request.requestFare())"
         }
     }
     @IBOutlet weak var recipientName: UILabel!
@@ -46,7 +44,7 @@ class PaymentViewController: UIViewController {
     }
         
     func loadMentorInformation() {
-        UserManager.sharedManager().getBasicInfoForUserWithUID(request?.mentorUID, block: { (userInfo: [NSObject : AnyObject]?) -> Void in
+        UserManager.sharedManager().getBasicInfoForUserWithUID(request.mentorUID, block: { (userInfo: [NSObject : AnyObject]?) -> Void in
             if let name: AnyObject? = userInfo?["displayName"] {
                 if let displayName = name as? String {
                     self.recipientName.text = displayName

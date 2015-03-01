@@ -19,6 +19,7 @@ typedef FirebaseHandle RequestHandle;
 @property (readonly, strong, nonatomic) NSString *username;
 @property (readonly, strong, nonatomic) NSString *displayName;
 @property (readonly, strong, nonatomic) NSString *profileImageURL;
+@property (strong, nonatomic) Request *currentRequest;
 
 - (instancetype)initWithAuthData:(FAuthData *)authData;
 

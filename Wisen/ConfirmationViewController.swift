@@ -10,7 +10,9 @@ import UIKit
 
 class ConfirmationViewController: UIViewController, UITextFieldDelegate, TimerDelegate {
 
-    var request: Request?
+    var request: Request {
+        return UserManager.sharedManager().user.currentRequest
+    }
     
     @IBOutlet weak var textField: UITextField! {
         didSet {
@@ -39,7 +41,7 @@ class ConfirmationViewController: UIViewController, UITextFieldDelegate, TimerDe
     func textFieldDidEndEditing(textField: UITextField) {
         let duration = NSString(string:textField.text).floatValue;
         clockFace?.myTime = duration;
-        request?.durationInHour = NSTimeInterval(duration)
+        request.durationInHour = NSTimeInterval(duration)
         minutesLeft = floor(Double(clockFace!.myTime * 60))
         timer = Timer(duration: NSTimeInterval(duration * 60.0), timeInterval: 1, completionNotification: nil, delegate: self)
         
