@@ -34,6 +34,7 @@ class ConfirmationViewController: UIViewController, UITextFieldDelegate {
         clockFace?.myTime = NSString(string:textField.text).floatValue;
         minutesLeft = floor(Double(clockFace!.myTime * 60))
         timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: "updateClockFace", userInfo: nil, repeats: true)
+        timer?.fire()
     }
     
     func updateClockFace() {

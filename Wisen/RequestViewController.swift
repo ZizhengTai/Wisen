@@ -12,9 +12,13 @@ import ArcGIS
 class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearchBarDelegate, CLLocationManagerDelegate {
     
     
+    let halo = PulsingHaloLayer()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         let timer = NSTimer.scheduledTimerWithTimeInterval(1, target:self, selector: "updateLocation", userInfo: nil, repeats: true)
+        halo.position = self.view.center
+        self.view.layer.addSublayer(halo)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -65,7 +69,9 @@ class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearch
 //        NSLog("Cur: \(cur) + Dest: \(dest)")
 
         dismissViewControllerAnimated(true, completion: { ()
-            UserManager.sharedManager().user.requestWithTag(self.searchBar.text, location: self.cllocation(destinationPoint), radius: 10)
+            UserManager.sharedManager().user.requestWithTag(self.searchBar.text, location: self.cllocation(destinationPoint), radius: 10, block: { (request: Request?) -> Void in
+//                let request = 
+            })
 
         })
     }
