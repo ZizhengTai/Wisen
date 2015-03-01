@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 self. All rights reserved.
 //
 
+#import <GeoFire/GeoFire.h>
 #import "TrendsManager.h"
 
 @implementation TrendsManager
@@ -20,6 +21,10 @@
 }
 
 - (void)getPopularRequestTagsAtLocation:(CLLocation *)location radius:(double)radius block:(void (^)(NSArray *))block {
+    Firebase *requestsRef = [[Firebase alloc] initWithUrl:@"https://wisen.firebaseio.com/requests"];
+    GeoFire *geoFire = [[GeoFire alloc] initWithFirebaseRef:requestsRef];
+    
+    GFCircleQuery *query = [geoFire queryAtLocation:location withRadius:radius];
 }
 
 - (void)getPopularUserTagsAtLocation:(CLLocation *)location radius:(double)radius block:(void (^)(NSArray *))block {

@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 self. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
 
 @interface TrendsManager : NSObject
 
