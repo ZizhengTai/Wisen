@@ -113,7 +113,7 @@
     }];
 }
 
-- (RequestHandle)requestWithTag:(NSString *)tag location:(CLLocation *)location radius:(double)radius block:(void (^)(Request *))block {
+- (RequestHandle)requestWithTag:(NSString *)tag location:(CLLocation *)location radius:(double)radius block:(void (^)(BOOL succeeded))block {
     GFCircleQuery *query = [self.geoFire queryAtLocation:location withRadius:radius];
     
     FirebaseHandle handle = [query observeEventType:GFEventTypeKeyEntered withBlock:^(NSString *key, CLLocation *location) {
@@ -135,7 +135,7 @@
                     
                     [self addRequest:request withBlock:^(BOOL succeeded) {
                         if (block) {
-                            block(succeeded ? request : nil);
+                            block(succeeded);
                         }
                     }];
                 }
