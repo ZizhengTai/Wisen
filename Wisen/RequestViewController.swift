@@ -67,7 +67,7 @@ class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearch
             UserManager.sharedManager().user.requestWithTag(self.searchBar.text, location: self.cllocation(destinationPoint), radius: 10, block: { (request: Request?) -> Void in
                 if let request = request {
 
-                    UserManager.sharedManager().user.observeSingleRequest(request, withBlock: { (request: Request?) -> Void in
+                    UserManager.sharedManager().user.observeRequest(request, withBlock: { (request: Request?) -> Void in
                         if let request = request {
                             if request.status == .MentorConfirmed {
                                 if let mainVC = self.presentingViewController as? MainViewController {

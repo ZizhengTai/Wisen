@@ -151,17 +151,21 @@
     [self.handleQueryPairs removeObjectForKey:@(handle)];
 }
 
-- (void)observeSingleRequest:(Request *)request withBlock:(void (^)(Request *request))block {
+- (void)observeRequest:(Request *)request withBlock:(void (^)(Request *request))block {
     Firebase *requestRef = [[Firebase alloc] initWithUrl:[NSString stringWithFormat:@"https://wisen.firebaseio.com/requests/%@", request.requestID]];
     __block BOOL firstEvent = YES;
-    FirebaseHandle handle = [requestRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+    [requestRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         if (firstEvent) {
             firstEvent = NO;
         } else if (block && snapshot.value != [NSNull null]) {
-            [requestRef removeObserverWithHandle:handle];
             block([[Request alloc] initWithDictionary:snapshot.value]);
         }
     }];
+}
+
+- (void)removeObserverWithRequestID:(NSString *)requestID {
+    Firebase *requestRef = [[Firebase alloc] initWithUrl:[NSString stringWithFormat:@"https://wisen.firebaseio.com/requests/%@", requestID]];
+    [requestRef removeAllObservers];
 }
 
 - (void)observeAllReceivedRequestsWithBlock:(void (^)(NSArray *requests))block {

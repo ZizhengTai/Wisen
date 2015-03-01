@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 self. All rights reserved.
 //
 
+#import <libkern/OSAtomic.h>
 #import <GeoFire/GeoFire.h>
 #import "TrendsManager.h"
 
@@ -25,22 +26,35 @@
     GeoFire *geoFire = [[GeoFire alloc] initWithFirebaseRef:requestLocationsRef];
     GFCircleQuery *query = [geoFire queryAtLocation:location withRadius:radius];
     
-    NSMutableSet *tags = [NSMutableSet set];
+    NSMutableArray *requestIDs = [NSMutableArray array];
     
     FirebaseHandle enteredHandle = [query observeEventType:GFEventTypeKeyEntered withBlock:^(NSString *key, CLLocation *location) {
-        Firebase *requestRef = [[Firebase alloc] initWithUrl:[NSString stringWithFormat:@"https://wisen.firebaseio.com/requests/%@", key]];
-        [requestRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-            if (snapshot.value != [NSNull null]) {
-                [tags addObject:snapshot.value[@"tag"]];
-            }
-        }];
+        [requestIDs addObject:key];
     }];
     
     FirebaseHandle readyHandle = [query observeReadyWithBlock:^{
         [query removeObserverWithFirebaseHandle:enteredHandle];
         [query removeObserverWithFirebaseHandle:readyHandle];
-        if (block) {
-            block(tags.allObjects);
+        
+        if (requestIDs.count == 0) {
+            if (block) {
+                block(@[]);
+            }
+        } else {
+            NSMutableSet *tags = [NSMutableSet set];
+            __block int32_t count = (int32_t)requestIDs.count;
+            
+            for (NSString *requestID in requestIDs) {
+                Firebase *tagRef = [[Firebase alloc] initWithUrl:[NSString stringWithFormat:@"https://wisen.firebaseio.com/request/%@/tag", requestID]];
+                [tagRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+                    if (snapshot.value != [NSNull null]) {
+                        [tags addObject:snapshot.value];
+                    }
+                    if (OSAtomicDecrement32(&count) == 0 && block) {
+                        block(tags.allObjects);
+                    }
+                }];
+            }
         }
     }];
 }
@@ -60,18 +74,25 @@
         [query removeObserverWithFirebaseHandle:enteredHandle];
         [query removeObserverWithFirebaseHandle:readyHandle];
         
-        NSMutableSet *tags = [NSMutableSet set];
-        
-        for (NSString *uid in uids) {
-            Firebase *tagsRef = [[Firebase alloc] initWithUrl:[NSString stringWithFormat:@"https://wisen.firebaseio.com/users/%@/tags", uid]];
-            [tagsRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-                if (snapshot.value != [NSNull null]) {
-                    [tags addObjectsFromArray:[snapshot.value allKeys]];
-                }
-                if (tags.count == uids.count && block) {
-                    block(tags.allObjects);
-                }
-            }];
+        if (uids.count == 0) {
+            if (block) {
+                block(@[]);
+            }
+        } else {
+            NSMutableSet *tags = [NSMutableSet set];
+            __block int32_t count = (int32_t)uids.count;
+            
+            for (NSString *uid in uids) {
+                Firebase *tagsRef = [[Firebase alloc] initWithUrl:[NSString stringWithFormat:@"https://wisen.firebaseio.com/users/%@/tags", uid]];
+                [tagsRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+                    if (snapshot.value != [NSNull null]) {
+                        [tags addObjectsFromArray:[snapshot.value allKeys]];
+                    }
+                    if (OSAtomicDecrement32(&count) == 0 && block) {
+                        block(tags.allObjects);
+                    }
+                }];
+            }
         }
     }];
 }
