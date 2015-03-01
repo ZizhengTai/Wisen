@@ -69,7 +69,7 @@ class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearch
                         if request.status == .MentorConfirmed {
                             if let mainVC = self.presentingViewController as? MainViewController {
                                 mainVC.showAlert(request, text: "We just found a match for you on \(request.tag), go ahead an say hight", completion: {
-                                    mainVC.pushToMessage(request, UID: request.mentorUID)
+                                    mainVC.pushToMessage(request, UID: request.mentorUID, status: .Ongoing)
                                 })
                             }
                     }

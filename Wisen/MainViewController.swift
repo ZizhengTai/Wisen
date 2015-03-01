@@ -104,7 +104,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             if let req = requests as? [Request] {
                 for r in req {
                     if r.status == .Pending {
-                        self.showAlert(r, text: "You just got a new request on \(r.tag)", { self.pushToMessage(r, UID: r.menteeUID)})
+                        self.showAlert(r, text: "You just got a new request on \(r.tag)", { self.pushToMessage(r, UID: r.menteeUID, status: .MentorConfirmed)})
                         break
                     }
                 }
@@ -281,8 +281,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
 //        }
 //    }
     
-    func pushToMessage(req: Request, UID: NSString) {
-        UserManager.sharedManager().user.updateStatus(.Ongoing, forRequestWithID: req.requestID)
+    func pushToMessage(req: Request, UID: NSString, status: RequestStatus) {
+        UserManager.sharedManager().user.updateStatus(status, forRequestWithID: req.requestID)
         let vc = storyboard?.instantiateViewControllerWithIdentifier("MessageScene") as MessageTableViewController
         vc.recipientUID = UID
         navigationController?.pushViewController(vc, animated: true)
