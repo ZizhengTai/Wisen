@@ -23,6 +23,10 @@ class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearch
         }
     }
     
+    @IBAction func gpsTouched(sender: UIButton) {
+        mapView.zoomToScale(5000, withCenterPoint: mapView.locationDisplay.mapLocation(), animated: true)
+    }
+    g
     @IBOutlet weak var recentSecondButton: UIButton! {
         didSet {
             recentSecondButton.clipsToBounds = true

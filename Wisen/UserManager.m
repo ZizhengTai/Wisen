@@ -91,7 +91,7 @@
 
 - (NSArray *)popularRequest
 {
-    return @[@"Skateboard", @"Piano", @"Soccer", @"Guitar", @"Cooking", @"Wokout", @"LOL"];
+    return @[@"Skateboard", @"Piano", @"Soccer", @"Guitar", @"Cooking", @"Workout", @"Origami"];
 }
 
 @end

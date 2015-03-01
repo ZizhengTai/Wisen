@@ -29,6 +29,7 @@
 		07D7EC4F1AA1EE5C00606D43 /* OutgoingMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07D7EC4D1AA1EE5C00606D43 /* OutgoingMessageCell.xib */; };
 		07D7EC521AA1EFA100606D43 /* MessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07D7EC511AA1EFA100606D43 /* MessageTableViewCell.m */; };
 		22D1942B5A9A218BE013B411 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FC19ABE1547EBEB50EAE97E7 /* libPods.a */; };
+		33186FEF1AA297E000844436 /* MJCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33186FEE1AA297E000844436 /* MJCollectionViewCell.m */; };
 		335186681AA1668600636D86 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 335186671AA1668600636D86 /* User.m */; };
 		3351866B1AA16E7900636D86 /* UserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3351866A1AA16E7900636D86 /* UserManager.m */; };
 		33720F531AA1B6F40040895D /* Request.m in Sources */ = {isa = PBXBuildFile; fileRef = 33720F521AA1B6F40040895D /* Request.m */; };
@@ -83,6 +84,8 @@
 		07D7EC501AA1EFA100606D43 /* MessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageTableViewCell.h; sourceTree = "<group>"; };
 		07D7EC511AA1EFA100606D43 /* MessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTableViewCell.m; sourceTree = "<group>"; };
 		182AD98120EF69D918B1C6E1 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		33186FED1AA297E000844436 /* MJCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJCollectionViewCell.h; sourceTree = "<group>"; };
+		33186FEE1AA297E000844436 /* MJCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJCollectionViewCell.m; sourceTree = "<group>"; };
 		335186661AA1668600636D86 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		335186671AA1668600636D86 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		335186691AA16E7900636D86 /* UserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserManager.h; sourceTree = "<group>"; };
@@ -232,6 +235,8 @@
 				33BC3E4D1AA1417400B4B620 /* Images.xcassets */,
 				07D7EC2F1AA1A32800606D43 /* UIImageView+Fetch.h */,
 				07D7EC301AA1A32800606D43 /* UIImageView+Fetch.m */,
+				33186FED1AA297E000844436 /* MJCollectionViewCell.h */,
+				33186FEE1AA297E000844436 /* MJCollectionViewCell.m */,
 				33BC3E411AA1417400B4B620 /* Info.plist */,
 				07D7EC281AA183D300606D43 /* PrefixHeader.pch */,
 				07D7EC291AA1853800606D43 /* Wisen-Bridging-Header.h */,
@@ -452,6 +457,7 @@
 				33BC3E431AA1417400B4B620 /* main.m in Sources */,
 				3351866B1AA16E7900636D86 /* UserManager.m in Sources */,
 				074870BC1AA214BF00F5D227 /* PaymentManager.m in Sources */,
+				33186FEF1AA297E000844436 /* MJCollectionViewCell.m in Sources */,
 				33D3E3251AA157A900F98C56 /* TwitterAuthHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

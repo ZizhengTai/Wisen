@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainCollectionViewCell: UICollectionViewCell {
+class MainCollectionViewCell: MJCollectionViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var backgroundImageView: UIImageView!

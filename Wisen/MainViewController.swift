@@ -13,6 +13,8 @@ private let DefaultDuration: NSTimeInterval = 0.3
 private let SmallAvatarWidth: CGFloat = 30
 private let CellHeight: CGFloat = 60
 private let MainCell = "MainCell"
+private let ImageHeight: CGFloat = 200
+private let ImageOffsetSpeed: CGFloat = 25
 
 class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
@@ -22,22 +24,24 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
+    var images = UserManager.sharedManager().popularRequest().map( { UIImage(named: "\($0)")} )
+    
     private struct CellText {
         static let FirstCell = "FIND YOUR MENTOR"
         static let SecondCell = "PAYMENT"
         static let ThirdCell = "PROMOTIONS"
         static let ForthCell = "FREE MENTOR"
         static let FifthCell = "SUPPORT"
-        static let SixCell = "ABOUT"
+        static let SixthCell = "ABOUT"
     }
     
     private struct CellPhoto {
-        static let FirstCell = "FIND YOUR MENTOR"
-        static let SecondCell = "PAYMENT"
-        static let ThirdCell = "PROMOTIONS"
-        static let ForthCell = "FREE MENTOR"
-        static let FifthCell = "SUPPORT"
-        static let SixCell = "ABOUT"
+        static let FirstCell = "Guru"
+        static let SecondCell = "Payment"
+        static let ThirdCell = "Promote"
+        static let ForthCell = "Share"
+        static let FifthCell = "Support"
+        static let SixthCell = "Info"
     }
     
     let user = UserManager.sharedManager().user
@@ -168,25 +172,26 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         switch indexPath.row {
         case 0:
             cell.titleLabel.text = CellText.FirstCell
-            cell.avtarImageView.fetchImage(CellPhoto.FirstCell)
+            cell.avtarImageView.image = UIImage(named:CellPhoto.FirstCell)
         case 1:
             cell.titleLabel.text = CellText.SecondCell
-            cell.avtarImageView.fetchImage(CellPhoto.SecondCell)
+            cell.avtarImageView.image = UIImage(named:CellPhoto.SecondCell)
         case 2:
             cell.titleLabel.text = CellText.ThirdCell
-            cell.avtarImageView.fetchImage(CellPhoto.ThirdCell)
+            cell.avtarImageView.image = UIImage(named:CellPhoto.ThirdCell)
         case 3:
             cell.titleLabel.text = CellText.ForthCell
-            cell.avtarImageView.fetchImage(CellPhoto.ForthCell)
+            cell.avtarImageView.image = UIImage(named:CellPhoto.ForthCell)
         case 4:
             cell.titleLabel.text = CellText.FifthCell
-            cell.avtarImageView.fetchImage(CellPhoto.FifthCell)
+            cell.avtarImageView.image = UIImage(named:CellPhoto.FifthCell)
         case 5:
-            cell.titleLabel.text = CellText.SixCell
-            cell.avtarImageView.fetchImage(CellPhoto.SixCell)
+            cell.titleLabel.text = CellText.SixthCell
+            cell.avtarImageView.image = UIImage(named:CellPhoto.SixthCell)
         default:
             break
         }
+        let image = cell.avtarImageView.image!
         return cell
     }
     
@@ -217,7 +222,11 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     // MARK: Collection View Method
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(MainCell, forIndexPath: indexPath) as MainCollectionViewCell
+        
+        cell.image = images[indexPath.item]
         cell.titleLabel.text = UserManager.sharedManager().popularRequest()[indexPath.row] as? String
+        let yOffset = ((collectionView.contentOffset.y - cell.frame.origin.y) / ImageHeight) * ImageOffsetSpeed
+        cell.imageOffset = CGPointMake(0, yOffset)
         return cell
     }
     
@@ -226,7 +235,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSize(width: 0.9 * CGRectGetWidth(view.frame), height: 300)
+        return CGSize(width: CGRectGetWidth(view.frame), height: 160)
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
@@ -234,7 +243,14 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 20, left: 20, bottom: 10, right: 20)
+        return UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        for view in mainCollectionView.visibleCells() as [MainCollectionViewCell] {
+            let yOffset = ((mainCollectionView.contentOffset.y - view.frame.origin.y) / ImageHeight) * ImageOffsetSpeed
+            view.imageOffset = CGPointMake(0, yOffset)
+        }
     }
     
     // MARK: Segue

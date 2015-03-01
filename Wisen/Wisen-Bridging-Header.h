@@ -21,5 +21,6 @@
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import "AMSmoothAlertView.h"
 #import "ClockFace.h"
+#import "MJCollectionViewCell.h"
 
 #endif
