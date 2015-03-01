@@ -145,8 +145,8 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
 }
 
 - (void)observeAllReceivedRequestsWithBlock:(void (^)(NSArray *requests))block {
-    Firebase *requestRef = [[Firebase alloc] initWithUrl:@"https://wisen.firebaseio.com/requests"];
-    [[[[requestRef queryOrderedByChild:@"mentorID"] queryStartingAtValue:self.uid] queryEndingAtValue:self.uid]observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+    Firebase *requestsRef = [[Firebase alloc] initWithUrl:@"https://wisen.firebaseio.com/requests"];
+    [[[[requestsRef queryOrderedByChild:@"mentorID"] queryStartingAtValue:self.uid] queryEndingAtValue:self.uid]observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         if (block) {
             NSMutableArray *requests = [NSMutableArray array];
             if (snapshot.value != [NSNull null]) {
@@ -162,18 +162,13 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
 }
 
 - (void)stopObservingAllReceivedRequests {
-    Firebase *requestRef = [[Firebase alloc] initWithUrl:@"https://wisen.firebaseio.com/requests"];
-    [requestRef removeAllObservers];
+    Firebase *requestsRef = [[Firebase alloc] initWithUrl:@"https://wisen.firebaseio.com/requests"];
+    [requestsRef removeAllObservers];
 }
 
 - (void)updateStatus:(RequestStatus)status forRequestWithID:(NSString *)requestID {
-    Firebase *receivedRequestsRef = [self.userRef childByAppendingPath:@"receivedRequests"];
-    Firebase *requestRef = [receivedRequestsRef childByAppendingPath:requestID];
-    [requestRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-        if (snapshot.value != [NSNull null]) {
-            [requestRef updateChildValues:@{ @"status": @(status) }];
-        }
-    }];
+    Firebase *requestRef = [[Firebase alloc] initWithUrl:[NSString stringWithFormat:@"https://wisen.firebaseio.com/tags/%@/tags", requestID]];
+    [requestRef updateChildValues:@{ @"status": @(status) }];
 }
 
 - (void)updateLocation:(CLLocation *)location {
