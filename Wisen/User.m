@@ -9,8 +9,6 @@
 #import <GeoFire/GeoFire.h>
 #import "User.h"
 
-NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
-
 @interface User ()
 
 @property (strong, nonatomic) FAuthData *authData;
@@ -100,21 +98,26 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
     }];
 }
 
-- (void)addRequest:(Request *)request {
+- (void)addRequest:(Request *)request withBlock:(void (^)(BOOL succeeded))block {
     Firebase *requestRef = [[[Firebase alloc] initWithUrl:@"https://wisen.firebaseio.com/requests"] childByAutoId];
     request.requestID = requestRef.key;
-    [requestRef setValue:request.dictionaryRepresentationWithoutRequestID];
-    
-    Firebase *requestLocationsRef = [[Firebase alloc] initWithUrl:@"https://wisen.firebaseio.com/requestLocations"];
-    GeoFire *geoFire = [[GeoFire alloc] initWithFirebaseRef:requestLocationsRef];
-    [geoFire setLocation:request.location forKey:request.requestID];
+    [requestRef setValue:request.dictionaryRepresentationWithoutRequestID withCompletionBlock:^(NSError *error, Firebase *ref) {
+        if (!error) {
+            Firebase *requestLocationsRef = [[Firebase alloc] initWithUrl:@"https://wisen.firebaseio.com/requestLocations"];
+            GeoFire *geoFire = [[GeoFire alloc] initWithFirebaseRef:requestLocationsRef];
+            [geoFire setLocation:request.location forKey:request.requestID];
+        }
+        if (block) {
+            block(error == nil);
+        }
+    }];
 }
 
-- (FirebaseHandle)requestWithTag:(NSString *)tag location:(CLLocation *)location radius:(double)radius {
+- (RequestHandle)requestWithTag:(NSString *)tag location:(CLLocation *)location radius:(double)radius block:(void (^)(Request *))block {
     GFCircleQuery *query = [self.geoFire queryAtLocation:location withRadius:radius];
     
     FirebaseHandle handle = [query observeEventType:GFEventTypeKeyEntered withBlock:^(NSString *key, CLLocation *location) {
-        if (![key isEqualToString:self.authData.uid]) {
+        if (![key isEqualToString:self.uid]) {
             Firebase *keyTagsRef = [[Firebase alloc] initWithUrl:[NSString stringWithFormat:@"https://wisen.firebaseio.com/users/%@/tags", key]];
             
             [keyTagsRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
@@ -130,9 +133,11 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
                     request.mentorUID = key;
                     request.status = RequestStatusPending;
                     
-                    [self addRequest:request];
-                    
-                    [[NSNotificationCenter defaultCenter] postNotificationName:kMentorFoundNotification object:self userInfo:@{ @"request": request }];
+                    [self addRequest:request withBlock:^(BOOL succeeded) {
+                        if (block) {
+                            block(succeeded ? request : nil);
+                        }
+                    }];
                 }
             }];
         }
@@ -143,7 +148,7 @@ NSString *const kMentorFoundNotification = @"kMentorFoundNotification";
     return handle;
 }
 
-- (void)cancelRequest:(FirebaseHandle)handle {
+- (void)cancelRequest:(RequestHandle)handle {
     [self.handleQueryPairs[@(handle)] removeObserverWithFirebaseHandle:handle];
     [self.handleQueryPairs removeObjectForKey:@(handle)];
 }

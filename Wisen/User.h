@@ -11,7 +11,7 @@
 #import <Firebase/Firebase.h>
 #import "Request.h"
 
-extern NSString *const kMentorFoundNotification;
+typedef FirebaseHandle RequestHandle;
 
 @interface User : NSObject
 
@@ -26,8 +26,8 @@ extern NSString *const kMentorFoundNotification;
 - (void)setTags:(NSArray *)tags withBlock:(void (^)(BOOL succeeded))block;
 - (void)getAllTagsWithBlock:(void (^)(NSArray *tags))block;
 
-- (FirebaseHandle)requestWithTag:(NSString *)tag location:(CLLocation *)location radius:(double)radius;
-- (void)cancelRequest:(FirebaseHandle)handle;
+- (RequestHandle)requestWithTag:(NSString *)tag location:(CLLocation *)location radius:(double)radius block:(void (^)(Request *request))block;
+- (void)cancelRequest:(RequestHandle)handle;
 
 - (void)observeAllSentRequestsWithBlock:(void (^)(NSArray *requests))block;
 - (void)observeAllReceivedRequestsWithBlock:(void (^)(NSArray *requests))block;
