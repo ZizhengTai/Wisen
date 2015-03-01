@@ -119,7 +119,9 @@ class RequestViewController: UIViewController, AGSMapViewLayerDelegate, UISearch
     }
     
     func replaceSearchBar(button: UIButton) {
-        searchBar.text = button.titleLabel?.text
+        var text = button.titleLabel!.text!
+        let newText = (text as NSString).substringFromIndex(1)
+        searchBar.text = newText
     }
     
     // MARK: Map Delegate Method

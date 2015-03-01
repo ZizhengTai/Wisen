@@ -49,6 +49,8 @@ class ConfirmationViewController: UIViewController, UITextFieldDelegate {
     }
     
     func requestFinished() {
+        timer?.invalidate()
+        timer = nil
         let alert = AMSmoothAlertView(dropAlertWithTitle: "Congrads!", andText: "You just finished your learning session", andCancelButton: false, forAlertType: .Success)
         alert.completionBlock = {(alertObj: AMSmoothAlertView!, button: UIButton!) -> () in
             if button == alertObj.defaultButton {

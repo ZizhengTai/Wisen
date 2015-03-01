@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="JsU-9a-XJ8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="bAm-C2-IXZ">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -331,6 +331,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Wallpaper" translatesAutoresizingMaskIntoConstraints="NO" id="I5C-NQ-flK">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </imageView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bty-vN-pGe">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="v1Q-PH-gAn">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AC1-kk-n9j">
                                 <rect key="frame" x="250" y="288" width="100" height="24"/>
                                 <constraints>
@@ -340,9 +351,17 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                         </subviews>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="HSG-ia-3X0" firstAttribute="top" secondItem="bty-vN-pGe" secondAttribute="bottom" id="5zZ-W4-Hn9"/>
+                            <constraint firstItem="bty-vN-pGe" firstAttribute="leading" secondItem="oE9-pf-LlB" secondAttribute="leading" id="BQ0-FH-OAF"/>
+                            <constraint firstItem="I5C-NQ-flK" firstAttribute="leading" secondItem="oE9-pf-LlB" secondAttribute="leading" id="Fx5-Dl-fdR"/>
+                            <constraint firstItem="bty-vN-pGe" firstAttribute="top" secondItem="oE9-pf-LlB" secondAttribute="top" id="Hch-lO-xVf"/>
                             <constraint firstAttribute="centerY" secondItem="AC1-kk-n9j" secondAttribute="centerY" id="MRs-LX-aCO"/>
+                            <constraint firstItem="HSG-ia-3X0" firstAttribute="top" secondItem="I5C-NQ-flK" secondAttribute="bottom" id="QKK-BK-krD"/>
+                            <constraint firstAttribute="trailing" secondItem="I5C-NQ-flK" secondAttribute="trailing" id="lSO-yl-lHB"/>
+                            <constraint firstAttribute="trailing" secondItem="bty-vN-pGe" secondAttribute="trailing" id="lT1-YN-zbg"/>
+                            <constraint firstItem="I5C-NQ-flK" firstAttribute="top" secondItem="oE9-pf-LlB" secondAttribute="top" id="ptB-L9-WDr"/>
                             <constraint firstAttribute="centerX" secondItem="AC1-kk-n9j" secondAttribute="centerX" id="yeJ-QN-rm7"/>
                         </constraints>
                     </view>
@@ -613,6 +632,7 @@
     <resources>
         <image name="Gps" width="72" height="72"/>
         <image name="Pin" width="200" height="157"/>
+        <image name="Wallpaper" width="640" height="360"/>
         <image name="Yosemite" width="853" height="533"/>
     </resources>
 </document>
